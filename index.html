@@ -543,8 +543,8 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
       <thead>
         <tr>
           <th style="width:40%;text-align:left">項目</th>
-          <th>3 月（預熱）</th>
-          <th>4 月（開賣）</th>
+          <th>3 月</th>
+          <th>4 月</th>
           <th>合計</th>
         </tr>
       </thead>
@@ -566,9 +566,9 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
   <div class="grid3 mb20">
     <div class="card kpi">
       <div class="icon">✍️</div>
-      <div class="val">5</div>
+      <div class="val">6</div>
       <div class="lbl">撰稿中 KOL</div>
-      <div class="sub">費用 $21,000</div>
+      <div class="sub">費用 $31,000</div>
     </div>
     <div class="card kpi">
       <div class="icon">✅</div>
@@ -578,9 +578,9 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
     </div>
     <div class="card kpi">
       <div class="icon">💵</div>
-      <div class="val">$65,000</div>
+      <div class="val">$55,000</div>
       <div class="lbl">KOL 可用預算</div>
-      <div class="sub">總預算 $100,000，已用 $35,000</div>
+      <div class="sub">總預算 $100,000，已用 $45,000</div>
     </div>
   </div>
 
@@ -775,7 +775,7 @@ const LS = 'zb_';
 const budgets = [
   { label:'問卷廣告', budget:90000, used:94896 },
   { label:'上線廣告', budget:326400, used:2109 },
-  { label:'KOL 費用', budget:100000, used:35000 },
+  { label:'KOL 費用', budget:100000, used:45000 },
   { label:'行銷推播', budget:80000, used:58017 },
 ];
 
@@ -786,7 +786,8 @@ const kolData = [
   { status:'撰稿中',     name:'徐可妮',            fee:5000, style:'全職媽媽',  type:'影片' },
   { status:'撰稿中',     name:'杜怡萱（記者）',   fee:4500, style:'身心療癒',  type:'影片' },
   { status:'撰稿中',     name:"Lea's Wonderland", fee:4000, style:'網紅生活',  type:'影片' },
-  { status:'撰稿中',     name:'厝邊工作室',        fee:6000, style:'',          type:'影片' },
+  { status:'撰稿中',     name:'厝邊工作室',        fee:6000,  style:'',          type:'影片' },
+  { status:'撰稿中',     name:'物理治療師',        fee:10000, style:'',          type:'體驗會合作' },
 ];
 
 
@@ -843,7 +844,7 @@ const weeklyReport = [
 const pnlRows = [
   { t:'header', label:'▌ 收入' },
   { label:'募資金額',          c3:null,  c4:272064 },
-  { label:'實收金額（92折）',  c3:null,  c4:250299 },
+  { label:'實收金額（92折）',  c3:null,  c4:244858 },
   { label:'總訂單數',          c3:null,  c4:53,    isCnt:true },
   { t:'spacer' },
   { t:'header', label:'▌ 商品成本' },
@@ -852,11 +853,12 @@ const pnlRows = [
   { label:'毛利率',            c3:null,  c4:null,  isPct:true },
   { t:'spacer' },
   { t:'header', label:'▌ 行銷費用' },
-  { label:'Meta 廣告費',       c3:24418, c4:7012,  isExp:true },
-  { label:'EDM 費用',          c3:5096,  c4:15958, isExp:true },
-  { label:'LINE 費用',         c3:19142, c4:5790,  isExp:true },
-  { label:'KOL 費用',          c3:35000, c4:0,     isExp:true },
-  { label:'行銷費用小計',      c3:83656, c4:28760, isExp:true, isSub:true },
+  { label:'Meta 廣告費',       c3:24418,  c4:77837,  isExp:true },
+  { label:'SMS 費用',          c3:0,      c4:10780,  isExp:true },
+  { label:'EDM 費用',          c3:0,      c4:5606,   isExp:true },
+  { label:'LINE 費用',         c3:19142,  c4:17393,  isExp:true },
+  { label:'KOL 費用',          c3:35000,  c4:10000,  isExp:true },
+  { label:'行銷費用小計',      c3:78560,  c4:121616, isExp:true, isSub:true },
   { t:'spacer' },
   { t:'header', label:'▌ 其他費用' },
   { label:'運費 / $120',       c3:0,     c4:0,     isExp:true },
@@ -866,7 +868,7 @@ const pnlRows = [
   { label:'總 ROAS',           c3:null,  c4:'38.8x', isText:true },
   { label:'總 ROI',            c3:null,  c4:null,  isText:true },
   { label:'淨利潤',            c3:null,  c4:null },
-  { label:'總損益',            c3:-83656, c4:243304, isTotal:true },
+  { label:'總損益',            c3:-78560, c4:123242, isTotal:true },
 ];
 
 const UPLOAD_SLOTS = [
@@ -1051,7 +1053,7 @@ function renderBudgetTable() {
   if (!el) return;
   const tags = {
     '問卷廣告':['tag-red','超支 5.5%'], '上線廣告':['tag-green','剛起步'],
-    'KOL 費用':['tag-amber','35% 已用'], '行銷推播':['tag-amber','72.5% 已用'],
+    'KOL 費用':['tag-amber','45% 已用'], '行銷推播':['tag-amber','72.5% 已用'],
   };
   el.innerHTML = budgets.map(b => {
     const [cls, lbl] = tags[b.label] || ['tag-gray','—'];
