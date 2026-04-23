@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🦓 3ZeBra 筋舒適 | 募資戰情室</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<style>
+:root {
+  --primary:#37352F;--primary-light:#787774;--accent:#2EAADC;
+  --bg:#F7F7F5;--card:#fff;--border:#E9E9E7;
+  --text:#37352F;--muted:#9B9A97;
+  --green:#0F7B6C;--red:#E03E3E;--amber:#936800;--blue:#0B6E99;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang TC',sans-serif;
+  background:var(--bg);color:var(--text);font-size:14px;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:var(--primary);
+  display:flex;align-items:center;gap:4px;padding:0 16px;overflow-x:auto;}
+nav a{color:rgba(255,255,255,0.7);text-decoration:none;padding:14px 14px;
+  white-space:nowrap;border-bottom:3px solid transparent;transition:all .2s;
+  font-size:13px;font-weight:500;}
+nav a.active{color:#fff;border-bottom-color:var(--accent);}
+nav a:hover:not(.active){color:rgba(255,255,255,0.9);}
+.nav-brand{color:#fff;font-weight:700;font-size:15px;margin-right:8px;
+  white-space:nowrap;padding:14px 8px 14px 0;border-right:1px solid rgba(255,255,255,0.2);}
+
+/* LAYOUT */
+.tab{display:none;}.tab.active{display:block;}
+.page{max-width:1200px;margin:0 auto;padding:20px 16px 60px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+@media(max-width:700px){.grid2,.grid3,.grid4{grid-template-columns:1fr;}}
+@media(max-width:900px) and (min-width:701px){.grid3{grid-template-columns:1fr 1fr;}.grid4{grid-template-columns:1fr 1fr;}}
+
+/* CARD */
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;}
+h2{font-size:17px;font-weight:700;margin-bottom:16px;}
+h3{font-size:14px;font-weight:600;margin-bottom:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
+.mb16{margin-bottom:16px;}.mb20{margin-bottom:20px;}
+.section-title{font-size:15px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.updated{font-size:11px;color:var(--muted);margin-left:auto;}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#37352F 0%,#4E4B45 100%);
+  color:#fff;border-radius:16px;padding:28px;margin-bottom:20px;}
+.hero-amount{font-size:36px;font-weight:800;letter-spacing:-1px;}
+.hero-label{font-size:13px;opacity:.8;margin-bottom:4px;}
+.hero-goal{font-size:14px;opacity:.75;margin-top:6px;}
+.progress-track{background:rgba(255,255,255,0.25);border-radius:99px;height:10px;margin:16px 0 8px;}
+.progress-fill{background:#fff;border-radius:99px;height:10px;transition:width .8s;}
+.hero-row{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;}
+.hero-stat .val{font-size:22px;font-weight:700;}
+.hero-stat .lbl{font-size:12px;opacity:.75;}
+
+/* KPI */
+.kpi{text-align:center;padding:16px;}
+.kpi .icon{font-size:24px;margin-bottom:6px;}
+.kpi .val{font-size:22px;font-weight:800;color:var(--primary);}
+.kpi .lbl{font-size:12px;color:var(--muted);margin-top:3px;}
+.kpi .sub{font-size:11px;color:var(--muted);}
+.tag{display:inline-block;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:600;}
+.tag-green{background:#DBEDDB;color:#0F7B6C;}
+.tag-red{background:#FFE2DD;color:#8D1619;}
+.tag-amber{background:#FDECC8;color:#705826;}
+.tag-blue{background:#D3E5EF;color:#0B6E99;}
+.tag-gray{background:#E3E2E0;color:#6F6E69;}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{text-align:left;padding:8px 10px;font-size:11px;font-weight:600;
+  color:var(--muted);text-transform:uppercase;letter-spacing:.4px;
+  border-bottom:1px solid var(--border);background:#FAFAF8;}
+td{padding:9px 10px;border-bottom:1px solid #F2EDE7;vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:#FAFAF8;}
+.tbl-scroll{overflow-x:auto;}
+
+/* BUDGET BAR */
+.budget-card{padding:14px 0;}
+.budget-header{display:flex;justify-content:space-between;margin-bottom:6px;align-items:center;}
+.budget-label{font-weight:600;font-size:14px;}
+.budget-amount{font-size:13px;color:var(--muted);}
+.budget-track{background:#F0EDE8;border-radius:99px;height:8px;margin-bottom:5px;}
+.budget-fill{height:8px;border-radius:99px;transition:width .8s;}
+.budget-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);}
+
+/* WEEKLY TABLE */
+.weekly-wrap{overflow-x:auto;}
+.wtbl{min-width:1000px;font-size:12px;}
+.wtbl th{background:var(--primary);color:#fff;font-size:10px;text-align:right;padding:8px 8px;}
+.wtbl th:first-child{text-align:left;}
+.wtbl td{text-align:right;font-variant-numeric:tabular-nums;padding:8px 8px;}
+.wtbl td:first-child{text-align:left;font-weight:700;white-space:nowrap;}
+.wtbl .tbd{color:var(--muted);}
+.wtbl tr.current-week td{background:#F0F7F5;}
+.wtbl tfoot td{font-weight:700;border-top:2px solid var(--border);background:#FAFAF8;}
+
+/* P&L TABLE */
+.pnl-wrap{overflow-x:auto;}
+.pnl-tbl{min-width:600px;}
+.pnl-tbl th{font-size:12px;text-align:right;}
+.pnl-tbl th:first-child{text-align:left;}
+.pnl-tbl td{text-align:right;font-variant-numeric:tabular-nums;}
+.pnl-tbl td:first-child{text-align:left;}
+.pnl-header td{background:#F0EDE8;font-weight:700;font-size:11px;
+  text-transform:uppercase;letter-spacing:.5px;color:var(--primary);padding:7px 10px;}
+.pnl-subtotal td{font-weight:700;background:#FAFAF8;border-top:1px solid var(--border);}
+.pnl-total td{font-weight:800;border-top:2px solid var(--border);border-bottom:2px solid var(--border);}
+.pnl-pos{color:var(--green);}
+.pnl-neg{color:var(--red);}
+.pnl-spacer td{height:6px;border-bottom:none;padding:0;}
+
+/* CONVERSION */
+.conv-bar{height:12px;background:#F0EDE8;border-radius:99px;overflow:hidden;margin:12px 0;}
+.conv-fill{height:12px;border-radius:99px;background:var(--primary);}
+.conv-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);}
+
+/* ADVISOR */
+.advisor-toggle{background:linear-gradient(135deg,#37352F 0%,#4E4B45 100%);
+  color:#fff;border-radius:16px;padding:20px 24px;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;user-select:none;}
+.advisor-toggle h2{color:#fff;margin:0;font-size:16px;}
+.advisor-toggle .sub{font-size:12px;opacity:.8;margin-top:3px;}
+.advisor-body{display:none;padding-top:16px;}
+.advisor-body.open{display:block;}
+.filter-row{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+.filter-btn{padding:6px 14px;border:1px solid var(--border);border-radius:99px;
+  background:var(--card);cursor:pointer;font-size:13px;transition:all .2s;}
+.filter-btn.active{background:var(--primary);color:#fff;border-color:var(--primary);}
+.rec-card{border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:12px;
+  background:var(--card);border-left:4px solid var(--primary);}
+.rec-card.warn{border-left-color:var(--accent);}
+.rec-card.ok{border-left-color:var(--green);}
+.rec-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.rec-icon{font-size:20px;}
+.rec-title{font-weight:700;font-size:14px;flex:1;}
+.rec-body{color:#3A3A3A;line-height:1.7;font-size:13px;}
+.rec-body ul{margin:8px 0 0 18px;}
+.rec-body li{margin-bottom:4px;}
+.rec-insight{background:#F7F7F5;border-radius:8px;padding:10px 14px;margin-top:10px;
+  font-size:12px;color:#37352F;font-weight:600;border-left:3px solid #E9E9E7;}
+
+/* UPLOAD */
+.upload-zone{border:2px dashed var(--border);border-radius:16px;
+  padding:40px 24px;text-align:center;cursor:pointer;transition:all .2s;
+  background:var(--card);margin-bottom:24px;}
+.upload-zone:hover,.upload-zone.drag-over{border-color:var(--primary);background:#F0F7F5;}
+.upload-zone .uz-icon{font-size:36px;margin-bottom:10px;}
+.upload-zone h3{color:var(--text);text-transform:none;letter-spacing:0;font-size:15px;}
+.upload-zone p{color:var(--muted);font-size:13px;margin-top:6px;}
+.uz-controls{margin-top:14px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap;}
+.uz-select{padding:8px 12px;border:1px solid var(--border);border-radius:8px;
+  background:#fff;font-size:13px;}
+.uz-btn{padding:8px 22px;background:var(--primary);color:#fff;
+  border:none;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;}
+.uz-btn:hover{background:var(--primary-light);}
+.slot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+@media(max-width:900px){.slot-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:600px){.slot-grid{grid-template-columns:1fr;}}
+.slot-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;}
+.slot-card.has-data{border-color:var(--primary-light);}
+.slot-icon{font-size:26px;margin-bottom:8px;}
+.slot-name{font-weight:700;font-size:14px;margin-bottom:4px;}
+.slot-desc{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:8px;}
+.slot-ts{font-size:11px;font-weight:600;}
+.slot-ts.ok{color:var(--green);}
+.slot-ts.empty{color:var(--muted);}
+.slot-actions{display:flex;gap:8px;margin-top:10px;}
+.slot-up-btn{padding:6px 12px;background:var(--primary);color:#fff;
+  border:none;border-radius:6px;cursor:pointer;font-size:12px;flex:1;}
+.slot-clr-btn{padding:6px 12px;border:1px solid var(--border);background:#fff;
+  border-radius:6px;cursor:pointer;font-size:12px;color:var(--muted);}
+.slot-clr-btn:hover{color:var(--red);border-color:var(--red);}
+
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:60px 24px;color:var(--muted);}
+.empty-state .es-icon{font-size:44px;margin-bottom:12px;}
+.empty-state h3{color:var(--muted);text-transform:none;letter-spacing:0;font-size:15px;margin-bottom:8px;}
+.empty-state p{font-size:13px;max-width:340px;margin:0 auto 16px;line-height:1.6;}
+.es-btn{padding:8px 20px;background:var(--primary);color:#fff;border:none;
+  border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;}
+
+/* CHART */
+.chart-wrap{position:relative;height:260px;}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--primary);
+  color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:600;
+  z-index:999;transform:translateY(100px);opacity:0;transition:all .3s;}
+.toast.show{transform:translateY(0);opacity:1;}
+
+/* MISC */
+input[type="file"]{display:none;}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
+.dot-green{background:var(--green);}.dot-amber{background:var(--amber);}
+.dot-red{background:var(--red);}.dot-blue{background:var(--blue);}
+hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<!-- hidden file inputs for each slot -->
+<input type="file" id="fi-overview" accept=".csv" onchange="handleSlotUpload('overview',this)">
+<input type="file" id="fi-orders" accept=".csv" onchange="handleSlotUpload('orders',this)">
+<input type="file" id="fi-discounts" accept=".csv" onchange="handleSlotUpload('discounts',this)">
+<input type="file" id="fi-referrals" accept=".csv" onchange="handleSlotUpload('referrals',this)">
+<input type="file" id="fi-customers" accept=".csv" onchange="handleSlotUpload('customers',this)">
+<input type="file" id="fi-survey_list" accept=".csv" onchange="handleSlotUpload('survey_list',this)">
+<input type="file" id="fi-social" accept=".csv" onchange="handleSlotUpload('social',this)">
+<input type="file" id="fi-pnl" accept=".csv" onchange="handleSlotUpload('pnl',this)">
+<input type="file" id="fi-universal" accept=".csv" onchange="handleUniversalUpload(this)">
+
+<nav>
+  <span class="nav-brand">🦓 筋舒適</span>
+  <a href="#" class="active" onclick="return switchTab('overview',this)">📊 總覽</a>
+  <a href="#" onclick="return switchTab('budget',this)">💰 預算控制</a>
+  <a href="#" onclick="return switchTab('pnl',this)">📉 損益</a>
+  <a href="#" onclick="return switchTab('kol',this)">📣 KOL</a>
+  <a href="#" onclick="return switchTab('survey',this)">📋 問卷成效</a>
+  <a href="#" onclick="return switchTab('products',this)">🛍️ 產品購買</a>
+  <a href="#" onclick="return switchTab('discounts',this)">🎟️ 折扣碼</a>
+  <a href="#" onclick="return switchTab('referrals',this)">🤝 推薦贊助</a>
+  <a href="#" onclick="return switchTab('upload',this)">📁 上傳資料</a>
+</nav>
+
+<!-- ==================== 總覽 ==================== -->
+<div class="tab active" id="tab-overview">
+<div class="page">
+
+  <div class="hero">
+    <div class="hero-row">
+      <div>
+        <div class="hero-label">累積募資金額</div>
+        <div class="hero-amount" id="h-amount">$228,953</div>
+        <div class="hero-goal">目標 $2,000,000 ／ 已達成 <strong id="h-pct">11.4%</strong></div>
+      </div>
+      <div class="hero-stat" style="text-align:right">
+        <div class="lbl">開賣天數</div>
+        <div class="val" id="h-days">—</div>
+        <div class="lbl">天</div>
+      </div>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="h-bar" style="width:11.4%"></div></div>
+    <div style="display:flex;justify-content:space-between;font-size:12px;opacity:.75">
+      <span>$0</span><span>$500K</span><span>$1M</span><span>$1.5M</span><span>$2M</span>
+    </div>
+  </div>
+
+  <div class="grid4 mb20">
+    <div class="card kpi">
+      <div class="icon">🛍️</div>
+      <div class="val">46</div>
+      <div class="lbl">總贊助人數</div>
+      <div class="sub">累計</div>
+    </div>
+    <div class="card kpi">
+      <div class="icon">💰</div>
+      <div class="val">$4,977</div>
+      <div class="lbl">客單價</div>
+      <div class="sub">目標 $5,500</div>
+    </div>
+    <div class="card kpi">
+      <div class="icon">⚡</div>
+      <div class="val">108.6x</div>
+      <div class="lbl">開賣廣告 ROAS</div>
+      <div class="sub"><span class="tag tag-green">問卷紅利期</span></div>
+    </div>
+    <div class="card kpi">
+      <div class="icon">📝</div>
+      <div class="val">1,587</div>
+      <div class="lbl">問卷填答人數</div>
+      <div class="sub">CPL $59.8</div>
+    </div>
+  </div>
+
+  <!-- 週報表 -->
+  <div class="card mb20">
+    <div class="section-title">📅 週報表
+      <span class="updated" id="weekly-updated">資料截至 4/22，上傳總覽 CSV 可自動更新</span>
+    </div>
+    <div class="weekly-wrap">
+      <table class="wtbl">
+        <thead>
+          <tr>
+            <th style="text-align:left">週次</th>
+            <th>廣告費<br>(FB+問卷)</th>
+            <th>總募資</th>
+            <th>單週募資</th>
+            <th>單週贊助</th>
+            <th>總贊助</th>
+            <th>客單價</th>
+            <th>總 ROAS</th>
+            <th>單週 ROAS</th>
+            <th>CPA</th>
+            <th>單週 CPA</th>
+            <th>商品成本</th>
+            <th>總 ROI</th>
+          </tr>
+        </thead>
+        <tbody id="weekly-tbody"></tbody>
+      </table>
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin-top:10px">＊ 總 ROAS／CPA 以開賣期廣告費計算（不含問卷預熱期 $94,896）</p>
+  </div>
+
+  <!-- 問卷轉換率 + 預算預覽 -->
+  <div class="grid2 mb20">
+    <div class="card">
+      <div class="section-title">📊 問卷轉換率</div>
+      <div id="conv-content">
+        <div class="empty-state" style="padding:30px 0">
+          <div class="es-icon">📋</div>
+          <h3>尚未上傳名單</h3>
+          <p>請至「上傳資料」分頁上傳<br><strong>問卷名單</strong> ＋ <strong>購買名單</strong></p>
+          <button class="es-btn" onclick="return switchTab('upload', document.querySelector('nav a:last-child'))">前往上傳</button>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="section-title">💰 預算使用進度</div>
+      <div id="budget-bars-overview"></div>
+    </div>
+  </div>
+
+  <!-- 圖表 -->
+  <div class="grid2 mb20">
+    <div class="card">
+      <h3>每日業績 + 廣告費</h3>
+      <div class="chart-wrap"><canvas id="chartDaily"></canvas></div>
+    </div>
+    <div class="card">
+      <h3>問卷成效週趨勢（CPL）</h3>
+      <div class="chart-wrap"><canvas id="chartSurveyOverview"></canvas></div>
+    </div>
+  </div>
+
+  <!-- 建議助手（可收合） -->
+  <div class="mb20">
+    <div class="advisor-toggle" onclick="toggleAdvisor()">
+      <div>
+        <h2>🤖 專案建議助手</h2>
+        <div class="sub">點擊展開 — 根據現有數據提供整體與廣告優化方向</div>
+      </div>
+      <span id="advisor-arrow" style="font-size:18px;margin-left:16px;transition:transform .3s">▼</span>
+    </div>
+    <div class="advisor-body" id="advisor-body">
+      <div class="filter-row" style="margin-top:16px">
+        <button class="filter-btn active" onclick="filterRec('all',this)">全部</button>
+        <button class="filter-btn" onclick="filterRec('overall',this)">📋 整體專案</button>
+        <button class="filter-btn" onclick="filterRec('meta',this)">📣 Meta 廣告</button>
+        <button class="filter-btn" onclick="filterRec('kol',this)">🎬 KOL 策略</button>
+        <button class="filter-btn" onclick="filterRec('warn',this)">⚠️ 注意事項</button>
+      </div>
+      <div id="rec-list">
+        <div class="rec-card ok" data-cat="overall">
+          <div class="rec-header"><span class="rec-icon">🚀</span>
+            <span class="rec-title">首日爆發力強，但要提前佈局中段維持</span>
+            <span class="tag tag-green">整體</span></div>
+          <div class="rec-body">
+            開賣第一天達 $228,953（目標 11.4%），46 筆訂單，節奏遠超線性目標。<br>
+            但募資通常呈 <strong>U 型曲線</strong>：首日爆發 → 中段平緩 → 截止前再衝，中段的維持策略最關鍵。
+            <ul>
+              <li>設定各週里程碑目標：W1 $400K → W2 $700K → W3 $1M → W4 $1.5M → 結尾衝 $2M</li>
+              <li>中段（開賣 2~4 週）安排 1~2 波 KOL 上線製造討論高峰</li>
+              <li>追蹤每日訂單數，若連續 3 天低於 5 筆，立即啟動推播或廣告加碼</li>
+            </ul>
+            <div class="rec-insight">💡 若以首日節奏估算，約 9 天即可達標——但勿依賴此速度，首日問卷名單轉換是不可重複的紅利。</div>
+          </div>
+        </div>
+        <div class="rec-card warn" data-cat="overall">
+          <div class="rec-header"><span class="rec-icon">💰</span>
+            <span class="rec-title">客單價 $4,977 略低於目標 $5,500，需追蹤 SKU 分布</span>
+            <span class="tag tag-amber">整體</span></div>
+          <div class="rec-body">
+            目前客單價比目標低 9.5%，若全程維持此水位，達標需要額外多約 83 筆訂單（共 447 筆）。
+            <ul>
+              <li>上傳嘖嘖訂單 CSV 後，可在「產品購買」分頁查看各方案選購比例</li>
+              <li>超早鳥價格優惠期結束後，觀察是否自然拉高客單價</li>
+              <li>設計「倒數 X 天優惠」時，推超早鳥 2 入組（$9,398）拉高客單</li>
+            </ul>
+          </div>
+        </div>
+        <div class="rec-card" data-cat="meta">
+          <div class="rec-header"><span class="rec-icon">📊</span>
+            <span class="rec-title">首日 ROAS 108.6x 是問卷紅利，長期目標設 3~5x</span>
+            <span class="tag tag-blue">Meta 廣告</span></div>
+          <div class="rec-body">
+            首日 ROAS 爆高，原因是廣告費僅 $2,109，但問卷名單帶來大量有機轉換。<br>
+            <ul>
+              <li>設定廣告擴量門檻：<strong>ROAS ≥ 3x</strong>，穩定後再增加預算</li>
+              <li>短期目標：維持 ROAS 5x 以上（預算 $4,132/天，對應業績 $20,660/天）</li>
+              <li>若 ROAS 低於 2x 且連續 3 天，立即優化受眾或素材</li>
+            </ul>
+            <div class="rec-insight">💡 廣告剩餘預算 $324,291，建議以每天 $5,000~$8,000 節奏啟動，ROAS 穩定後再擴量。</div>
+          </div>
+        </div>
+        <div class="rec-card" data-cat="meta">
+          <div class="rec-header"><span class="rec-icon">👥</span>
+            <span class="rec-title">受眾分層策略：問卷名單 → 類似受眾 → 廣泛受眾</span>
+            <span class="tag tag-blue">Meta 廣告</span></div>
+          <div class="rec-body">
+            <ul>
+              <li><strong>第一優先：</strong>問卷自訂受眾（1,587 人）+ EDM/LINE 開信名單 → 最高轉換潛力</li>
+              <li><strong>第二優先：</strong>問卷受眾 1% 類似受眾（LAL）→ 初期擴量首選</li>
+              <li><strong>第三層：</strong>廣泛興趣受眾（35~60 歲 / 健康生活 / 瑜珈 / 按摩）</li>
+            </ul>
+            <div class="rec-insight">💡 4 月下旬問卷 CPL 已升至 $90~$295，代表廣泛受眾已飽和。開賣廣告組要重建，重新計算頻率。</div>
+          </div>
+        </div>
+        <div class="rec-card" data-cat="meta">
+          <div class="rec-header"><span class="rec-icon">🎬</span>
+            <span class="rec-title">廣告素材優先級：KOL 影片二創 > 官方影片 > 靜態圖</span>
+            <span class="tag tag-blue">Meta 廣告</span></div>
+          <div class="rec-body">
+            <ul>
+              <li>KOL 影片上線 24~48 小時內申請廣告授權，快速二創為廣告素材</li>
+              <li>最具說服力方向：物理治療師 ZM（專業可信度）、杜怡萱（情感連結）</li>
+              <li>開賣初期同時測試 3~5 組不同素材，用 A/B 測試找最佳 CTR</li>
+            </ul>
+          </div>
+        </div>
+        <div class="rec-card" data-cat="meta">
+          <div class="rec-header"><span class="rec-icon">📅</span>
+            <span class="rec-title">廣告預算節奏建議</span>
+            <span class="tag tag-blue">Meta 廣告</span></div>
+          <div class="rec-body">
+            <table style="margin-top:4px">
+              <thead><tr><th>時段</th><th>建議日預算</th><th>重點</th></tr></thead>
+              <tbody>
+                <tr><td>W1（4/22–4/28）</td><td>$5,000~8,000</td><td>觀察 ROAS，問卷受眾轉換</td></tr>
+                <tr><td>W2（4/29–5/5）</td><td>$8,000~12,000</td><td>KOL 影片二創上線</td></tr>
+                <tr><td>W3~W5（中段）</td><td>$10,000~15,000</td><td>LAL 擴量，維持熱度</td></tr>
+                <tr><td>首批截止前一週</td><td>$15,000~20,000</td><td>倒數文案，緊迫感</td></tr>
+                <tr><td>早鳥截止前</td><td>$20,000+</td><td>最後衝刺</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="rec-card" data-cat="kol">
+          <div class="rec-header"><span class="rec-icon">⏰</span>
+            <span class="rec-title">KOL 上線時間軸要對齊首批截止</span>
+            <span class="tag tag-green">KOL 策略</span></div>
+          <div class="rec-body">
+            <ul>
+              <li><strong>優先確認：</strong>物理治療師 ZM、杜怡萱（目標客群吻合度最高）</li>
+              <li>建議在首批截止前 1~2 週內集中 3~4 位 KOL 上線，製造高峰</li>
+              <li>小夫妻已有貼文，確認是否申請廣告授權做二創</li>
+              <li>洽談中的厝邊工作室（$6,000）建議盡快確認，以免錯過最佳時間窗</li>
+            </ul>
+          </div>
+        </div>
+        <div class="rec-card warn" data-cat="warn">
+          <div class="rec-header"><span class="rec-icon">⚠️</span>
+            <span class="rec-title">問卷廣告超出預算 $4,896，但品質優於預期</span>
+            <span class="tag tag-amber">注意</span></div>
+          <div class="rec-body">
+            問卷預算 $90,000，實際花費 $94,896，超支 5.5%。但 CPL $59.8 遠低於目標 $90。
+            <ul>
+              <li>超支金額不大，整體可控，無需特別調整</li>
+              <li>建議將問卷名單做好分層（高滿意度 5.0 / 低滿意度 3.5 以下），分別設計不同推播文案</li>
+            </ul>
+            <div class="rec-insight">💡 1,587 份問卷、平均滿意度 4.60，這批名單是開賣期的核心資產。</div>
+          </div>
+        </div>
+        <div class="rec-card warn" data-cat="warn">
+          <div class="rec-header"><span class="rec-icon">🔴</span>
+            <span class="rec-title">設定廣告停損與警示指標</span>
+            <span class="tag tag-amber">注意</span></div>
+          <div class="rec-body">
+            <ul>
+              <li><strong>每日監控：</strong>廣告費 / 當日訂單數 → 若 CPA 超過 $3,500 連續 3 天，停廣告審查素材</li>
+              <li><strong>週監控：</strong>週訂單數 &lt; 前一週 50%，啟動緊急推播或 KOL 加碼</li>
+              <li><strong>每日回填：</strong>每週固定上傳嘖嘖 CSV，才能即時發現異常趨勢</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ==================== 預算控制 ==================== -->
+<div class="tab" id="tab-budget">
+<div class="page">
+
+  <div class="grid2 mb20">
+    <div class="card">
+      <h3>各類預算使用狀況</h3>
+      <div id="budget-detail"></div>
+    </div>
+    <div class="card">
+      <h3>成本結構（估算）</h3>
+      <div class="chart-wrap"><canvas id="chartCost"></canvas></div>
+    </div>
+  </div>
+
+  <div class="card mb20">
+    <h3>廣告預算拆分試算</h3>
+    <table>
+      <thead><tr>
+        <th>預算項目</th><th>規劃預算</th><th>已使用</th><th>剩餘</th><th>使用率</th><th>狀態</th>
+      </tr></thead>
+      <tbody id="budget-table"></tbody>
+      <tfoot>
+        <tr style="font-weight:700;background:#FAFAF8">
+          <td>合計</td><td>$596,400</td><td>$150,565</td><td>$445,835</td><td>25.2%</td>
+          <td><span class="tag tag-green">進度正常</span></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>目標試算（依目前節奏）</h3>
+    <table>
+      <thead><tr><th>指標</th><th>目標</th><th>現況</th><th>評估</th></tr></thead>
+      <tbody>
+        <tr><td>贊助金額</td><td>$2,000,000</td><td>$228,953 (11.4%)</td><td><span class="tag tag-green">首日強勁</span></td></tr>
+        <tr><td>客單價</td><td>$5,500</td><td>$4,977</td><td><span class="tag tag-amber">略低 9.5%</span></td></tr>
+        <tr><td>目標贊助人數</td><td>364 人</td><td>46 人 (12.6%)</td><td><span class="tag tag-green">節奏超前</span></td></tr>
+        <tr><td>CPL（問卷）</td><td>$90</td><td>$59.8</td><td><span class="tag tag-green">節省 33.6%</span></td></tr>
+        <tr><td>廣告 ROAS</td><td>3.0x</td><td>108.6x（首日）</td><td><span class="tag tag-blue">問卷紅利</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</div>
+
+<!-- ==================== 損益 ==================== -->
+<div class="tab" id="tab-pnl">
+<div class="page">
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:8px">
+    <div>
+      <h2 style="margin-bottom:4px">📉 損益表</h2>
+      <p style="font-size:13px;color:var(--muted)" id="pnl-note">資料截至 2026/4/22 ｜ 每月上傳損益 CSV 可更新數值</p>
+    </div>
+    <button class="uz-btn" onclick="document.getElementById('fi-pnl').click()">⬆ 上傳損益 CSV</button>
+  </div>
+
+  <div class="card pnl-wrap">
+    <table class="pnl-tbl">
+      <thead>
+        <tr>
+          <th style="width:40%;text-align:left">項目</th>
+          <th>3 月（預熱）</th>
+          <th>4 月（開賣）</th>
+          <th>合計</th>
+        </tr>
+      </thead>
+      <tbody id="pnl-tbody"></tbody>
+    </table>
+  </div>
+
+  <p style="font-size:11px;color:var(--muted);margin-top:12px">
+    ＊ 4月損益尚未扣除商品成本，毛利 / ROI 待嘖嘖出貨後確認 ｜ 實收金額採 92折（嘖嘖 8% 手續費）計算
+  </p>
+
+</div>
+</div>
+
+<!-- ==================== KOL ==================== -->
+<div class="tab" id="tab-kol">
+<div class="page">
+
+  <div class="grid3 mb20">
+    <div class="card kpi">
+      <div class="icon">✍️</div>
+      <div class="val">6</div>
+      <div class="lbl">撰稿中 KOL</div>
+      <div class="sub">費用 $29,000</div>
+    </div>
+    <div class="card kpi">
+      <div class="icon">🤝</div>
+      <div class="val">1</div>
+      <div class="lbl">洽談中 KOL</div>
+      <div class="sub">費用 $6,000</div>
+    </div>
+    <div class="card kpi">
+      <div class="icon">💵</div>
+      <div class="val">$65,000</div>
+      <div class="lbl">KOL 可用預算</div>
+      <div class="sub">總預算 $100,000，已用 $35,000</div>
+    </div>
+  </div>
+
+  <div class="card mb20">
+    <div class="section-title">KOL 追蹤表
+      <span class="updated">合作中 + 洽談中</span>
+    </div>
+    <table>
+      <thead><tr>
+        <th>狀態</th><th>KOL 名稱</th><th>費用</th><th>風格 / 取向</th><th>類型</th><th>確認狀態</th>
+      </tr></thead>
+      <tbody id="kol-tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="section-title">官方 + KOL 貼文追蹤</div>
+    <table>
+      <thead><tr>
+        <th>來源</th><th>內容</th><th>類型</th><th>廣告投放</th>
+      </tr></thead>
+      <tbody id="post-tbody"></tbody>
+    </table>
+  </div>
+
+</div>
+</div>
+
+<!-- ==================== 問卷成效 ==================== -->
+<div class="tab" id="tab-survey">
+<div class="page">
+
+  <div class="grid4 mb20">
+    <div class="card kpi">
+      <div class="icon">📝</div>
+      <div class="val">1,587</div>
+      <div class="lbl">問卷總數</div>
+      <div class="sub">3/25 ~ 4/21</div>
+    </div>
+    <div class="card kpi">
+      <div class="icon">💸</div>
+      <div class="val">$59.8</div>
+      <div class="lbl">平均 CPL</div>
+      <div class="sub"><span class="tag tag-green">預算 $90 ✓</span></div>
+    </div>
+    <div class="card kpi">
+      <div class="icon">⭐</div>
+      <div class="val">4.60</div>
+      <div class="lbl">平均滿意度</div>
+      <div class="sub">滿分 5 分</div>
+    </div>
+    <div class="card kpi">
+      <div class="icon">📣</div>
+      <div class="val">$94,896</div>
+      <div class="lbl">問卷廣告總支出</div>
+      <div class="sub"><span class="tag tag-amber">超預算 $4,896</span></div>
+    </div>
+  </div>
+
+  <div class="grid2 mb20">
+    <div class="card">
+      <h3>每週問卷數 vs CPL</h3>
+      <div class="chart-wrap"><canvas id="chartSurvey"></canvas></div>
+    </div>
+    <div class="card">
+      <h3>問卷廣告費週分佈</h3>
+      <div class="chart-wrap"><canvas id="chartSurveySpend"></canvas></div>
+    </div>
+  </div>
+
+  <div class="card mb20">
+    <div class="section-title">LINE 推播成效</div>
+    <table>
+      <thead><tr><th>名稱</th><th>傳送人數</th><th>開信率</th><th>點擊率</th><th>成本</th></tr></thead>
+      <tbody>
+        <tr><td>筋舒適｜0325｜問卷上線</td><td>47,854</td><td>29.75%</td><td>0.62%</td><td>$19,142</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="section-title">EDM 成效</div>
+    <table>
+      <thead><tr><th>名稱</th><th>傳送人數</th><th>開信率</th><th>點擊率</th><th>成本</th></tr></thead>
+      <tbody>
+        <tr><td>問卷上線－waca vip</td><td>1,162</td><td>9.90%</td><td>4.40%</td><td>$116</td></tr>
+        <tr><td>問卷上線－過去問卷</td><td>7,353</td><td>6.30%</td><td>2.00%</td><td>$735</td></tr>
+        <tr><td>問卷上線－大補帖</td><td>25,802</td><td>6.00%</td><td>1.10%</td><td>$2,580</td></tr>
+        <tr><td>問卷上線－waca</td><td>16,646</td><td>8.50%</td><td>1.30%</td><td>$1,665</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</div>
+
+<!-- ==================== 產品購買狀況 ==================== -->
+<div class="tab" id="tab-products">
+<div class="page">
+  <div id="products-content">
+    <div class="empty-state">
+      <div class="es-icon">🛍️</div>
+      <h3>尚未上傳訂單資料</h3>
+      <p>從嘖嘖後台下載訂單 CSV，上傳後即可查看各方案銷售比例、客單價分布等數據。</p>
+      <button class="es-btn" onclick="document.getElementById('fi-orders').click()">⬆ 上傳嘖嘖訂單 CSV</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== 折扣碼使用狀況 ==================== -->
+<div class="tab" id="tab-discounts">
+<div class="page">
+  <div id="discounts-content">
+    <div class="empty-state">
+      <div class="es-icon">🎟️</div>
+      <h3>尚未上傳折扣碼資料</h3>
+      <p>從嘖嘖後台下載優惠碼使用紀錄 CSV，上傳後即可查看各折扣碼的使用次數與業績貢獻。</p>
+      <button class="es-btn" onclick="document.getElementById('fi-discounts').click()">⬆ 上傳折扣碼 CSV</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== 推薦贊助列表 ==================== -->
+<div class="tab" id="tab-referrals">
+<div class="page">
+  <div id="referrals-content">
+    <div class="empty-state">
+      <div class="es-icon">🤝</div>
+      <h3>尚未上傳推薦贊助資料</h3>
+      <p>從嘖嘖後台下載推薦贊助列表 CSV，上傳後即可查看推薦人業績分佈與貢獻排名。</p>
+      <button class="es-btn" onclick="document.getElementById('fi-referrals').click()">⬆ 上傳推薦贊助 CSV</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== 上傳資料 ==================== -->
+<div class="tab" id="tab-upload">
+<div class="page">
+
+  <h2 style="margin-bottom:6px">📁 上傳資料</h2>
+  <p style="color:var(--muted);font-size:13px;margin-bottom:24px">所有資料儲存於本機瀏覽器，不會上傳至任何伺服器。關閉後下次開啟仍保留。</p>
+
+  <!-- Universal Drop Zone -->
+  <div class="upload-zone" id="universal-zone"
+    ondragover="onDragOver(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event)">
+    <div class="uz-icon">📂</div>
+    <h3>拖曳檔案至此，或點擊選取</h3>
+    <p>支援 CSV 格式，請選擇資料類型再上傳</p>
+    <div class="uz-controls">
+      <select class="uz-select" id="uz-type-select">
+        <option value="">— 選擇資料類型 —</option>
+        <option value="overview">📊 總覽日報（Google Sheet CSV）</option>
+        <option value="orders">🛍️ 嘖嘖訂單</option>
+        <option value="discounts">🎟️ 嘖嘖折扣碼</option>
+        <option value="referrals">🤝 嘖嘖推薦贊助</option>
+        <option value="customers">👥 購買名單（問卷轉換用）</option>
+        <option value="survey_list">📝 問卷名單（一次性）</option>
+        <option value="social">📱 社群數據</option>
+        <option value="pnl">📉 損益表 CSV</option>
+      </select>
+      <button class="uz-btn" onclick="triggerUniversalUpload()">選取檔案</button>
+    </div>
+  </div>
+
+  <!-- Slot Cards -->
+  <h3 style="margin-bottom:16px;color:var(--text);text-transform:none;letter-spacing:0;font-size:14px">資料槽狀態</h3>
+  <div class="slot-grid" id="slot-grid"></div>
+
+  <!-- 匯出 / 匯入 -->
+  <div style="margin-top:32px;border-top:1px solid var(--border);padding-top:24px">
+    <h3 style="color:var(--text);text-transform:none;letter-spacing:0;font-size:14px;margin-bottom:6px">🔗 分享給夥伴</h3>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:16px">將目前所有已上傳的資料打包成一個 JSON 檔，夥伴匯入後即可看到相同內容。</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <button class="uz-btn" onclick="exportDataPackage()">⬇ 匯出資料包</button>
+      <button class="uz-btn" style="background:#fff;color:var(--text);border:1px solid var(--border)" onclick="document.getElementById('fi-import').click()">⬆ 匯入資料包</button>
+    </div>
+    <input type="file" id="fi-import" accept=".json" onchange="importDataPackage(this)">
+    <p style="font-size:11px;color:var(--muted);margin-top:12px">＊ 匯入會覆蓋夥伴端的現有資料，請確認後再操作</p>
+  </div>
+
+</div>
+</div>
+
+<script>
+// ==================== CONSTANTS ====================
+const GOAL = 2000000;
+const START_DATE = new Date('2026-04-22');
+const LS = 'zb_';
+
+// ==================== STATIC DATA ====================
+const budgets = [
+  { label:'問卷廣告', budget:90000, used:94896 },
+  { label:'上線廣告', budget:326400, used:2109 },
+  { label:'KOL 費用', budget:100000, used:35000 },
+  { label:'行銷推播', budget:80000, used:19142 },
+];
+
+const kolData = [
+  { status:'撰稿中', name:'物理治療師 ZM',     fee:6000, style:'',         type:'影片', confirmed:true },
+  { status:'撰稿中', name:'小夫妻的旅攝生活', fee:8000, style:'',          type:'影片', confirmed:true },
+  { status:'撰稿中', name:'林瑄',              fee:1500, style:'瑜珈老師',  type:'影片', confirmed:true },
+  { status:'撰稿中', name:'徐可妮',            fee:5000, style:'全職媽媽',  type:'影片', confirmed:false },
+  { status:'撰稿中', name:'杜怡萱（記者）',   fee:4500, style:'身心療癒',  type:'影片', confirmed:true },
+  { status:'撰稿中', name:"Lea's Wonderland", fee:4000, style:'網紅生活',  type:'影片', confirmed:false },
+  { status:'洽談中', name:'厝邊工作室',        fee:6000, style:'',          type:'影片', confirmed:true },
+];
+
+const postData = [
+  { source:'官方', content:'問卷上線影片', type:'方形影片', isAd:true },
+  { source:'官方', content:'主視覺單圖',   type:'單圖',     isAd:true },
+  { source:'官方', content:'自己亂伸篇',   type:'方形影片', isAd:true },
+  { source:'官方', content:'不用預約才高級',type:'單圖',    isAd:true },
+  { source:'官方', content:'倒數七天',      type:'單圖',    isAd:true },
+  { source:'官方', content:'倒數五天－QA',  type:'多圖',    isAd:true },
+  { source:'官方', content:'倒數三天',      type:'單圖',    isAd:true },
+  { source:'官方', content:'開賣－長輩篇',  type:'直式影片',isAd:false },
+  { source:'官方', content:'達標 100%',     type:'單圖',    isAd:true },
+  { source:'KOL',  content:'小夫妻的旅攝生活', type:'多圖', isAd:true },
+];
+
+const surveyWeekly = [
+  { label:'3/25–3/31', surveys:596, spend:24395, cpl:40.9 },
+  { label:'4/1–4/5',   surveys:303, spend:17004, cpl:56.1 },
+  { label:'4/6–4/12',  surveys:403, spend:27001, cpl:67.0 },
+  { label:'4/13–4/19', surveys:255, spend:22952, cpl:90.0 },
+  { label:'4/20–4/21', surveys:30,  spend:3544,  cpl:118.1 },
+];
+
+const weeklyReport = [
+  { week:'W1', label:'4/22–4/28', current:true,
+    adFB:2109, adSurvey:0, totalRevenue:228953, weekRevenue:228953,
+    weekOrders:46, totalOrders:46, cogs:null },
+  { week:'W2', label:'4/29–5/5',  current:false, adFB:null, adSurvey:0, totalRevenue:null, weekRevenue:null, weekOrders:null, totalOrders:null, cogs:null },
+  { week:'W3', label:'5/6–5/12',  current:false, adFB:null, adSurvey:0, totalRevenue:null, weekRevenue:null, weekOrders:null, totalOrders:null, cogs:null },
+  { week:'W4', label:'5/13–5/19', current:false, adFB:null, adSurvey:0, totalRevenue:null, weekRevenue:null, weekOrders:null, totalOrders:null, cogs:null },
+  { week:'W5', label:'5/20–5/26', current:false, adFB:null, adSurvey:0, totalRevenue:null, weekRevenue:null, weekOrders:null, totalOrders:null, cogs:null },
+];
+
+const pnlRows = [
+  { t:'header', label:'▌ 收入' },
+  { label:'募資金額',          c3:null,  c4:228953 },
+  { label:'實收金額（92折）',  c3:null,  c4:210637 },
+  { label:'總訂單數',          c3:null,  c4:46,    isCnt:true },
+  { t:'spacer' },
+  { t:'header', label:'▌ 商品成本' },
+  { label:'商品總成本',        c3:null,  c4:null },
+  { label:'毛利',              c3:null,  c4:null,  isCalc:true },
+  { label:'毛利率',            c3:null,  c4:null,  isPct:true },
+  { t:'spacer' },
+  { t:'header', label:'▌ 行銷費用' },
+  { label:'Meta 廣告費',       c3:24418, c4:2109,  isExp:true },
+  { label:'SMS 費用',          c3:0,     c4:0,     isExp:true },
+  { label:'EDM 費用',          c3:0,     c4:0,     isExp:true },
+  { label:'LINE 費用',         c3:19142, c4:0,     isExp:true },
+  { label:'KOL 費用',          c3:35000, c4:0,     isExp:true },
+  { label:'行銷費用小計',      c3:78560, c4:2109,  isExp:true, isSub:true },
+  { t:'spacer' },
+  { t:'header', label:'▌ 其他費用' },
+  { label:'運費 / $120',       c3:0,     c4:0,     isExp:true },
+  { label:'管銷費用 8%',       c3:0,     c4:0,     isExp:true },
+  { t:'spacer' },
+  { t:'header', label:'▌ 損益指標' },
+  { label:'總 ROAS',           c3:null,  c4:'108.6x', isText:true },
+  { label:'總 ROI',            c3:null,  c4:null,  isText:true },
+  { label:'淨利潤',            c3:null,  c4:null },
+  { label:'總損益',            c3:-78560, c4:226844, isTotal:true },
+];
+
+const UPLOAD_SLOTS = [
+  { key:'overview',    icon:'📊', name:'總覽日報',       desc:'從 Google Sheet 下載的總覽分頁 CSV，包含每日業績、廣告費數據' },
+  { key:'orders',      icon:'🛍️', name:'嘖嘖訂單',       desc:'嘖嘖後台 → 訂單管理 → 匯出，包含商品、金額、訂購人' },
+  { key:'discounts',   icon:'🎟️', name:'折扣碼使用',     desc:'嘖嘖後台 → 優惠碼紀錄 → 匯出，包含折扣碼、使用次數' },
+  { key:'referrals',   icon:'🤝', name:'推薦贊助',       desc:'嘖嘖後台 → 推薦贊助 → 匯出，包含推薦人與業績' },
+  { key:'customers',   icon:'👥', name:'購買名單',       desc:'嘖嘖顧客名單 CSV，每週更新，用於計算問卷轉換率' },
+  { key:'survey_list', icon:'📝', name:'問卷名單',       desc:'問卷填答名單（一次性上傳），包含姓名、email、電話' },
+  { key:'social',      icon:'📱', name:'社群數據',       desc:'各平台社群成效 CSV，包含觸及、互動、點擊數據' },
+  { key:'pnl',         icon:'📉', name:'損益表',         desc:'損益分頁 CSV 匯出，上傳後自動更新損益頁面數值' },
+];
+
+// ==================== LOCALSTORAGE ====================
+function lsGet(key) {
+  try { return JSON.parse(localStorage.getItem(LS + key)); } catch { return null; }
+}
+function lsSet(key, val) { localStorage.setItem(LS + key, JSON.stringify(val)); }
+function lsDel(key) { localStorage.removeItem(LS + key); }
+
+// ==================== FORMATTERS ====================
+function fmt(n) { return n == null ? '—' : Number(n).toLocaleString('zh-TW'); }
+function fmtC(n) { return n == null ? '—' : '$' + Number(n).toLocaleString('zh-TW'); }
+function fmtX(n) { return n == null ? '—' : Number(n).toFixed(1) + 'x'; }
+function fmtP(n) { return n == null ? '—' : Number(n).toFixed(1) + '%'; }
+
+// ==================== TAB SWITCHING ====================
+function switchTab(id, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  const tab = document.getElementById('tab-' + id);
+  if (tab) tab.classList.add('active');
+  if (el) el.classList.add('active');
+  return false;
+}
+
+// ==================== RENDER: HERO ====================
+function renderHero() {
+  const days = Math.max(1, Math.ceil((new Date() - START_DATE) / 86400000));
+  const el = document.getElementById('h-days');
+  if (el) el.textContent = days;
+}
+
+// ==================== RENDER: WEEKLY ====================
+function calcWeek(r) {
+  const totalAd = (r.adFB || 0) + (r.adSurvey || 0);
+  return {
+    ...r,
+    totalAd,
+    aov: r.totalRevenue && r.totalOrders ? Math.round(r.totalRevenue / r.totalOrders) : null,
+    weekROAS: totalAd && r.weekRevenue ? +(r.weekRevenue / totalAd).toFixed(1) : null,
+    totalROAS: totalAd && r.totalRevenue ? +(r.totalRevenue / totalAd).toFixed(1) : null,
+    weekCPA: totalAd && r.weekOrders ? +(totalAd / r.weekOrders).toFixed(1) : null,
+    cpa: totalAd && r.totalOrders ? +(totalAd / r.totalOrders).toFixed(1) : null,
+    totalROI: r.cogs && totalAd && r.totalRevenue
+      ? +((r.totalRevenue - r.cogs - totalAd) / (r.cogs + totalAd) * 100).toFixed(1) : null,
+  };
+}
+
+function renderWeekly() {
+  const el = document.getElementById('weekly-tbody');
+  if (!el) return;
+  el.innerHTML = weeklyReport.map(r => {
+    const w = calcWeek(r);
+    const cls = w.current ? ' class="current-week"' : '';
+    const d = v => v == null ? '<span class="tbd">—</span>' : v;
+    const dc = v => v == null ? '<span class="tbd">—</span>' : fmtC(v);
+    const dx = v => v == null ? '<span class="tbd">—</span>' : fmtX(v);
+    return `<tr${cls}>
+      <td>${w.week} <small style="color:var(--muted);font-weight:400">${w.label}</small>${w.current ? ' <span class="tag tag-blue" style="font-size:10px">進行中</span>' : ''}</td>
+      <td>${dc(w.totalAd)}</td>
+      <td>${dc(w.totalRevenue)}</td>
+      <td>${dc(w.weekRevenue)}</td>
+      <td>${d(w.weekOrders)}</td>
+      <td>${d(w.totalOrders)}</td>
+      <td>${dc(w.aov)}</td>
+      <td>${dx(w.totalROAS)}</td>
+      <td>${dx(w.weekROAS)}</td>
+      <td>${dc(w.cpa)}</td>
+      <td>${dc(w.weekCPA)}</td>
+      <td>${dc(w.cogs)}</td>
+      <td>${w.totalROI == null ? '<span class="tbd">—</span>' : fmtP(w.totalROI)}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ==================== RENDER: CONVERSION ====================
+function renderConversion() {
+  const surveyData = lsGet('survey_list');
+  const custData = lsGet('customers');
+  const el = document.getElementById('conv-content');
+  if (!el) return;
+
+  if (!surveyData || !custData) {
+    const missing = [];
+    if (!surveyData) missing.push('問卷名單');
+    if (!custData) missing.push('購買名單');
+    el.innerHTML = `<div class="empty-state" style="padding:30px 0">
+      <div class="es-icon">📋</div>
+      <h3>尚未上傳：${missing.join('、')}</h3>
+      <p>兩份名單都上傳後，系統自動比對計算轉換率</p>
+      <button class="es-btn" onclick="return switchTab('upload', document.querySelectorAll('nav a')[8])">前往上傳</button>
+    </div>`;
+    return;
+  }
+
+  const { matched, rate } = matchConversion(surveyData.data, custData.data);
+  const surveyTotal = surveyData.data.length;
+  const pct = (rate * 100).toFixed(1);
+  el.innerHTML = `
+    <div style="padding:8px 0">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px">
+        <span style="font-size:28px;font-weight:800;color:var(--primary)">${pct}%</span>
+        <span style="font-size:12px;color:var(--muted)">已購買 ${fmt(matched)} ／ 問卷 ${fmt(surveyTotal)} 人</span>
+      </div>
+      <div class="conv-bar"><div class="conv-fill" style="width:${pct}%"></div></div>
+      <div class="conv-meta">
+        <span><span class="dot dot-green" style="margin-right:4px"></span>已購買 ${pct}%（${fmt(matched)} 人）</span>
+        <span>尚未購買 ${(100-pct).toFixed(1)}%（${fmt(surveyTotal - matched)} 人）</span>
+      </div>
+      <p style="font-size:11px;color:var(--muted);margin-top:10px">
+        比對欄位：email ＋ 電話 ｜ 購買名單更新於 ${fmtDate(custData.uploadedAt)}
+      </p>
+    </div>`;
+}
+
+function matchConversion(surveyRows, custRows) {
+  const emailCols = ['email','Email','電子郵件','信箱','EMAIL'];
+  const phoneCols = ['phone','Phone','電話','手機','聯絡電話','PHONE','行動電話'];
+
+  function findCol(headers, candidates) {
+    for (const c of candidates) {
+      const found = headers.find(h => h && h.toLowerCase().includes(c.toLowerCase()));
+      if (found) return found;
+    }
+    return null;
+  }
+
+  const sHeaders = Object.keys(surveyRows[0] || {});
+  const cHeaders = Object.keys(custRows[0] || {});
+  const sEmail = findCol(sHeaders, emailCols);
+  const sPhone = findCol(sHeaders, phoneCols);
+  const cEmail = findCol(cHeaders, emailCols);
+  const cPhone = findCol(cHeaders, phoneCols);
+
+  const custEmails = new Set(custRows.map(r => (r[cEmail] || '').toLowerCase().trim()).filter(Boolean));
+  const custPhones = new Set(custRows.map(r => (r[cPhone] || '').replace(/\D/g, '')).filter(v => v.length > 5));
+
+  let matched = 0;
+  surveyRows.forEach(r => {
+    const e = (r[sEmail] || '').toLowerCase().trim();
+    const p = (r[sPhone] || '').replace(/\D/g, '');
+    if ((e && custEmails.has(e)) || (p && p.length > 5 && custPhones.has(p))) matched++;
+  });
+
+  return { matched, rate: surveyRows.length ? matched / surveyRows.length : 0 };
+}
+
+// ==================== RENDER: BUDGET BARS ====================
+function renderBudgetBars(containerId, mini) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = budgets.map(b => {
+    const pct = Math.min(b.used / b.budget * 100, 100);
+    const over = b.used > b.budget;
+    const color = over ? '#C17272' : pct > 80 ? '#BB8A6A' : '#6B8FAB';
+    return `<div class="budget-card" ${mini ? 'style="border-bottom:1px solid #F0EDE8"' : ''}>
+      <div class="budget-header">
+        <span class="budget-label">${b.label}</span>
+        <span class="budget-amount">${over ? '<span style="color:#E74C3C">超支</span>' : '剩 ' + fmtC(b.budget - b.used)}</span>
+      </div>
+      <div class="budget-track"><div class="budget-fill" style="width:${pct}%;background:${color}"></div></div>
+      <div class="budget-meta">
+        <span>已用 ${fmtC(b.used)}</span>
+        <span>${pct.toFixed(1)}% ／ ${fmtC(b.budget)}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderBudgetTable() {
+  const el = document.getElementById('budget-table');
+  if (!el) return;
+  const tags = {
+    '問卷廣告':['tag-red','超支 5.5%'], '上線廣告':['tag-green','剛起步'],
+    'KOL 費用':['tag-amber','35% 已用'], '行銷推播':['tag-amber','23.9% 已用'],
+  };
+  el.innerHTML = budgets.map(b => {
+    const [cls, lbl] = tags[b.label] || ['tag-gray','—'];
+    return `<tr>
+      <td>${b.label}</td><td>${fmtC(b.budget)}</td><td>${fmtC(b.used)}</td>
+      <td>${fmtC(Math.max(0, b.budget - b.used))}</td>
+      <td>${(b.used/b.budget*100).toFixed(1)}%</td>
+      <td><span class="tag ${cls}">${lbl}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+// ==================== RENDER: P&L ====================
+function renderPnL() {
+  const el = document.getElementById('pnl-tbody');
+  if (!el) return;
+
+  const savedPnl = lsGet('pnl');
+  if (savedPnl) {
+    renderPnLFromCSV(savedPnl.data);
+    const noteEl = document.getElementById('pnl-note');
+    if (noteEl) noteEl.textContent = '最後更新：' + fmtDate(savedPnl.uploadedAt);
+    return;
+  }
+
+  el.innerHTML = pnlRows.map(r => {
+    if (r.t === 'header') return `<tr class="pnl-header"><td colspan="4">${r.label}</td></tr>`;
+    if (r.t === 'spacer') return `<tr class="pnl-spacer"><td colspan="4"></td></tr>`;
+
+    const total = (r.c3 != null || r.c4 != null)
+      ? ((r.c3 || 0) + (r.c4 || 0))
+      : null;
+
+    const fv = (v, isNeg) => {
+      if (r.isText) return v == null ? '<span style="color:var(--muted)">—</span>' : v;
+      if (r.isPct) return v == null ? '<span style="color:var(--muted)">—</span>' : v;
+      if (r.isCnt) return v == null ? '<span style="color:var(--muted)">—</span>' : fmt(v);
+      if (v == null) return '<span style="color:var(--muted)">—</span>';
+      const n = Number(v);
+      if (n === 0) return '<span style="color:var(--muted)">$0</span>';
+      const cls = isNeg ? 'pnl-neg' : (n > 0 && r.isTotal ? 'pnl-pos' : (n < 0 && r.isTotal ? 'pnl-neg' : ''));
+      return `<span class="${cls}">${n < 0 ? '-' : (r.isTotal && n > 0 ? '+' : '')}$${fmt(Math.abs(n))}</span>`;
+    };
+
+    const rowCls = r.isSub ? ' class="pnl-subtotal"' : r.isTotal ? ' class="pnl-total"' : '';
+    const indent = r.isSub || r.isTotal ? '' : 'style="padding-left:20px"';
+
+    return `<tr${rowCls}>
+      <td ${indent}>${r.label}</td>
+      <td>${fv(r.c3, r.isExp)}</td>
+      <td>${fv(r.c4, r.isExp)}</td>
+      <td>${fv(total, r.isExp)}</td>
+    </tr>`;
+  }).join('');
+}
+
+function renderPnLFromCSV(data) {
+  const el = document.getElementById('pnl-tbody');
+  if (!el || !data.length) return;
+  const headers = Object.keys(data[0]);
+  el.innerHTML = data.map(row => {
+    const cells = headers.map(h => `<td>${row[h] || ''}</td>`).join('');
+    return `<tr>${cells}</tr>`;
+  }).join('');
+}
+
+// ==================== RENDER: KOL ====================
+function renderKolTable() {
+  const el = document.getElementById('kol-tbody');
+  if (!el) return;
+  const statusMap = { '撰稿中':'tag-blue', '洽談中':'tag-amber' };
+  el.innerHTML = kolData
+    .filter(k => k.status === '撰稿中' || k.status === '洽談中')
+    .map(k => `<tr>
+      <td><span class="tag ${statusMap[k.status]}">${k.status}</span></td>
+      <td><strong>${k.name}</strong></td>
+      <td>${fmtC(k.fee)}</td>
+      <td>${k.style || '—'}</td>
+      <td>${k.type}</td>
+      <td>${k.confirmed ? '✅ 確認' : '<span style="color:var(--muted)">待確認</span>'}</td>
+    </tr>`).join('');
+}
+
+function renderPostTable() {
+  const el = document.getElementById('post-tbody');
+  if (!el) return;
+  el.innerHTML = postData.map(p => `<tr>
+    <td><span class="tag ${p.source==='KOL'?'tag-blue':'tag-gray'}">${p.source}</span></td>
+    <td>${p.content}</td>
+    <td>${p.type}</td>
+    <td>${p.isAd ? '<span class="tag tag-green">有投放</span>' : '<span class="tag tag-gray">無</span>'}</td>
+  </tr>`).join('');
+}
+
+// ==================== RENDER: UPLOAD SLOTS ====================
+function renderUploadSlots() {
+  const el = document.getElementById('slot-grid');
+  if (!el) return;
+  el.innerHTML = UPLOAD_SLOTS.map(s => {
+    const saved = lsGet(s.key);
+    const hasData = !!saved;
+    const ts = hasData ? '✅ 最後更新：' + fmtDate(saved.uploadedAt) : '尚未上傳';
+    const rows = hasData ? `${fmt(saved.data.length)} 筆資料` : '';
+    return `<div class="slot-card ${hasData ? 'has-data' : ''}" id="slot-${s.key}">
+      <div class="slot-icon">${s.icon}</div>
+      <div class="slot-name">${s.name}</div>
+      <div class="slot-desc">${s.desc}</div>
+      <div class="slot-ts ${hasData ? 'ok' : 'empty'}">${ts}${rows ? ' · ' + rows : ''}</div>
+      <div class="slot-actions">
+        <button class="slot-up-btn" onclick="document.getElementById('fi-${s.key}').click()">⬆ 上傳</button>
+        ${hasData ? `<button class="slot-clr-btn" onclick="clearSlot('${s.key}')">清除</button>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ==================== RENDER: PRODUCTS ====================
+function renderProducts() {
+  const saved = lsGet('orders');
+  const el = document.getElementById('products-content');
+  if (!el) return;
+  if (!saved || !saved.data.length) return; // keep empty state
+
+  const data = saved.data;
+  const headers = Object.keys(data[0]);
+
+  // Try to find useful columns
+  const amountCol = headers.find(h => /金額|amount|price|total/i.test(h));
+  const itemCol = headers.find(h => /商品|方案|item|product|name/i.test(h));
+  const qtyCol = headers.find(h => /數量|qty|quantity/i.test(h));
+
+  const totalOrders = data.length;
+  const totalRevenue = amountCol ? data.reduce((s, r) => s + (parseFloat(String(r[amountCol]).replace(/[^\d.]/g,'')) || 0), 0) : null;
+
+  // Group by item if column found
+  let itemSummary = [];
+  if (itemCol) {
+    const map = {};
+    data.forEach(r => {
+      const item = r[itemCol] || '未知';
+      if (!map[item]) map[item] = { count: 0, revenue: 0 };
+      map[item].count++;
+      if (amountCol) map[item].revenue += parseFloat(String(r[amountCol]).replace(/[^\d.]/g,'')) || 0;
+    });
+    itemSummary = Object.entries(map).sort((a,b) => b[1].count - a[1].count);
+  }
+
+  el.innerHTML = `
+    <div class="grid4 mb20">
+      <div class="card kpi"><div class="icon">🛍️</div><div class="val">${fmt(totalOrders)}</div><div class="lbl">總訂單數</div></div>
+      ${totalRevenue != null ? `<div class="card kpi"><div class="icon">💰</div><div class="val">${fmtC(Math.round(totalRevenue))}</div><div class="lbl">總金額</div></div>` : ''}
+      ${totalRevenue && totalOrders ? `<div class="card kpi"><div class="icon">📊</div><div class="val">${fmtC(Math.round(totalRevenue/totalOrders))}</div><div class="lbl">客單價</div></div>` : ''}
+      <div class="card kpi"><div class="icon">📅</div><div class="val">${fmtDate(saved.uploadedAt)}</div><div class="lbl">更新時間</div></div>
+    </div>
+    ${itemSummary.length ? `
+    <div class="card mb20">
+      <div class="section-title">📦 各方案購買狀況</div>
+      <table>
+        <thead><tr><th>商品 / 方案</th><th>訂單數</th><th>佔比</th>${amountCol ? '<th>金額</th>' : ''}</tr></thead>
+        <tbody>${itemSummary.map(([name, d]) => `
+          <tr>
+            <td>${name}</td>
+            <td>${fmt(d.count)}</td>
+            <td>${(d.count/totalOrders*100).toFixed(1)}%</td>
+            ${amountCol ? `<td>${fmtC(Math.round(d.revenue))}</td>` : ''}
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>` : ''}
+    <div class="card">
+      <div class="section-title">📋 訂單原始資料 <span class="updated">共 ${fmt(totalOrders)} 筆</span></div>
+      <div class="tbl-scroll"><table>
+        <thead><tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr></thead>
+        <tbody>${data.slice(0, 50).map(r => `<tr>${headers.map(h => `<td>${r[h] || ''}</td>`).join('')}</tr>`).join('')}
+        ${data.length > 50 ? `<tr><td colspan="${headers.length}" style="color:var(--muted);text-align:center">僅顯示前 50 筆</td></tr>` : ''}
+        </tbody>
+      </table></div>
+    </div>
+    <div style="text-align:right;margin-top:12px">
+      <button class="slot-up-btn" style="display:inline-block;padding:8px 20px" onclick="document.getElementById('fi-orders').click()">⬆ 更新資料</button>
+    </div>`;
+}
+
+// ==================== RENDER: DISCOUNTS ====================
+function renderDiscounts() {
+  const saved = lsGet('discounts');
+  const el = document.getElementById('discounts-content');
+  if (!el) return;
+  if (!saved || !saved.data.length) return;
+
+  const data = saved.data;
+  const headers = Object.keys(data[0]);
+  const codeCol = headers.find(h => /折扣碼|code|coupon|voucher/i.test(h));
+  const cntCol = headers.find(h => /次數|count|used|使用/i.test(h));
+  const amtCol = headers.find(h => /金額|amount|discount|折扣/i.test(h));
+
+  el.innerHTML = `
+    <div class="grid3 mb20">
+      <div class="card kpi"><div class="icon">🎟️</div><div class="val">${fmt(data.length)}</div><div class="lbl">折扣碼種類</div></div>
+      ${cntCol ? `<div class="card kpi"><div class="icon">🔢</div><div class="val">${fmt(data.reduce((s,r)=>s+(parseInt(r[cntCol])||0),0))}</div><div class="lbl">總使用次數</div></div>` : ''}
+      <div class="card kpi"><div class="icon">📅</div><div class="val">${fmtDate(saved.uploadedAt)}</div><div class="lbl">更新時間</div></div>
+    </div>
+    <div class="card">
+      <div class="section-title">🎟️ 折扣碼使用明細</div>
+      <div class="tbl-scroll"><table>
+        <thead><tr>${headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead>
+        <tbody>${data.map(r=>`<tr>${headers.map(h=>`<td>${r[h]||''}</td>`).join('')}</tr>`).join('')}</tbody>
+      </table></div>
+    </div>
+    <div style="text-align:right;margin-top:12px">
+      <button class="slot-up-btn" style="display:inline-block;padding:8px 20px" onclick="document.getElementById('fi-discounts').click()">⬆ 更新資料</button>
+    </div>`;
+}
+
+// ==================== RENDER: REFERRALS ====================
+function renderReferrals() {
+  const saved = lsGet('referrals');
+  const el = document.getElementById('referrals-content');
+  if (!el) return;
+  if (!saved || !saved.data.length) return;
+
+  const data = saved.data;
+  const headers = Object.keys(data[0]);
+  const nameCol = headers.find(h => /推薦人|姓名|name/i.test(h));
+  const cntCol = headers.find(h => /人數|count|被推薦|referred/i.test(h));
+  const amtCol = headers.find(h => /業績|金額|amount|revenue/i.test(h));
+
+  // Sort by amount or count desc
+  const sorted = [...data].sort((a, b) => {
+    const col = amtCol || cntCol;
+    if (!col) return 0;
+    return (parseFloat(String(b[col]).replace(/[^\d.]/g,''))||0) - (parseFloat(String(a[col]).replace(/[^\d.]/g,''))||0);
+  });
+
+  el.innerHTML = `
+    <div class="grid3 mb20">
+      <div class="card kpi"><div class="icon">🤝</div><div class="val">${fmt(data.length)}</div><div class="lbl">推薦人數</div></div>
+      ${cntCol ? `<div class="card kpi"><div class="icon">👥</div><div class="val">${fmt(data.reduce((s,r)=>s+(parseInt(r[cntCol])||0),0))}</div><div class="lbl">被推薦總人數</div></div>` : ''}
+      ${amtCol ? `<div class="card kpi"><div class="icon">💰</div><div class="val">${fmtC(Math.round(data.reduce((s,r)=>s+(parseFloat(String(r[amtCol]).replace(/[^\d.]/g,''))||0),0)))}</div><div class="lbl">推薦總業績</div></div>` : ''}
+    </div>
+    <div class="card">
+      <div class="section-title">🏆 推薦贊助業績排行</div>
+      <div class="tbl-scroll"><table>
+        <thead><tr>${headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead>
+        <tbody>${sorted.slice(0,30).map(r=>`<tr>${headers.map(h=>`<td>${r[h]||''}</td>`).join('')}</tr>`).join('')}
+        ${sorted.length > 30 ? `<tr><td colspan="${headers.length}" style="color:var(--muted);text-align:center">僅顯示前 30 筆</td></tr>` : ''}
+        </tbody>
+      </table></div>
+    </div>
+    <div style="text-align:right;margin-top:12px">
+      <button class="slot-up-btn" style="display:inline-block;padding:8px 20px" onclick="document.getElementById('fi-referrals').click()">⬆ 更新資料</button>
+    </div>`;
+}
+
+// ==================== UPLOAD HANDLING ====================
+function handleSlotUpload(key, input) {
+  const file = input.files[0];
+  if (!file) return;
+  parseAndStore(key, file, () => {
+    input.value = '';
+    afterUpload(key);
+  });
+}
+
+function handleUniversalUpload(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const select = document.getElementById('uz-type-select');
+  const key = select ? select.value : '';
+  if (!key) { showToast('⚠️ 請先選擇資料類型'); input.value = ''; return; }
+  parseAndStore(key, file, () => {
+    input.value = '';
+    if (select) select.value = '';
+    afterUpload(key);
+  });
+}
+
+function parseAndStore(key, file, cb) {
+  Papa.parse(file, {
+    header: true, skipEmptyLines: true,
+    complete: results => {
+      const slotName = UPLOAD_SLOTS.find(s => s.key === key)?.name || key;
+      lsSet(key, {
+        data: results.data,
+        headers: results.meta.fields || [],
+        uploadedAt: new Date().toISOString(),
+        filename: file.name,
+      });
+      showToast('✅ ' + slotName + ' 上傳成功（' + fmt(results.data.length) + ' 筆）');
+      cb();
+    },
+    error: err => showToast('❌ 解析失敗：' + err.message),
+  });
+}
+
+function afterUpload(key) {
+  renderUploadSlots();
+  if (key === 'orders')      renderProducts();
+  if (key === 'discounts')   renderDiscounts();
+  if (key === 'referrals')   renderReferrals();
+  if (key === 'customers' || key === 'survey_list') renderConversion();
+  if (key === 'pnl')         renderPnL();
+  if (key === 'overview')    renderWeekly();
+}
+
+function clearSlot(key) {
+  if (!confirm('確定清除「' + (UPLOAD_SLOTS.find(s=>s.key===key)?.name||key) + '」的資料？')) return;
+  lsDel(key);
+  afterUpload(key);
+  renderUploadSlots();
+  showToast('🗑 已清除');
+}
+
+function triggerUniversalUpload() {
+  const select = document.getElementById('uz-type-select');
+  if (!select || !select.value) { showToast('⚠️ 請先選擇資料類型'); return; }
+  document.getElementById('fi-universal').click();
+}
+
+// Drag & Drop
+function onDragOver(e) {
+  e.preventDefault();
+  document.getElementById('universal-zone').classList.add('drag-over');
+}
+function onDragLeave() {
+  document.getElementById('universal-zone').classList.remove('drag-over');
+}
+function onDrop(e) {
+  e.preventDefault();
+  document.getElementById('universal-zone').classList.remove('drag-over');
+  const file = e.dataTransfer?.files?.[0];
+  if (!file) return;
+  const select = document.getElementById('uz-type-select');
+  const key = select ? select.value : '';
+  if (!key) { showToast('⚠️ 請先選擇資料類型'); return; }
+  parseAndStore(key, file, () => {
+    if (select) select.value = '';
+    afterUpload(key);
+  });
+}
+
+// ==================== CHARTS ====================
+function renderChartDaily() {
+  const ctx = document.getElementById('chartDaily');
+  if (!ctx) return;
+  const labels = ['4/22','4/23','4/24','4/25','4/26','4/27','4/28'];
+  const targetPace = labels.map((_, i) => Math.round(GOAL / 60 * (i + 1)));
+  new Chart(ctx, {
+    type:'bar',
+    data: {
+      labels,
+      datasets: [
+        { label:'每日業績', data:[228953,null,null,null,null,null,null],
+          backgroundColor:'#6B8FAB', borderRadius:6 },
+        { label:'廣告費', data:[2109,null,null,null,null,null,null],
+          backgroundColor:'#C9AEB0', borderRadius:6 },
+        { label:'線性目標', data:targetPace,
+          type:'line', borderColor:'#C4C2BE', borderDash:[4,4],
+          borderWidth:1.5, pointRadius:0, tension:0, fill:false },
+      ]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ position:'bottom', labels:{ font:{size:11} } } },
+      scales: {
+        y:{ ticks:{ callback:v=>'$'+(v>=1000?(v/1000).toFixed(0)+'K':v), font:{size:11} }, grid:{color:'#F0EDE8'} },
+        x:{ grid:{display:false}, ticks:{font:{size:11}} },
+      }
+    }
+  });
+}
+
+function renderChartSurveyOverview() {
+  const ctx = document.getElementById('chartSurveyOverview');
+  if (!ctx) return;
+  new Chart(ctx, {
+    data: {
+      labels: surveyWeekly.map(w => w.label),
+      datasets: [
+        { type:'bar', label:'問卷數', data:surveyWeekly.map(w=>w.surveys),
+          backgroundColor:'#6B8FAB', borderRadius:6, yAxisID:'y' },
+        { type:'line', label:'CPL ($)', data:surveyWeekly.map(w=>w.cpl),
+          borderColor:'#BB8A6A', backgroundColor:'transparent',
+          borderWidth:2, pointRadius:4, tension:.3, yAxisID:'y1' },
+      ]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ position:'bottom', labels:{font:{size:11}} } },
+      scales: {
+        y:{ type:'linear', position:'left', ticks:{font:{size:11}}, grid:{color:'#F0EDE8'} },
+        y1:{ type:'linear', position:'right', ticks:{callback:v=>'$'+v, font:{size:11}}, grid:{drawOnChartArea:false} },
+        x:{ grid:{display:false}, ticks:{font:{size:11}} },
+      }
+    }
+  });
+}
+
+function renderChartSurvey() {
+  const ctx = document.getElementById('chartSurvey');
+  if (!ctx) return;
+  new Chart(ctx, {
+    data: {
+      labels: surveyWeekly.map(w => w.label),
+      datasets: [
+        { type:'bar', label:'問卷數', data:surveyWeekly.map(w=>w.surveys),
+          backgroundColor:'#6B8FAB', borderRadius:6, yAxisID:'y' },
+        { type:'line', label:'CPL ($)', data:surveyWeekly.map(w=>w.cpl),
+          borderColor:'#BB8A6A', backgroundColor:'transparent',
+          borderWidth:2, pointRadius:4, tension:.3, yAxisID:'y1' },
+      ]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ position:'bottom', labels:{font:{size:11}} } },
+      scales: {
+        y:{ type:'linear', position:'left', ticks:{font:{size:11}}, grid:{color:'#F0EDE8'} },
+        y1:{ type:'linear', position:'right', ticks:{callback:v=>'$'+v, font:{size:11}}, grid:{drawOnChartArea:false} },
+        x:{ grid:{display:false}, ticks:{font:{size:11}} },
+      }
+    }
+  });
+}
+
+function renderChartSurveySpend() {
+  const ctx = document.getElementById('chartSurveySpend');
+  if (!ctx) return;
+  new Chart(ctx, {
+    type:'bar',
+    data: {
+      labels: surveyWeekly.map(w => w.label),
+      datasets:[{ label:'Meta 廣告費', data:surveyWeekly.map(w=>w.spend),
+        backgroundColor:['#6B8FAB','#7BA6BC','#8FBDCB','#BB8A6A','#C17272'],
+        borderRadius:6 }]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false} },
+      scales:{
+        y:{ ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'K',font:{size:11}}, grid:{color:'#F0EDE8'} },
+        x:{ grid:{display:false}, ticks:{font:{size:11}} },
+      }
+    }
+  });
+}
+
+function renderChartCost() {
+  const ctx = document.getElementById('chartCost');
+  if (!ctx) return;
+  new Chart(ctx, {
+    type:'doughnut',
+    data: {
+      labels:['商品成本 45%','嘖嘖 8%','廣告費 21%','KOL 5%','行銷推播 4%','管銷稅務 14%','利潤 3%'],
+      datasets:[{
+        data:[45,8,21,5,4,14,3],
+        backgroundColor:['#6B8FAB','#7BB5A0','#BB8A6A','#8E7FB0','#C17272','#C4C2BE','#D4BC8A'],
+        borderWidth:2, borderColor:'#fff',
+      }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false, cutout:'60%',
+      plugins:{ legend:{ position:'right', labels:{font:{size:11}, boxWidth:12} } }
+    }
+  });
+}
+
+// ==================== ADVISOR ====================
+function toggleAdvisor() {
+  const body = document.getElementById('advisor-body');
+  const arrow = document.getElementById('advisor-arrow');
+  const open = body.classList.toggle('open');
+  if (arrow) arrow.style.transform = open ? 'rotate(180deg)' : '';
+}
+
+function filterRec(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.rec-card').forEach(c => {
+    c.style.display = (cat === 'all' || c.dataset.cat === cat) ? 'block' : 'none';
+  });
+}
+
+// ==================== EXPORT / IMPORT ====================
+function exportDataPackage() {
+  const pkg = {};
+  UPLOAD_SLOTS.forEach(s => {
+    const d = lsGet(s.key);
+    if (d) pkg[s.key] = d;
+  });
+  if (Object.keys(pkg).length === 0) {
+    showToast('⚠️ 目前沒有已上傳的資料');
+    return;
+  }
+  const blob = new Blob([JSON.stringify(pkg, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = '3ZeBra_data_' + new Date().toISOString().slice(0, 10) + '.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('✅ 資料包已匯出');
+}
+
+function importDataPackage(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const pkg = JSON.parse(e.target.result);
+      let count = 0;
+      Object.entries(pkg).forEach(([key, val]) => {
+        lsSet(key, val);
+        count++;
+      });
+      input.value = '';
+      renderUploadSlots();
+      renderProducts();
+      renderDiscounts();
+      renderReferrals();
+      renderConversion();
+      renderPnL();
+      renderWeekly();
+      showToast('✅ 成功匯入 ' + count + ' 個資料集');
+    } catch {
+      showToast('❌ 匯入失敗：格式不正確');
+      input.value = '';
+    }
+  };
+  reader.readAsText(file);
+}
+
+// ==================== TOAST ====================
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  if (!el) return;
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 3000);
+}
+
+// ==================== HELPERS ====================
+function fmtDate(iso) {
+  if (!iso) return '—';
+  const d = new Date(iso);
+  return d.getFullYear() + '/' +
+    String(d.getMonth()+1).padStart(2,'0') + '/' +
+    String(d.getDate()).padStart(2,'0') + ' ' +
+    String(d.getHours()).padStart(2,'0') + ':' +
+    String(d.getMinutes()).padStart(2,'0');
+}
+
+// ==================== INIT ====================
+window.addEventListener('DOMContentLoaded', () => {
+  renderHero();
+  renderWeekly();
+  renderConversion();
+  renderBudgetBars('budget-bars-overview', true);
+  renderBudgetBars('budget-detail', false);
+  renderBudgetTable();
+  renderPnL();
+  renderKolTable();
+  renderPostTable();
+  renderUploadSlots();
+  renderProducts();
+  renderDiscounts();
+  renderReferrals();
+  renderChartDaily();
+  renderChartSurveyOverview();
+  renderChartSurvey();
+  renderChartSurveySpend();
+  renderChartCost();
+});
+</script>
+</body>
+</html>
