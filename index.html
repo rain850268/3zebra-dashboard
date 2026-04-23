@@ -214,6 +214,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
   <a href="#" onclick="return switchTab('budget',this)">💰 預算控制</a>
   <a href="#" onclick="return switchTab('pnl',this)">📉 損益</a>
   <a href="#" onclick="return switchTab('kol',this)">📣 KOL</a>
+  <a href="#" onclick="return switchTab('push',this)">📬 行銷推播</a>
   <a href="#" onclick="return switchTab('survey',this)">📋 問卷成效</a>
   <a href="#" onclick="return switchTab('products',this)">🛍️ 產品購買</a>
   <a href="#" onclick="return switchTab('discounts',this)">🎟️ 折扣碼</a>
@@ -599,6 +600,60 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
 </div>
 </div>
 
+<!-- ==================== 行銷推播 ==================== -->
+<div class="tab" id="tab-push">
+<div class="page">
+
+  <div class="grid4 mb20">
+    <div class="card kpi">
+      <div class="icon">📱</div>
+      <div class="val">$36,535</div>
+      <div class="lbl">LINE 費用</div>
+      <div class="sub">問卷 $30,745 ＋ 開賣 $5,790</div>
+    </div>
+    <div class="card kpi">
+      <div class="icon">📧</div>
+      <div class="val">$21,482</div>
+      <div class="lbl">EDM 費用</div>
+      <div class="sub">問卷 $5,524 ＋ 開賣 $15,958</div>
+    </div>
+    <div class="card kpi">
+      <div class="icon">💰</div>
+      <div class="val">$181,882</div>
+      <div class="lbl">推播帶動訂單</div>
+      <div class="sub">開賣期</div>
+    </div>
+    <div class="card kpi">
+      <div class="icon">⚡</div>
+      <div class="val">8.4x</div>
+      <div class="lbl">開賣期推播 ROAS</div>
+      <div class="sub">費用 $21,748</div>
+    </div>
+  </div>
+
+  <div class="card mb20">
+    <div class="section-title">LINE 推播</div>
+    <table>
+      <thead><tr>
+        <th>活動名稱</th><th>傳送人數</th><th>開信率</th><th>點擊率</th><th>訂單金額</th><th>ROAS</th><th>成本</th><th>標記</th>
+      </tr></thead>
+      <tbody id="push-line-tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="section-title">EDM</div>
+    <table>
+      <thead><tr>
+        <th>活動名稱</th><th>傳送人數</th><th>開信率</th><th>點擊率</th><th>訂單金額</th><th>ROAS</th><th>成本</th><th>標記</th>
+      </tr></thead>
+      <tbody id="push-edm-tbody"></tbody>
+    </table>
+  </div>
+
+</div>
+</div>
+
 <!-- ==================== 問卷成效 ==================== -->
 <div class="tab" id="tab-survey">
 <div class="page">
@@ -721,7 +776,7 @@ const budgets = [
   { label:'問卷廣告', budget:90000, used:94896 },
   { label:'上線廣告', budget:326400, used:2109 },
   { label:'KOL 費用', budget:100000, used:35000 },
-  { label:'行銷推播', budget:80000, used:19142 },
+  { label:'行銷推播', budget:80000, used:58017 },
 ];
 
 const kolData = [
@@ -734,6 +789,38 @@ const kolData = [
   { status:'撰稿中',     name:'厝邊工作室',        fee:6000, style:'',          type:'影片' },
 ];
 
+
+const pushData = {
+  line: [
+    { name:'0325 問卷上線',        sends:47854, openRate:'29.75%', ctr:'0.62%',  revenue:0,     roas:null,  cost:19142, tag:'問卷' },
+    { name:'0417 倒數五天－問卷',  sends:694,   openRate:'54.47%', ctr:'10.37%', revenue:0,     roas:null,  cost:278,   tag:'問卷' },
+    { name:'0417 倒數五天－其他',  sends:13815, openRate:'61.56%', ctr:'1.38%',  revenue:0,     roas:null,  cost:5526,  tag:'問卷' },
+    { name:'0419 倒數三天－問卷',  sends:706,   openRate:'51.42%', ctr:'9.07%',  revenue:0,     roas:null,  cost:282,   tag:'問卷' },
+    { name:'0419 倒數三天－其他',  sends:13794, openRate:'60.56%', ctr:'1.09%',  revenue:0,     roas:null,  cost:5518,  tag:'問卷' },
+    { name:'0422 上線當天－問卷',  sends:714,   openRate:'46.22%', ctr:'11.90%', revenue:86742, roas:303.7, cost:286,   tag:'開賣' },
+    { name:'0422 上線當天－其他',  sends:13760, openRate:'56.25%', ctr:'1.48%',  revenue:0,     roas:null,  cost:5504,  tag:'開賣' },
+  ],
+  edm: [
+    { name:'問卷上線－waca vip',       sends:1162,  openRate:'9.90%',  ctr:'4.40%',  revenue:0,     roas:null,  cost:116,  tag:'問卷' },
+    { name:'問卷上線－過去問卷',       sends:7353,  openRate:'6.30%',  ctr:'2.00%',  revenue:0,     roas:null,  cost:735,  tag:'問卷' },
+    { name:'問卷上線－大補帖',         sends:25802, openRate:'6.00%',  ctr:'1.10%',  revenue:0,     roas:null,  cost:2580, tag:'問卷' },
+    { name:'問卷上線－waca',           sends:16646, openRate:'8.50%',  ctr:'1.30%',  revenue:0,     roas:null,  cost:1665, tag:'問卷' },
+    { name:'倒數七天－waca vip開信',   sends:88,    openRate:'55.70%', ctr:'0.00%',  revenue:0,     roas:null,  cost:9,    tag:'問卷' },
+    { name:'倒數七天－問卷名單',       sends:1257,  openRate:'12.44%', ctr:'2.61%',  revenue:0,     roas:null,  cost:126,  tag:'問卷' },
+    { name:'倒數七天－waca開信',       sends:825,   openRate:'58.37%', ctr:'0.00%',  revenue:0,     roas:null,  cost:83,   tag:'問卷' },
+    { name:'倒數七天－其他問卷開信',   sends:360,   openRate:'57.78%', ctr:'0.83%',  revenue:0,     roas:null,  cost:36,   tag:'問卷' },
+    { name:'倒數七天－大補帖開信',     sends:1748,  openRate:'58.47%', ctr:'0.17%',  revenue:0,     roas:null,  cost:175,  tag:'問卷' },
+    { name:'體驗會',                   sends:22,    openRate:'23.81%', ctr:'0.00%',  revenue:0,     roas:null,  cost:2,    tag:'開賣' },
+    { name:'上線當天－問卷名單',       sends:1066,  openRate:'10.57%', ctr:'4.06%',  revenue:34273, roas:321.5, cost:107,  tag:'開賣' },
+    { name:'上線當天－waca',           sends:16602, openRate:'8.17%',  ctr:'0.13%',  revenue:0,     roas:null,  cost:1660, tag:'開賣' },
+    { name:'上線當天－其他問卷',       sends:7196,  openRate:'7.40%',  ctr:'0.27%',  revenue:4719,  roas:6.6,   cost:720,  tag:'開賣' },
+    { name:'上線當天－waca vip',       sends:1152,  openRate:'9.18%',  ctr:'0.09%',  revenue:0,     roas:null,  cost:115,  tag:'開賣' },
+    { name:'上線當天－大補帖',         sends:25741, openRate:'9.30%',  ctr:'0.14%',  revenue:0,     roas:null,  cost:2574, tag:'開賣' },
+    { name:'開賣－問卷名單',           sends:730,   openRate:null,     ctr:'80%',    revenue:56148, roas:76.9,  cost:730,  tag:'開賣' },
+    { name:'開賣－VIP',                sends:1107,  openRate:null,     ctr:'44.26%', revenue:0,     roas:null,  cost:1107, tag:'開賣' },
+    { name:'開賣－WACA',               sends:8943,  openRate:null,     ctr:'38.03%', revenue:0,     roas:null,  cost:8943, tag:'開賣' },
+  ]
+};
 
 const surveyWeekly = [
   { label:'3/25–3/31', surveys:596, spend:24395, social:24238, cpl:81.6 },
@@ -766,11 +853,10 @@ const pnlRows = [
   { t:'spacer' },
   { t:'header', label:'▌ 行銷費用' },
   { label:'Meta 廣告費',       c3:24418, c4:7012,  isExp:true },
-  { label:'SMS 費用',          c3:0,     c4:0,     isExp:true },
-  { label:'EDM 費用',          c3:0,     c4:0,     isExp:true },
-  { label:'LINE 費用',         c3:19142, c4:0,     isExp:true },
+  { label:'EDM 費用',          c3:5096,  c4:15958, isExp:true },
+  { label:'LINE 費用',         c3:19142, c4:5790,  isExp:true },
   { label:'KOL 費用',          c3:35000, c4:0,     isExp:true },
-  { label:'行銷費用小計',      c3:78560, c4:7012,  isExp:true, isSub:true },
+  { label:'行銷費用小計',      c3:83656, c4:28760, isExp:true, isSub:true },
   { t:'spacer' },
   { t:'header', label:'▌ 其他費用' },
   { label:'運費 / $120',       c3:0,     c4:0,     isExp:true },
@@ -780,7 +866,7 @@ const pnlRows = [
   { label:'總 ROAS',           c3:null,  c4:'38.8x', isText:true },
   { label:'總 ROI',            c3:null,  c4:null,  isText:true },
   { label:'淨利潤',            c3:null,  c4:null },
-  { label:'總損益',            c3:-78560, c4:265052, isTotal:true },
+  { label:'總損益',            c3:-83656, c4:243304, isTotal:true },
 ];
 
 const UPLOAD_SLOTS = [
@@ -965,7 +1051,7 @@ function renderBudgetTable() {
   if (!el) return;
   const tags = {
     '問卷廣告':['tag-red','超支 5.5%'], '上線廣告':['tag-green','剛起步'],
-    'KOL 費用':['tag-amber','35% 已用'], '行銷推播':['tag-amber','23.9% 已用'],
+    'KOL 費用':['tag-amber','35% 已用'], '行銷推播':['tag-amber','72.5% 已用'],
   };
   el.innerHTML = budgets.map(b => {
     const [cls, lbl] = tags[b.label] || ['tag-gray','—'];
@@ -1048,6 +1134,25 @@ function renderKolTable() {
     </tr>`).join('');
 }
 
+
+// ==================== RENDER: 行銷推播 ====================
+function renderPushTables() {
+  const tagCls = t => t === '問卷' ? 'tag-blue' : 'tag-green';
+  const fmtRow = d => `<tr>
+    <td>${d.name}</td>
+    <td>${fmt(d.sends)}</td>
+    <td>${d.openRate || '—'}</td>
+    <td>${d.ctr}</td>
+    <td>${d.revenue ? fmtC(d.revenue) : '<span style="color:var(--muted)">—</span>'}</td>
+    <td>${d.roas ? d.roas+'x' : '<span style="color:var(--muted)">—</span>'}</td>
+    <td>${fmtC(d.cost)}</td>
+    <td><span class="tag ${tagCls(d.tag)}">${d.tag}</span></td>
+  </tr>`;
+  const lineEl = document.getElementById('push-line-tbody');
+  if (lineEl) lineEl.innerHTML = pushData.line.map(fmtRow).join('');
+  const edmEl = document.getElementById('push-edm-tbody');
+  if (edmEl) edmEl.innerHTML = pushData.edm.map(fmtRow).join('');
+}
 
 // ==================== RENDER: UPLOAD SLOTS ====================
 function renderUploadSlots() {
@@ -1520,6 +1625,7 @@ window.addEventListener('DOMContentLoaded', () => {
   renderBudgetTable();
   renderPnL();
   renderKolTable();
+  renderPushTables();
   renderUploadSlots();
   renderProducts();
   renderDiscounts();
