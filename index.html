@@ -206,15 +206,6 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
 
 <div class="toast" id="toast"></div>
 
-<!-- hidden file inputs for each slot -->
-<input type="file" id="fi-overview" accept=".csv" onchange="handleSlotUpload('overview',this)">
-<input type="file" id="fi-orders" accept=".csv" onchange="handleSlotUpload('orders',this)">
-<input type="file" id="fi-discounts" accept=".csv" onchange="handleSlotUpload('discounts',this)">
-<input type="file" id="fi-referrals" accept=".csv" onchange="handleSlotUpload('referrals',this)">
-<input type="file" id="fi-customers" accept=".csv" onchange="handleSlotUpload('customers',this)">
-<input type="file" id="fi-survey_list" accept=".csv" onchange="handleSlotUpload('survey_list',this)">
-<input type="file" id="fi-social" accept=".csv" onchange="handleSlotUpload('social',this)">
-<input type="file" id="fi-pnl" accept=".csv" onchange="handleSlotUpload('pnl',this)">
 <input type="file" id="fi-universal" accept=".csv" onchange="handleUniversalUpload(this)">
 
 <nav>
@@ -227,7 +218,6 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
   <a href="#" onclick="return switchTab('products',this)">🛍️ 產品購買</a>
   <a href="#" onclick="return switchTab('discounts',this)">🎟️ 折扣碼</a>
   <a href="#" onclick="return switchTab('referrals',this)">🤝 推薦贊助</a>
-  <a href="#" onclick="return switchTab('upload',this)">📁 上傳資料</a>
 </nav>
 
 <!-- ==================== 總覽 ==================== -->
@@ -318,8 +308,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
         <div class="empty-state" style="padding:30px 0">
           <div class="es-icon">📋</div>
           <h3>尚未上傳名單</h3>
-          <p>請至「上傳資料」分頁上傳<br><strong>問卷名單</strong> ＋ <strong>購買名單</strong></p>
-          <button class="es-btn" onclick="return switchTab('upload', document.querySelector('nav a:last-child'))">前往上傳</button>
+          <p>尚未有問卷名單與購買名單資料</p>
         </div>
       </div>
     </div>
@@ -729,53 +718,6 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
 </div>
 </div>
 
-<!-- ==================== 上傳資料 ==================== -->
-<div class="tab" id="tab-upload">
-<div class="page">
-
-  <h2 style="margin-bottom:6px">📁 上傳資料</h2>
-  <p style="color:var(--muted);font-size:13px;margin-bottom:24px">所有資料儲存於本機瀏覽器，不會上傳至任何伺服器。關閉後下次開啟仍保留。</p>
-
-  <!-- Universal Drop Zone -->
-  <div class="upload-zone" id="universal-zone"
-    ondragover="onDragOver(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event)">
-    <div class="uz-icon">📂</div>
-    <h3>拖曳檔案至此，或點擊選取</h3>
-    <p>支援 CSV 格式，請選擇資料類型再上傳</p>
-    <div class="uz-controls">
-      <select class="uz-select" id="uz-type-select">
-        <option value="">— 選擇資料類型 —</option>
-        <option value="overview">📊 總覽日報（Google Sheet CSV）</option>
-        <option value="orders">🛍️ 嘖嘖訂單</option>
-        <option value="discounts">🎟️ 嘖嘖折扣碼</option>
-        <option value="referrals">🤝 嘖嘖推薦贊助</option>
-        <option value="customers">👥 購買名單（問卷轉換用）</option>
-        <option value="survey_list">📝 問卷名單（一次性）</option>
-        <option value="social">📱 社群數據</option>
-        <option value="pnl">📉 損益表 CSV</option>
-      </select>
-      <button class="uz-btn" onclick="triggerUniversalUpload()">選取檔案</button>
-    </div>
-  </div>
-
-  <!-- Slot Cards -->
-  <h3 style="margin-bottom:16px;color:var(--text);text-transform:none;letter-spacing:0;font-size:14px">資料槽狀態</h3>
-  <div class="slot-grid" id="slot-grid"></div>
-
-  <!-- 匯出 / 匯入 -->
-  <div style="margin-top:32px;border-top:1px solid var(--border);padding-top:24px">
-    <h3 style="color:var(--text);text-transform:none;letter-spacing:0;font-size:14px;margin-bottom:6px">🔗 分享給夥伴</h3>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:16px">將目前所有已上傳的資料打包成一個 JSON 檔，夥伴匯入後即可看到相同內容。</p>
-    <div style="display:flex;gap:12px;flex-wrap:wrap">
-      <button class="uz-btn" onclick="exportDataPackage()">⬇ 匯出資料包</button>
-      <button class="uz-btn" style="background:#fff;color:var(--text);border:1px solid var(--border)" onclick="document.getElementById('fi-import').click()">⬆ 匯入資料包</button>
-    </div>
-    <input type="file" id="fi-import" accept=".json" onchange="importDataPackage(this)">
-    <p style="font-size:11px;color:var(--muted);margin-top:12px">＊ 匯入會覆蓋夥伴端的現有資料，請確認後再操作</p>
-  </div>
-
-</div>
-</div>
 
 <script>
 // ==================== CONSTANTS ====================
@@ -960,8 +902,7 @@ function renderConversion() {
     el.innerHTML = `<div class="empty-state" style="padding:30px 0">
       <div class="es-icon">📋</div>
       <h3>尚未上傳：${missing.join('、')}</h3>
-      <p>兩份名單都上傳後，系統自動比對計算轉換率</p>
-      <button class="es-btn" onclick="return switchTab('upload', document.querySelectorAll('nav a')[8])">前往上傳</button>
+      <p>兩份名單都就緒後，系統自動比對計算轉換率</p>
     </div>`;
     return;
   }
