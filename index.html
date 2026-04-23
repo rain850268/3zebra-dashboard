@@ -276,7 +276,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
       <div class="icon">📝</div>
       <div class="val">1,587</div>
       <div class="lbl">問卷填答人數</div>
-      <div class="sub">CPL $59.8</div>
+      <div class="sub">CPL $82.6</div>
     </div>
   </div>
 
@@ -307,7 +307,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
         <tbody id="weekly-tbody"></tbody>
       </table>
     </div>
-    <p style="font-size:11px;color:var(--muted);margin-top:10px">＊ 總 ROAS／CPA 以開賣期廣告費計算（不含問卷預熱期 $94,896）</p>
+    <p style="font-size:11px;color:var(--muted);margin-top:10px">＊ 總 ROAS／CPA 以開賣期廣告費計算（不含問卷預熱期 $131,165，含廣告 $94,896 ＋社群推播 $36,269）</p>
   </div>
 
   <!-- 問卷轉換率 + 預算預覽 -->
@@ -461,7 +461,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
             <span class="rec-title">問卷廣告超出預算 $4,896，但品質優於預期</span>
             <span class="tag tag-amber">注意</span></div>
           <div class="rec-body">
-            問卷預算 $90,000，實際花費 $94,896，超支 5.5%。但 CPL $59.8 遠低於目標 $90。
+            問卷推廣實際總費用 $131,165（廣告 $94,896 ＋社群推播 $36,269）。CPL $82.6，仍低於目標 $90。
             <ul>
               <li>超支金額不大，整體可控，無需特別調整</li>
               <li>建議將問卷名單做好分層（高滿意度 5.0 / 低滿意度 3.5 以下），分別設計不同推播文案</li>
@@ -527,7 +527,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
         <tr><td>贊助金額</td><td>$2,000,000</td><td>$228,953 (11.4%)</td><td><span class="tag tag-green">首日強勁</span></td></tr>
         <tr><td>客單價</td><td>$5,500</td><td>$4,977</td><td><span class="tag tag-amber">略低 9.5%</span></td></tr>
         <tr><td>目標贊助人數</td><td>364 人</td><td>46 人 (12.6%)</td><td><span class="tag tag-green">節奏超前</span></td></tr>
-        <tr><td>CPL（問卷）</td><td>$90</td><td>$59.8</td><td><span class="tag tag-green">節省 33.6%</span></td></tr>
+        <tr><td>CPL（問卷）</td><td>$90</td><td>$82.6</td><td><span class="tag tag-green">節省 8.2%</span></td></tr>
         <tr><td>廣告 ROAS</td><td>3.0x</td><td>108.6x（首日）</td><td><span class="tag tag-blue">問卷紅利</span></td></tr>
       </tbody>
     </table>
@@ -632,7 +632,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
     </div>
     <div class="card kpi">
       <div class="icon">💸</div>
-      <div class="val">$59.8</div>
+      <div class="val">$82.6</div>
       <div class="lbl">平均 CPL</div>
       <div class="sub"><span class="tag tag-green">預算 $90 ✓</span></div>
     </div>
@@ -644,9 +644,9 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
     </div>
     <div class="card kpi">
       <div class="icon">📣</div>
-      <div class="val">$94,896</div>
-      <div class="lbl">問卷廣告總支出</div>
-      <div class="sub"><span class="tag tag-amber">超預算 $4,896</span></div>
+      <div class="val">$131,165</div>
+      <div class="lbl">問卷推廣總費用</div>
+      <div class="sub">廣告 $94,896 ＋社群 $36,269</div>
     </div>
   </div>
 
@@ -815,11 +815,11 @@ const postData = [
 ];
 
 const surveyWeekly = [
-  { label:'3/25–3/31', surveys:596, spend:24395, cpl:40.9 },
-  { label:'4/1–4/5',   surveys:303, spend:17004, cpl:56.1 },
-  { label:'4/6–4/12',  surveys:403, spend:27001, cpl:67.0 },
-  { label:'4/13–4/19', surveys:255, spend:22952, cpl:90.0 },
-  { label:'4/20–4/21', surveys:30,  spend:3544,  cpl:118.1 },
+  { label:'3/25–3/31', surveys:596, spend:24395, social:24238, cpl:81.6 },
+  { label:'4/1–4/5',   surveys:303, spend:17004, social:0,     cpl:56.1 },
+  { label:'4/6–4/12',  surveys:403, spend:27001, social:0,     cpl:67.0 },
+  { label:'4/13–4/19', surveys:255, spend:22952, social:12031, cpl:137.2 },
+  { label:'4/20–4/21', surveys:30,  spend:3544,  social:0,     cpl:118.1 },
 ];
 
 const weeklyReport = [
@@ -1477,16 +1477,19 @@ function renderChartSurveySpend() {
     type:'bar',
     data: {
       labels: surveyWeekly.map(w => w.label),
-      datasets:[{ label:'Meta 廣告費', data:surveyWeekly.map(w=>w.spend),
-        backgroundColor:['#6B8FAB','#7BA6BC','#8FBDCB','#BB8A6A','#C17272'],
-        borderRadius:6 }]
+      datasets:[
+        { label:'Meta 廣告費', data:surveyWeekly.map(w=>w.spend),
+          backgroundColor:'#6B8FAB', borderRadius:0 },
+        { label:'社群推播費', data:surveyWeekly.map(w=>w.social),
+          backgroundColor:'#BB8A6A', borderRadius:6 }
+      ]
     },
     options: {
       responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{display:false} },
+      plugins:{ legend:{display:true, position:'top', labels:{font:{size:11}}} },
       scales:{
-        y:{ ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'K',font:{size:11}}, grid:{color:'#F0EDE8'} },
-        x:{ grid:{display:false}, ticks:{font:{size:11}} },
+        y:{ stacked:true, ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'K',font:{size:11}}, grid:{color:'#F0EDE8'} },
+        x:{ stacked:true, grid:{display:false}, ticks:{font:{size:11}} },
       }
     }
   });
