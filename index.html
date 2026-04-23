@@ -565,15 +565,15 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
   <div class="grid3 mb20">
     <div class="card kpi">
       <div class="icon">✍️</div>
-      <div class="val">6</div>
+      <div class="val">5</div>
       <div class="lbl">撰稿中 KOL</div>
-      <div class="sub">費用 $29,000</div>
+      <div class="sub">費用 $21,000</div>
     </div>
     <div class="card kpi">
-      <div class="icon">🤝</div>
-      <div class="val">1</div>
-      <div class="lbl">洽談中 KOL</div>
-      <div class="sub">費用 $6,000</div>
+      <div class="icon">✅</div>
+      <div class="val">2</div>
+      <div class="lbl">已上線結案</div>
+      <div class="sub">費用 $14,000</div>
     </div>
     <div class="card kpi">
       <div class="icon">💵</div>
@@ -589,21 +589,12 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
     </div>
     <table>
       <thead><tr>
-        <th>狀態</th><th>KOL 名稱</th><th>費用</th><th>風格 / 取向</th><th>類型</th><th>確認狀態</th>
+        <th>狀態</th><th>KOL 名稱</th><th>費用</th><th>風格 / 取向</th><th>類型</th>
       </tr></thead>
       <tbody id="kol-tbody"></tbody>
     </table>
   </div>
 
-  <div class="card">
-    <div class="section-title">官方 + KOL 貼文追蹤</div>
-    <table>
-      <thead><tr>
-        <th>來源</th><th>內容</th><th>類型</th><th>廣告投放</th>
-      </tr></thead>
-      <tbody id="post-tbody"></tbody>
-    </table>
-  </div>
 
 </div>
 </div>
@@ -734,27 +725,15 @@ const budgets = [
 ];
 
 const kolData = [
-  { status:'撰稿中', name:'物理治療師 ZM',     fee:6000, style:'',         type:'影片', confirmed:true },
-  { status:'撰稿中', name:'小夫妻的旅攝生活', fee:8000, style:'',          type:'影片', confirmed:true },
-  { status:'撰稿中', name:'林瑄',              fee:1500, style:'瑜珈老師',  type:'影片', confirmed:true },
-  { status:'撰稿中', name:'徐可妮',            fee:5000, style:'全職媽媽',  type:'影片', confirmed:false },
-  { status:'撰稿中', name:'杜怡萱（記者）',   fee:4500, style:'身心療癒',  type:'影片', confirmed:true },
-  { status:'撰稿中', name:"Lea's Wonderland", fee:4000, style:'網紅生活',  type:'影片', confirmed:false },
-  { status:'洽談中', name:'厝邊工作室',        fee:6000, style:'',          type:'影片', confirmed:true },
+  { status:'已上線結案', name:'物理治療師 ZM',     fee:6000, style:'',         type:'影片' },
+  { status:'已上線結案', name:'小夫妻的旅攝生活', fee:8000, style:'',          type:'影片' },
+  { status:'撰稿中',     name:'林瑄',              fee:1500, style:'瑜珈老師',  type:'影片' },
+  { status:'撰稿中',     name:'徐可妮',            fee:5000, style:'全職媽媽',  type:'影片' },
+  { status:'撰稿中',     name:'杜怡萱（記者）',   fee:4500, style:'身心療癒',  type:'影片' },
+  { status:'撰稿中',     name:"Lea's Wonderland", fee:4000, style:'網紅生活',  type:'影片' },
+  { status:'撰稿中',     name:'厝邊工作室',        fee:6000, style:'',          type:'影片' },
 ];
 
-const postData = [
-  { source:'官方', content:'問卷上線影片', type:'方形影片', isAd:true },
-  { source:'官方', content:'主視覺單圖',   type:'單圖',     isAd:true },
-  { source:'官方', content:'自己亂伸篇',   type:'方形影片', isAd:true },
-  { source:'官方', content:'不用預約才高級',type:'單圖',    isAd:true },
-  { source:'官方', content:'倒數七天',      type:'單圖',    isAd:true },
-  { source:'官方', content:'倒數五天－QA',  type:'多圖',    isAd:true },
-  { source:'官方', content:'倒數三天',      type:'單圖',    isAd:true },
-  { source:'官方', content:'開賣－長輩篇',  type:'直式影片',isAd:false },
-  { source:'官方', content:'達標 100%',     type:'單圖',    isAd:true },
-  { source:'KOL',  content:'小夫妻的旅攝生活', type:'多圖', isAd:true },
-];
 
 const surveyWeekly = [
   { label:'3/25–3/31', surveys:596, spend:24395, social:24238, cpl:81.6 },
@@ -1057,29 +1036,18 @@ function renderPnLFromCSV(data) {
 function renderKolTable() {
   const el = document.getElementById('kol-tbody');
   if (!el) return;
-  const statusMap = { '撰稿中':'tag-blue', '洽談中':'tag-amber' };
+  const statusMap = { '撰稿中':'tag-blue', '洽談中':'tag-amber', '已上線結案':'tag-green' };
   el.innerHTML = kolData
-    .filter(k => k.status === '撰稿中' || k.status === '洽談中')
+    .filter(k => k.status === '撰稿中' || k.status === '洽談中' || k.status === '已上線結案')
     .map(k => `<tr>
       <td><span class="tag ${statusMap[k.status]}">${k.status}</span></td>
       <td><strong>${k.name}</strong></td>
       <td>${fmtC(k.fee)}</td>
       <td>${k.style || '—'}</td>
       <td>${k.type}</td>
-      <td>${k.confirmed ? '✅ 確認' : '<span style="color:var(--muted)">待確認</span>'}</td>
     </tr>`).join('');
 }
 
-function renderPostTable() {
-  const el = document.getElementById('post-tbody');
-  if (!el) return;
-  el.innerHTML = postData.map(p => `<tr>
-    <td><span class="tag ${p.source==='KOL'?'tag-blue':'tag-gray'}">${p.source}</span></td>
-    <td>${p.content}</td>
-    <td>${p.type}</td>
-    <td>${p.isAd ? '<span class="tag tag-green">有投放</span>' : '<span class="tag tag-gray">無</span>'}</td>
-  </tr>`).join('');
-}
 
 // ==================== RENDER: UPLOAD SLOTS ====================
 function renderUploadSlots() {
@@ -1552,7 +1520,6 @@ window.addEventListener('DOMContentLoaded', () => {
   renderBudgetTable();
   renderPnL();
   renderKolTable();
-  renderPostTable();
   renderUploadSlots();
   renderProducts();
   renderDiscounts();
