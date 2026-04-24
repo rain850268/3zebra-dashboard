@@ -766,11 +766,63 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
 <div class="tab" id="tab-products">
 <div class="page">
   <div id="products-content">
-    <div class="empty-state">
-      <div class="es-icon">🛍️</div>
-      <h3>尚未上傳訂單資料</h3>
-      <p>從嘖嘖後台下載訂單 CSV，上傳後即可查看各方案銷售比例、客單價分布等數據。</p>
-      <button class="es-btn" onclick="document.getElementById('fi-orders').click()">⬆ 上傳嘖嘖訂單 CSV</button>
+    <div class="kpi-row mb20" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+      <div class="card kpi"><div class="icon">🛍️</div><div class="val">53</div><div class="lbl">總訂單數</div></div>
+      <div class="card kpi"><div class="icon">💰</div><div class="val">$272,064</div><div class="lbl">總銷售金額</div></div>
+      <div class="card kpi"><div class="icon">🧮</div><div class="val">$5,133</div><div class="lbl">平均客單價</div></div>
+    </div>
+    <div class="card mb20">
+      <h3>方案銷售分布</h3>
+      <div style="margin-top:16px">
+        <div style="margin-bottom:18px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <span style="font-weight:600;font-size:14px">⏰ 超早鳥組</span>
+            <span style="font-size:13px;color:var(--muted)">30 筆｜$144,690</span>
+          </div>
+          <div style="background:#F0EDE8;border-radius:99px;height:10px">
+            <div style="width:56.6%;background:#6B8FAB;height:10px;border-radius:99px"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:4px">
+            <span>訂單佔比 56.6%</span><span>業績佔比 53.2%</span>
+          </div>
+        </div>
+        <div style="margin-bottom:18px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <span style="font-weight:600;font-size:14px">✦ 早鳥限定</span>
+            <span style="font-size:13px;color:var(--muted)">20 筆｜$99,500</span>
+          </div>
+          <div style="background:#F0EDE8;border-radius:99px;height:10px">
+            <div style="width:37.7%;background:#7EAB8F;height:10px;border-radius:99px"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:4px">
+            <span>訂單佔比 37.7%</span><span>業績佔比 36.6%</span>
+          </div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <span style="font-weight:600;font-size:14px">🎁 雙入優惠組</span>
+            <span style="font-size:13px;color:var(--muted)">3 筆｜$27,874</span>
+          </div>
+          <div style="background:#F0EDE8;border-radius:99px;height:10px">
+            <div style="width:5.7%;background:#BB8A6A;height:10px;border-radius:99px"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:4px">
+            <span>訂單佔比 5.7%</span><span>業績佔比 10.2%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>方案明細</h3>
+      <table style="margin-top:12px">
+        <thead><tr><th>方案</th><th style="text-align:right">訂單數</th><th style="text-align:right">銷售金額</th><th style="text-align:right">平均客單</th><th style="text-align:right">業績佔比</th></tr></thead>
+        <tbody>
+          <tr><td>⏰ 超早鳥組</td><td style="text-align:right">30</td><td style="text-align:right">$144,690</td><td style="text-align:right">$4,823</td><td style="text-align:right">53.2%</td></tr>
+          <tr><td>✦ 早鳥限定</td><td style="text-align:right">20</td><td style="text-align:right">$99,500</td><td style="text-align:right">$4,975</td><td style="text-align:right">36.6%</td></tr>
+          <tr><td>🎁 雙入優惠組</td><td style="text-align:right">3</td><td style="text-align:right">$27,874</td><td style="text-align:right">$9,291</td><td style="text-align:right">10.2%</td></tr>
+          <tr style="font-weight:600;border-top:2px solid #F0EDE8"><td>合計</td><td style="text-align:right">53</td><td style="text-align:right">$272,064</td><td style="text-align:right">$5,133</td><td style="text-align:right">100%</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
@@ -780,11 +832,56 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
 <div class="tab" id="tab-discounts">
 <div class="page">
   <div id="discounts-content">
-    <div class="empty-state">
-      <div class="es-icon">🎟️</div>
-      <h3>尚未上傳折扣碼資料</h3>
-      <p>從嘖嘖後台下載優惠碼使用紀錄 CSV，上傳後即可查看各折扣碼的使用次數與業績貢獻。</p>
-      <button class="es-btn" onclick="document.getElementById('fi-discounts').click()">⬆ 上傳折扣碼 CSV</button>
+    <div class="kpi-row mb20" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+      <div class="card kpi"><div class="icon">🎟️</div><div class="val">49</div><div class="lbl">折扣碼使用次數</div></div>
+      <div class="card kpi"><div class="icon">💸</div><div class="val">$4,560</div><div class="lbl">折扣總讓利</div></div>
+      <div class="card kpi"><div class="icon">📊</div><div class="val">92.5%</div><div class="lbl">折扣碼使用率</div></div>
+    </div>
+    <div class="card">
+      <h3>各折扣碼使用狀況</h3>
+      <table style="margin-top:12px">
+        <thead><tr><th>折扣碼</th><th style="text-align:right">折扣金額</th><th style="text-align:right">使用次數</th><th style="text-align:right">帶入業績</th><th style="text-align:right">讓利合計</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>new80</strong><span style="font-size:11px;color:var(--muted);margin-left:6px">新客首購</span></td>
+            <td style="text-align:right">-$80</td>
+            <td style="text-align:right">33 <span style="font-size:11px;color:var(--muted)">(62.3%)</span></td>
+            <td style="text-align:right">$163,686</td>
+            <td style="text-align:right">$2,640</td>
+          </tr>
+          <tr>
+            <td><strong>老朋友</strong><span style="font-size:11px;color:var(--muted);margin-left:6px">回頭客</span></td>
+            <td style="text-align:right">-$120</td>
+            <td style="text-align:right">12 <span style="font-size:11px;color:var(--muted)">(22.6%)</span></td>
+            <td style="text-align:right">$59,108</td>
+            <td style="text-align:right">$1,440</td>
+          </tr>
+          <tr>
+            <td><strong>老好友</strong><span style="font-size:11px;color:var(--muted);margin-left:6px">回頭客</span></td>
+            <td style="text-align:right">-$120</td>
+            <td style="text-align:right">4 <span style="font-size:11px;color:var(--muted)">(7.5%)</span></td>
+            <td style="text-align:right">$27,914</td>
+            <td style="text-align:right">$480</td>
+          </tr>
+          <tr>
+            <td>（無折扣碼）</td>
+            <td style="text-align:right">—</td>
+            <td style="text-align:right">4 <span style="font-size:11px;color:var(--muted)">(7.5%)</span></td>
+            <td style="text-align:right">$21,356</td>
+            <td style="text-align:right">—</td>
+          </tr>
+          <tr style="font-weight:600;border-top:2px solid #F0EDE8">
+            <td>合計</td>
+            <td style="text-align:right">—</td>
+            <td style="text-align:right">53</td>
+            <td style="text-align:right">$272,064</td>
+            <td style="text-align:right">$4,560</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="margin-top:16px;padding:12px 16px;background:#FBF9F6;border-radius:8px;font-size:13px;color:var(--muted)">
+        💡 老朋友 + 老好友合計 16 筆（30.2%），代表回購客群佔開賣訂單近三成。
+      </div>
     </div>
   </div>
 </div>
@@ -794,11 +891,61 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
 <div class="tab" id="tab-referrals">
 <div class="page">
   <div id="referrals-content">
-    <div class="empty-state">
-      <div class="es-icon">🤝</div>
-      <h3>尚未上傳推薦贊助資料</h3>
-      <p>從嘖嘖後台下載推薦贊助列表 CSV，上傳後即可查看推薦人業績分佈與貢獻排名。</p>
-      <button class="es-btn" onclick="document.getElementById('fi-referrals').click()">⬆ 上傳推薦贊助 CSV</button>
+    <div class="kpi-row mb20" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+      <div class="card kpi"><div class="icon">🔗</div><div class="val">43</div><div class="lbl">有追蹤來源訂單</div></div>
+      <div class="card kpi"><div class="icon">💰</div><div class="val">$219,554</div><div class="lbl">有追蹤來源業績</div></div>
+      <div class="card kpi"><div class="icon">📊</div><div class="val">80.7%</div><div class="lbl">來源追蹤率</div></div>
+    </div>
+    <div class="card">
+      <h3>推薦來源業績排行</h3>
+      <table style="margin-top:12px">
+        <thead><tr><th>來源</th><th style="text-align:right">訂單數</th><th style="text-align:right">業績金額</th><th style="text-align:right">業績佔比</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="tag tag-blue" style="font-size:11px;margin-right:6px">LINE</span>正式開賣_問卷_0422</td>
+            <td style="text-align:right">18</td><td style="text-align:right">$86,742</td><td style="text-align:right">31.9%</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-amber" style="font-size:11px;margin-right:6px">SMS</span>正式開賣_問卷_0422</td>
+            <td style="text-align:right">10</td><td style="text-align:right">$56,148</td><td style="text-align:right">20.6%</td>
+          </tr>
+          <tr>
+            <td><span style="font-size:11px;color:var(--muted);margin-right:6px">—</span>（直接 / 未追蹤）</td>
+            <td style="text-align:right">10</td><td style="text-align:right">$52,510</td><td style="text-align:right">19.3%</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-green" style="font-size:11px;margin-right:6px">EDM</span>正式開賣_問卷_0422</td>
+            <td style="text-align:right">7</td><td style="text-align:right">$34,273</td><td style="text-align:right">12.6%</td>
+          </tr>
+          <tr>
+            <td><span class="tag" style="font-size:11px;margin-right:6px;background:#E8E4DE;color:#7A6F5E">嘖嘖</span>正式開賣_0422</td>
+            <td style="text-align:right">3</td><td style="text-align:right">$14,237</td><td style="text-align:right">5.2%</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-blue" style="font-size:11px;margin-right:6px">FB</span>正式開賣_0422</td>
+            <td style="text-align:right">2</td><td style="text-align:right">$14,037</td><td style="text-align:right">5.2%</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-green" style="font-size:11px;margin-right:6px">EDM</span>正式開賣_其他問卷_0422</td>
+            <td style="text-align:right">1</td><td style="text-align:right">$4,719</td><td style="text-align:right">1.7%</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-blue" style="font-size:11px;margin-right:6px">廣告</span>皮克敏_30S_加框_0422</td>
+            <td style="text-align:right">1</td><td style="text-align:right">$4,719</td><td style="text-align:right">1.7%</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-blue" style="font-size:11px;margin-right:6px">廣告</span>自己亂伸篇_9:16_RT</td>
+            <td style="text-align:right">1</td><td style="text-align:right">$4,679</td><td style="text-align:right">1.7%</td>
+          </tr>
+          <tr style="font-weight:600;border-top:2px solid #F0EDE8">
+            <td>合計</td>
+            <td style="text-align:right">53</td><td style="text-align:right">$272,064</td><td style="text-align:right">100%</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="margin-top:16px;padding:12px 16px;background:#FBF9F6;border-radius:8px;font-size:13px;color:var(--muted)">
+        💡 LINE + SMS + EDM 問卷名單三渠道合計帶入 35 筆訂單（66.0%），佔首日業績 $177,163（65.1%）——問卷名單是開賣最強轉換引擎。
+      </div>
     </div>
   </div>
 </div>
