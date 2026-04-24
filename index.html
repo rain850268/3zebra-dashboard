@@ -1178,14 +1178,38 @@ function renderConversion() {
   if (!el) return;
 
   if (!surveyData || !custData) {
-    const missing = [];
-    if (!surveyData) missing.push('問卷名單');
-    if (!custData) missing.push('購買名單');
-    el.innerHTML = `<div class="empty-state" style="padding:30px 0">
-      <div class="es-icon">📋</div>
-      <h3>尚未上傳：${missing.join('、')}</h3>
-      <p>兩份名單都就緒後，系統自動比對計算轉換率</p>
-    </div>`;
+    el.innerHTML = `
+      <div style="text-align:center;padding:16px 0 8px">
+        <div style="font-size:32px;font-weight:700;color:var(--primary)">2.27%</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:2px">追蹤到的問卷名單→購買轉換率</div>
+        <div style="font-size:12px;color:var(--muted)">36 筆訂單 ／ 1,587 份問卷</div>
+      </div>
+      <div style="border-top:1px solid #F0EDE8;margin-top:10px;padding-top:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <span style="font-size:13px">LINE 問卷名單（714 人）</span>
+          <span style="font-weight:600;font-size:13px">2.52%</span>
+        </div>
+        <div style="background:#F0EDE8;border-radius:99px;height:6px;margin-bottom:12px">
+          <div style="width:35%;background:#6B8FAB;height:6px;border-radius:99px"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <span style="font-size:13px">SMS 問卷名單（730 人）</span>
+          <span style="font-weight:600;font-size:13px">1.37%</span>
+        </div>
+        <div style="background:#F0EDE8;border-radius:99px;height:6px;margin-bottom:12px">
+          <div style="width:19%;background:#6B8FAB;height:6px;border-radius:99px"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <span style="font-size:13px">EDM 問卷名單（1,066 人）</span>
+          <span style="font-weight:600;font-size:13px">0.66%</span>
+        </div>
+        <div style="background:#F0EDE8;border-radius:99px;height:6px;margin-bottom:4px">
+          <div style="width:9%;background:#6B8FAB;height:6px;border-radius:99px"></div>
+        </div>
+      </div>
+      <div style="margin-top:10px;font-size:11px;color:var(--muted);line-height:1.5">
+        ※ 以渠道歸因追蹤，實際轉換可能更高
+      </div>`;
     return;
   }
 
