@@ -259,7 +259,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
     </div>
     <div class="card kpi">
       <div class="icon">⚡</div>
-      <div class="val">38.8</div>
+      <div class="val">17.9</div>
       <div class="lbl">開賣廣告 ROAS</div>
       <div class="sub"><span class="tag tag-green">W1 累積</span></div>
     </div>
@@ -551,7 +551,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
       <tbody id="budget-table"></tbody>
       <tfoot>
         <tr style="font-weight:700;background:#FAFAF8">
-          <td>合計</td><td>$596,400</td><td>$150,565</td><td>$445,835</td><td>25.2%</td>
+          <td>合計</td><td>$596,400</td><td>$220,924</td><td>$375,476</td><td>37.1%</td>
           <td><span class="tag tag-green">進度正常</span></td>
         </tr>
       </tfoot>
@@ -567,7 +567,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
         <tr><td>客單價</td><td>$5,500</td><td>$5,224</td><td><span class="tag tag-amber">略低 5.0%</span></td></tr>
         <tr><td>目標贊助人數</td><td>364 人</td><td>79 人 (21.7%)</td><td><span class="tag tag-green">節奏超前</span></td></tr>
         <tr><td>CPL（問卷）</td><td>$90</td><td>$82.6</td><td><span class="tag tag-green">節省 8.2%</span></td></tr>
-        <tr><td>廣告 ROAS</td><td>3.0</td><td>38.8（W1 累積）</td><td><span class="tag tag-blue">問卷紅利</span></td></tr>
+        <tr><td>廣告 ROAS</td><td>3.0</td><td>17.9（W1 累積）</td><td><span class="tag tag-green">超標 6 倍</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -866,7 +866,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px">
         <div style="background:#F7F7F5;border-radius:10px;padding:14px;text-align:center">
           <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px">初始庫存</div>
-          <div style="font-size:24px;font-weight:800">185</div>
+          <div style="font-size:24px;font-weight:800">190</div>
           <div style="font-size:12px;color:var(--muted)">台</div>
         </div>
         <div style="background:#FFF3CD;border-radius:10px;padding:14px;text-align:center">
@@ -876,15 +876,15 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
         </div>
         <div style="background:#DBEDDB;border-radius:10px;padding:14px;text-align:center">
           <div style="font-size:11px;color:var(--green);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px">剩餘庫存</div>
-          <div style="font-size:24px;font-weight:800;color:var(--green)">100</div>
+          <div style="font-size:24px;font-weight:800;color:var(--green)">105</div>
           <div style="font-size:12px;color:var(--green)">台</div>
         </div>
       </div>
       <div style="background:#F0EDE8;border-radius:99px;height:10px;margin-bottom:6px">
-        <div style="width:45.9%;background:var(--amber);height:10px;border-radius:99px"></div>
+        <div style="width:44.7%;background:var(--amber);height:10px;border-radius:99px"></div>
       </div>
       <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:20px">
-        <span>庫存消耗 45.9%（85 / 185 台）</span><span>剩餘 100 台</span>
+        <span>庫存消耗 44.7%（85 / 190 台）</span><span>剩餘 105 台</span>
       </div>
       <table style="margin-bottom:20px">
         <thead><tr>
@@ -1168,7 +1168,7 @@ const LS = 'zb_';
 // ==================== STATIC DATA ====================
 const budgets = [
   { label:'問卷廣告', budget:90000, used:94896 },
-  { label:'上線廣告', budget:326400, used:2109 },
+  { label:'上線廣告', budget:326400, used:23011 },
   { label:'KOL 費用', budget:100000, used:45000 },
   { label:'行銷推播', budget:80000, used:58017 },
 ];
@@ -1229,7 +1229,7 @@ const surveyWeekly = [
 
 const weeklyReport = [
   { week:'W1', label:'4/22–4/28', current:true,
-    adFB:7012, adSurvey:0, totalRevenue:412695, weekRevenue:412695,
+    adFB:23011, adSurvey:0, totalRevenue:412695, weekRevenue:412695,
     weekOrders:79, totalOrders:79, cogs:null },
   { week:'W2', label:'4/29–5/5',  current:false, adFB:null, adSurvey:0, totalRevenue:null, weekRevenue:null, weekOrders:null, totalOrders:null, cogs:null },
   { week:'W3', label:'5/6–5/12',  current:false, adFB:null, adSurvey:0, totalRevenue:null, weekRevenue:null, weekOrders:null, totalOrders:null, cogs:null },
@@ -1261,7 +1261,7 @@ const pnlRows = [
   { label:'管銷費用 8%',       c3:0,     c4:0,     isExp:true },
   { t:'spacer' },
   { t:'header', label:'▌ 損益指標' },
-  { label:'總 ROAS',           c3:null,  c4:'38.8', isText:true },
+  { label:'總 ROAS',           c3:null,  c4:'17.9', isText:true },
   { label:'總 ROI',            c3:null,  c4:null,  isText:true },
   { label:'淨利潤',            c3:null,  c4:null },
   { label:'總損益',            c3:-78560, c4:123242, isTotal:true },
@@ -1481,7 +1481,7 @@ function renderBudgetTable() {
   const el = document.getElementById('budget-table');
   if (!el) return;
   const tags = {
-    '問卷廣告':['tag-red','超支 5.5%'], '上線廣告':['tag-green','剛起步'],
+    '問卷廣告':['tag-red','超支 5.5%'], '上線廣告':['tag-green','7.1% 已用'],
     'KOL 費用':['tag-amber','45% 已用'], '行銷推播':['tag-amber','72.5% 已用'],
   };
   el.innerHTML = budgets.map(b => {
@@ -1874,7 +1874,7 @@ function renderChartDaily() {
       datasets: [
         { label:'每日業績', data:[214716,57348,83163,57468,null,null,null],
           backgroundColor:'#6B8FAB', borderRadius:6 },
-        { label:'廣告費', data:[2109,4903,null,null,null,null,null],
+        { label:'廣告費', data:[2109,4903,7526,8473,null,null,null],
           backgroundColor:'#C9AEB0', borderRadius:6 },
         { label:'線性目標', data:targetPace,
           type:'line', borderColor:'#C4C2BE', borderDash:[4,4],
