@@ -345,6 +345,14 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
     </div>
   </div>
 
+  <!-- 累積業績曲線圖 -->
+  <div class="card mb20">
+    <div class="section-title">📈 累積業績走勢
+      <span class="updated">截至 4/25｜含目標線與里程碑</span>
+    </div>
+    <div style="position:relative;height:300px"><canvas id="chartRevenueTrend"></canvas></div>
+  </div>
+
   <!-- 圖表 -->
   <div class="grid2 mb20">
     <div class="card">
@@ -1864,7 +1872,7 @@ function renderChartDaily() {
     data: {
       labels,
       datasets: [
-        { label:'每日業績', data:[214716,57348,null,null,null,null,null],
+        { label:'每日業績', data:[214716,57348,83163,57468,null,null,null],
           backgroundColor:'#6B8FAB', borderRadius:6 },
         { label:'廣告費', data:[2109,4903,null,null,null,null,null],
           backgroundColor:'#C9AEB0', borderRadius:6 },
@@ -1879,6 +1887,117 @@ function renderChartDaily() {
       scales: {
         y:{ ticks:{ callback:v=>'$'+(v>=1000?(v/1000).toFixed(0)+'K':v), font:{size:11} }, grid:{color:'#F0EDE8'} },
         x:{ grid:{display:false}, ticks:{font:{size:11}} },
+      }
+    }
+  });
+}
+
+function renderChartRevenueTrend() {
+  const ctx = document.getElementById('chartRevenueTrend');
+  if (!ctx) return;
+
+  // 每日累積業績（實際）
+  const dailyRevenue = [214716, 57348, 83163, 57468];
+  const cumulative = dailyRevenue.reduce((acc, v, i) => {
+    acc.push((acc[i-1] || 0) + v);
+    return acc;
+  }, []);
+
+  // W1~W5 最後一天的 labels（每週日）
+  const allLabels = [
+    '4/22','4/23','4/24','4/25','4/26','4/27','4/28',
+    '4/29','4/30','5/1','5/2','5/3','5/4','5/5',
+    '5/6','5/7','5/8','5/9','5/10','5/11','5/12',
+    '5/13','5/14','5/15','5/16','5/17','5/18','5/19',
+    '5/20','5/21','5/22','5/23','5/24','5/25','5/26',
+  ];
+
+  // 線性目標（60天到$2M）
+  const linearTarget = allLabels.map((_, i) => Math.round(GOAL / 60 * (i + 1)));
+
+  // 累積業績資料（已知4天，後面 null）
+  const actualData = allLabels.map((_, i) => i < cumulative.length ? cumulative[i] : null);
+
+  // 里程碑標記（週末，垂直線用 annotation plugin 太複雜，改用 pointStyle）
+  const milestones = { 6: 'W1 末', 13: 'W2 末', 20: '母親節', 27: 'W4 末' };
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: allLabels,
+      datasets: [
+        {
+          label: '累積業績',
+          data: actualData,
+          borderColor: '#37352F',
+          backgroundColor: 'rgba(55,53,47,0.08)',
+          borderWidth: 2.5,
+          pointRadius: allLabels.map((_, i) => i < cumulative.length ? 4 : 0),
+          pointBackgroundColor: '#37352F',
+          tension: 0.3,
+          fill: true,
+        },
+        {
+          label: '線性目標（$2M/60天）',
+          data: linearTarget,
+          borderColor: '#C4C2BE',
+          borderDash: [5, 5],
+          borderWidth: 1.5,
+          pointRadius: 0,
+          tension: 0,
+          fill: false,
+        },
+        {
+          label: '目標 $2,000,000',
+          data: allLabels.map(() => GOAL),
+          borderColor: '#BB8A6A',
+          borderDash: [3, 3],
+          borderWidth: 1,
+          pointRadius: 0,
+          tension: 0,
+          fill: false,
+        },
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { size: 11 } } },
+        tooltip: {
+          callbacks: {
+            label: ctx => {
+              if (ctx.raw == null) return null;
+              const v = ctx.raw;
+              return `${ctx.dataset.label}: $${v.toLocaleString()}`;
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          min: 0,
+          max: 2100000,
+          ticks: {
+            callback: v => '$' + (v >= 1000000 ? (v/1000000).toFixed(1) + 'M' : (v/1000).toFixed(0) + 'K'),
+            font: { size: 11 },
+            maxTicksLimit: 7,
+          },
+          grid: { color: '#F0EDE8' }
+        },
+        x: {
+          grid: { display: false },
+          ticks: {
+            font: { size: 10 },
+            maxTicksLimit: 12,
+            callback: function(val, i) {
+              // 只顯示每週一、母親節等關鍵點
+              const key = [0,6,13,19,20,27,34];
+              return key.includes(i) ? allLabels[i] : '';
+            }
+          }
+        }
       }
     }
   });
@@ -2082,6 +2201,7 @@ window.addEventListener('DOMContentLoaded', () => {
   renderProducts();
   renderDiscounts();
   renderReferrals();
+  renderChartRevenueTrend();
   renderChartDaily();
   renderChartSurveyOverview();
   renderChartSurvey();
