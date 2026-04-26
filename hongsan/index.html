@@ -274,9 +274,9 @@ textarea{resize:vertical;min-height:72px;}
           <div class="f half" data-owner="admin">
             <label class="fl">所得格式代號 <span class="ob ob-a">公司填寫</span></label>
             <select id="l-income-type" onchange="calcDeductions()">
-              <option value="9B">9B — 稿費</option>
-              <option value="9A">9A — 薪資（兼職）</option>
-              <option value="50">50 — 執行業務所得</option>
+              <option value="9B">9B — 稿費 / 演講鐘點費</option>
+              <option value="9A">9A — 執行業務所得</option>
+              <option value="50">50 — 薪資所得（兼職）</option>
             </select>
           </div>
         </div>
@@ -800,12 +800,16 @@ function calcDeductions() {
   const type    = document.getElementById('l-income-type').value;
   let nhf = 0, tax = 0;
 
-  if (type === '50') { // 執行業務
-    if (amt >= 20000) nhf = Math.round(amt * 0.0211);
-    if (amt >= 20010) tax = Math.round(amt * 0.10);
-  } else { // 9A, 9B (兼職/稿費)
-    if (amt >= 23100) nhf = Math.round(amt * 0.0211);
-    if (amt >= 84501) tax = Math.round(amt * 0.05);
+  // 二代健保：所有類型單次 ≥20,000 扣 2.11%
+  if (amt >= 20000) nhf = Math.round(amt * 0.0211);
+
+  // 所得稅
+  if (type === '50') {
+    // 薪資所得（兼職）：單次 >88,501 才扣 5%
+    if (amt > 88501) tax = Math.round(amt * 0.05);
+  } else {
+    // 執行業務 / 稿費（9A/9B）：單次 ≥20,001 才扣 10%
+    if (amt >= 20001) tax = Math.round(amt * 0.10);
   }
 
   const real = amt - nhf - tax;
@@ -813,11 +817,11 @@ function calcDeductions() {
 
   document.getElementById('l-show-amount').textContent = `NT$${amt.toLocaleString()}`;
   document.getElementById('l-nhf').textContent   = nhf > 0 ? fmt(nhf) : '—';
-  document.getElementById('l-tax5').textContent  = (type !== '50' && tax > 0) ? fmt(tax) : '—';
-  document.getElementById('l-tax10').textContent = (type === '50' && tax > 0) ? fmt(tax) : '—';
+  document.getElementById('l-tax5').textContent  = (type === '50' && tax > 0) ? fmt(tax) : '—';
+  document.getElementById('l-tax10').textContent = (type !== '50' && tax > 0) ? fmt(tax) : '—';
   document.getElementById('l-real').textContent  = `NT$${real.toLocaleString()}`;
 
-  const labels = { '9A':'9A（薪資）', '9B':'9B（稿費）', '50':'50（執行業務）' };
+  const labels = { '9A':'9A（執行業務）', '9B':'9B（稿費）', '50':'50（薪資兼職）' };
   document.getElementById('l-income-label').value = `${labels[type]} ／ NT$${amt.toLocaleString()}`;
 }
 
