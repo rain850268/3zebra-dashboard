@@ -1517,8 +1517,8 @@ function renderPnL() {
   // 自動計算「其他費用」：有訂單才會有數值
   const ordersC3 = getC('總訂單數', 'c3');
   const ordersC4 = getC('總訂單數', 'c4');
-  const revC3    = getC('實收金額（92折）', 'c3');
-  const revC4    = getC('實收金額（92折）', 'c4');
+  const rawC3    = getC('募資金額', 'c3');
+  const rawC4    = getC('募資金額', 'c4');
 
   const shipRow = getRow('運費 / $120');
   if (shipRow) {
@@ -1528,8 +1528,8 @@ function renderPnL() {
 
   const mgmtRow = getRow('管銷費用 8%');
   if (mgmtRow) {
-    mgmtRow.c3 = Math.round(revC3 * 0.08);
-    mgmtRow.c4 = Math.round(revC4 * 0.08);
+    mgmtRow.c3 = Math.round(rawC3 * 0.08);
+    mgmtRow.c4 = Math.round(rawC4 * 0.08);
   }
 
   const otherSubRow = getRow('其他費用小計');
