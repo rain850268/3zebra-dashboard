@@ -1257,8 +1257,9 @@ const pnlRows = [
   { label:'行銷費用小計',      c3:78560,  c4:121616, isExp:true, isSub:true },
   { t:'spacer' },
   { t:'header', label:'▌ 其他費用' },
-  { label:'運費 / $120',       c3:0,     c4:0,     isExp:true },
-  { label:'管銷費用 8%',       c3:0,     c4:0,     isExp:true },
+  { label:'運費 / $120',       c3:0,     c4:0,     isExp:true, isAuto:true },
+  { label:'管銷費用 8%',       c3:0,     c4:0,     isExp:true, isAuto:true },
+  { label:'其他費用小計',      c3:0,     c4:0,     isExp:true, isSub:true, isAuto:true },
   { t:'spacer' },
   { t:'header', label:'▌ 損益指標' },
   { label:'總 ROAS',           c3:null,  c4:'17.9', isText:true },
@@ -1508,7 +1509,57 @@ function renderPnL() {
     return;
   }
 
-  el.innerHTML = pnlRows.map(r => {
+  // 深複製，避免汙染 pnlRows 原始資料
+  const rows = pnlRows.map(r => ({...r}));
+  const getRow = lbl => rows.find(r => r.label === lbl);
+  const getC = (lbl, col) => { const r = getRow(lbl); return r && r[col] != null ? r[col] : 0; };
+
+  // 自動計算「其他費用」：有訂單才會有數值
+  const ordersC3 = getC('總訂單數', 'c3');
+  const ordersC4 = getC('總訂單數', 'c4');
+  const revC3    = getC('實收金額（92折）', 'c3');
+  const revC4    = getC('實收金額（92折）', 'c4');
+
+  const shipRow = getRow('運費 / $120');
+  if (shipRow) {
+    shipRow.c3 = ordersC3 * 120;
+    shipRow.c4 = ordersC4 * 120;
+  }
+
+  const mgmtRow = getRow('管銷費用 8%');
+  if (mgmtRow) {
+    mgmtRow.c3 = Math.round(revC3 * 0.08);
+    mgmtRow.c4 = Math.round(revC4 * 0.08);
+  }
+
+  const otherSubRow = getRow('其他費用小計');
+  if (otherSubRow) {
+    otherSubRow.c3 = (shipRow ? shipRow.c3 : 0) + (mgmtRow ? mgmtRow.c3 : 0);
+    otherSubRow.c4 = (shipRow ? shipRow.c4 : 0) + (mgmtRow ? mgmtRow.c4 : 0);
+  }
+
+  // 重新計算「總損益」= 毛利 − 行銷費用小計 − 其他費用小計
+  const totalRow = getRow('總損益');
+  if (totalRow) {
+    const calc = col =>
+      getC('毛利', col) - getC('行銷費用小計', col)
+      - (otherSubRow ? (otherSubRow[col] || 0) : 0);
+    totalRow.c3 = calc('c3');
+    totalRow.c4 = calc('c4');
+  }
+
+  const fv = (r, v, isNeg) => {
+    if (r.isText) return v == null ? '<span style="color:var(--muted)">—</span>' : v;
+    if (r.isPct)  return v == null ? '<span style="color:var(--muted)">—</span>' : fmtP(v);
+    if (r.isCnt)  return v == null ? '<span style="color:var(--muted)">—</span>' : fmt(v);
+    if (v == null) return '<span style="color:var(--muted)">—</span>';
+    const n = Number(v);
+    if (n === 0) return '<span style="color:var(--muted)">$0</span>';
+    const cls = isNeg ? 'pnl-neg' : (n > 0 && r.isTotal ? 'pnl-pos' : (n < 0 && r.isTotal ? 'pnl-neg' : ''));
+    return `<span class="${cls}">${n < 0 ? '-' : (r.isTotal && n > 0 ? '+' : '')}$${fmt(Math.abs(n))}</span>`;
+  };
+
+  el.innerHTML = rows.map(r => {
     if (r.t === 'header') return `<tr class="pnl-header"><td colspan="4">${r.label}</td></tr>`;
     if (r.t === 'spacer') return `<tr class="pnl-spacer"><td colspan="4"></td></tr>`;
 
@@ -1516,25 +1567,15 @@ function renderPnL() {
       ? ((r.c3 || 0) + (r.c4 || 0))
       : null;
 
-    const fv = (v, isNeg) => {
-      if (r.isText) return v == null ? '<span style="color:var(--muted)">—</span>' : v;
-      if (r.isPct) return v == null ? '<span style="color:var(--muted)">—</span>' : v;
-      if (r.isCnt) return v == null ? '<span style="color:var(--muted)">—</span>' : fmt(v);
-      if (v == null) return '<span style="color:var(--muted)">—</span>';
-      const n = Number(v);
-      if (n === 0) return '<span style="color:var(--muted)">$0</span>';
-      const cls = isNeg ? 'pnl-neg' : (n > 0 && r.isTotal ? 'pnl-pos' : (n < 0 && r.isTotal ? 'pnl-neg' : ''));
-      return `<span class="${cls}">${n < 0 ? '-' : (r.isTotal && n > 0 ? '+' : '')}$${fmt(Math.abs(n))}</span>`;
-    };
-
     const rowCls = r.isSub ? ' class="pnl-subtotal"' : r.isTotal ? ' class="pnl-total"' : '';
+    const autoTag = r.isAuto ? ' <span style="font-size:10px;color:var(--muted);font-weight:400">自動</span>' : '';
     const indent = r.isSub || r.isTotal ? '' : 'style="padding-left:20px"';
 
     return `<tr${rowCls}>
-      <td ${indent}>${r.label}</td>
-      <td>${fv(r.c3, r.isExp)}</td>
-      <td>${fv(r.c4, r.isExp)}</td>
-      <td>${fv(total, r.isExp)}</td>
+      <td ${indent}>${r.label}${autoTag}</td>
+      <td>${fv(r, r.c3, r.isExp)}</td>
+      <td>${fv(r, r.c4, r.isExp)}</td>
+      <td>${fv(r, total, r.isExp)}</td>
     </tr>`;
   }).join('');
 }
@@ -1817,7 +1858,7 @@ function parseAndStore(key, file, cb) {
 
 function afterUpload(key) {
   renderUploadSlots();
-  if (key === 'orders')      renderProducts();
+  if (key === 'orders')      { renderProducts(); renderPnL(); }
   if (key === 'discounts')   renderDiscounts();
   if (key === 'referrals')   renderReferrals();
   if (key === 'customers' || key === 'survey_list') renderConversion();
