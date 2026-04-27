@@ -1538,14 +1538,41 @@ function renderPnL() {
     otherSubRow.c4 = (shipRow ? shipRow.c4 : 0) + (mgmtRow ? mgmtRow.c4 : 0);
   }
 
-  // 重新計算「總損益」= 毛利 − 行銷費用小計 − 其他費用小計
+  // 淨利潤 = 實收金額 − 總廣告費用 − 商品成本 − 管銷費用 − 運費
+  const netRow = getRow('淨利潤');
+  if (netRow) {
+    const calcNet = col =>
+      getC('實收金額（92折）', col) - getC('行銷費用小計', col)
+      - getC('商品總成本', col)
+      - (mgmtRow ? (mgmtRow[col] || 0) : 0)
+      - (shipRow ? (shipRow[col] || 0) : 0);
+    netRow.c3 = calcNet('c3');
+    netRow.c4 = calcNet('c4');
+    netRow.isAuto = true;
+  }
+
+  // 總損益 = 同上（保持一致）
   const totalRow = getRow('總損益');
   if (totalRow) {
-    const calc = col =>
-      getC('毛利', col) - getC('行銷費用小計', col)
-      - (otherSubRow ? (otherSubRow[col] || 0) : 0);
-    totalRow.c3 = calc('c3');
-    totalRow.c4 = calc('c4');
+    const calcNet = col =>
+      getC('實收金額（92折）', col) - getC('行銷費用小計', col)
+      - getC('商品總成本', col)
+      - (mgmtRow ? (mgmtRow[col] || 0) : 0)
+      - (shipRow ? (shipRow[col] || 0) : 0);
+    totalRow.c3 = calcNet('c3');
+    totalRow.c4 = calcNet('c4');
+  }
+
+  // ROI = (募資金額 − 總廣告費用) / 總廣告費用
+  const roiRow = getRow('總 ROI');
+  if (roiRow) {
+    const calcRoi = (raw, mkt) => mkt ? +((raw - mkt) / mkt * 100).toFixed(1) : null;
+    roiRow.c3 = calcRoi(rawC3, getC('行銷費用小計', 'c3'));
+    roiRow.c4 = calcRoi(rawC4, getC('行銷費用小計', 'c4'));
+    roiRow.isPct = true;
+    roiRow.isText = false;
+    roiRow.noTotal = true;
+    roiRow.isAuto = true;
   }
 
   const fv = (r, v, isNeg) => {
@@ -1563,7 +1590,8 @@ function renderPnL() {
     if (r.t === 'header') return `<tr class="pnl-header"><td colspan="4">${r.label}</td></tr>`;
     if (r.t === 'spacer') return `<tr class="pnl-spacer"><td colspan="4"></td></tr>`;
 
-    const total = (r.c3 != null || r.c4 != null)
+    const total = r.noTotal ? null
+      : (r.c3 != null || r.c4 != null)
       ? ((r.c3 || 0) + (r.c4 || 0))
       : null;
 
