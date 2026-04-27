@@ -1566,11 +1566,10 @@ function renderPnL() {
   // ROI = (募資金額 − 總廣告費用) / 總廣告費用
   const roiRow = getRow('總 ROI');
   if (roiRow) {
-    const calcRoi = (raw, mkt) => mkt ? +((raw - mkt) / mkt * 100).toFixed(1) : null;
+    const calcRoi = (raw, mkt) => mkt ? ((raw - mkt) / mkt).toFixed(2) : null;
     roiRow.c3 = calcRoi(rawC3, getC('行銷費用小計', 'c3'));
     roiRow.c4 = calcRoi(rawC4, getC('行銷費用小計', 'c4'));
-    roiRow.isPct = true;
-    roiRow.isText = false;
+    roiRow.isText = true;
     roiRow.noTotal = true;
     roiRow.isAuto = true;
   }
