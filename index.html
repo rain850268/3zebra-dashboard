@@ -1265,7 +1265,6 @@ const pnlRows = [
   { label:'總 ROAS',           c3:null,  c4:'17.9', isText:true },
   { label:'總 ROI',            c3:null,  c4:null,  isText:true },
   { label:'淨利潤',            c3:null,  c4:null },
-  { label:'總損益',            c3:-78560, c4:123242, isTotal:true },
 ];
 
 const UPLOAD_SLOTS = [
@@ -1549,18 +1548,6 @@ function renderPnL() {
     netRow.c3 = calcNet('c3');
     netRow.c4 = calcNet('c4');
     netRow.isAuto = true;
-  }
-
-  // 總損益 = 同上（保持一致）
-  const totalRow = getRow('總損益');
-  if (totalRow) {
-    const calcNet = col =>
-      getC('實收金額（92折）', col) - getC('行銷費用小計', col)
-      - getC('商品總成本', col)
-      - (mgmtRow ? (mgmtRow[col] || 0) : 0)
-      - (shipRow ? (shipRow[col] || 0) : 0);
-    totalRow.c3 = calcNet('c3');
-    totalRow.c4 = calcNet('c4');
   }
 
   // ROI = (募資金額 − 總廣告費用) / 總廣告費用
