@@ -1436,7 +1436,7 @@ function calcWeek(r) {
     weekCPA: totalAd && r.weekOrders ? +(totalAd / r.weekOrders).toFixed(1) : null,
     cpa: totalAd && r.totalOrders ? +(totalAd / r.totalOrders).toFixed(1) : null,
     totalROI: r.cogs && totalAd && r.totalRevenue
-      ? +((r.totalRevenue - r.cogs - totalAd) / (r.cogs + totalAd) * 100).toFixed(1) : null,
+      ? +((r.totalRevenue - r.cogs - totalAd) / totalAd).toFixed(2) : null,
   };
 }
 
