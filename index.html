@@ -1329,23 +1329,27 @@ const surveyWeekly = [
 ];
 
 const weeklyReport = [
-  { week:'W1', label:'4/22–4/28', current:true,
-    adFB:39368, adSurvey:0, totalRevenue:431611, weekRevenue:431611,
-    weekOrders:83, totalOrders:83, cogs:226166 },
-  { week:'W2', label:'4/29–5/5',  current:false, adFB:null, adSurvey:0, totalRevenue:null, weekRevenue:null, weekOrders:null, totalOrders:null, cogs:null },
-  { week:'W3', label:'5/6–5/12',  current:false, adFB:null, adSurvey:0, totalRevenue:null, weekRevenue:null, weekOrders:null, totalOrders:null, cogs:null },
-  { week:'W4', label:'5/13–5/19', current:false, adFB:null, adSurvey:0, totalRevenue:null, weekRevenue:null, weekOrders:null, totalOrders:null, cogs:null },
-  { week:'W5', label:'5/20–5/26', current:false, adFB:null, adSurvey:0, totalRevenue:null, weekRevenue:null, weekOrders:null, totalOrders:null, cogs:null },
+  { week:'W1', label:'4/22–4/26', current:false,
+    adFB:34105, adSurvey:0, totalRevenue:426932, weekRevenue:426932,
+    weekOrders:82, totalOrders:82, cogs:223283 },
+  { week:'W2', label:'4/27–5/3',  current:true,
+    adFB:5263, adSurvey:0, totalRevenue:431611, weekRevenue:4679,
+    weekOrders:1, totalOrders:83, cogs:null },
+  { week:'W3', label:'5/4–5/10',  current:false, adFB:null, adSurvey:0, totalRevenue:null, weekRevenue:null, weekOrders:null, totalOrders:null, cogs:null },
+  { week:'W4', label:'5/11–5/17', current:false, adFB:null, adSurvey:0, totalRevenue:null, weekRevenue:null, weekOrders:null, totalOrders:null, cogs:null },
+  { week:'W5', label:'5/18–5/24', current:false, adFB:null, adSurvey:0, totalRevenue:null, weekRevenue:null, weekOrders:null, totalOrders:null, cogs:null },
 ];
 
 const weeklyProducts = [
-  { week:'W1', label:'4/22–4/28', current:true,
-    earlyBird:30, earlyBirdUnits:30, standard:47, standardUnits:47,
-    double:6, doubleUnits:12, orders:83, units:89, revenue:431611 },
-  { week:'W2', label:'4/29–5/5',  current:false, earlyBird:null, earlyBirdUnits:null, standard:null, standardUnits:null, double:null, doubleUnits:null, orders:null, units:null, revenue:null },
-  { week:'W3', label:'5/6–5/12',  current:false, earlyBird:null, earlyBirdUnits:null, standard:null, standardUnits:null, double:null, doubleUnits:null, orders:null, units:null, revenue:null },
-  { week:'W4', label:'5/13–5/19', current:false, earlyBird:null, earlyBirdUnits:null, standard:null, standardUnits:null, double:null, doubleUnits:null, orders:null, units:null, revenue:null },
-  { week:'W5', label:'5/20–5/26', current:false, earlyBird:null, earlyBirdUnits:null, standard:null, standardUnits:null, double:null, doubleUnits:null, orders:null, units:null, revenue:null },
+  { week:'W1', label:'4/22–4/26', current:false,
+    earlyBird:30, earlyBirdUnits:30, standard:46, standardUnits:46,
+    double:6, doubleUnits:12, orders:82, units:88, revenue:426932 },
+  { week:'W2', label:'4/27–5/3',  current:true,
+    earlyBird:null, earlyBirdUnits:null, standard:null, standardUnits:null,
+    double:null, doubleUnits:null, orders:1, units:1, revenue:4679 },
+  { week:'W3', label:'5/4–5/10',  current:false, earlyBird:null, earlyBirdUnits:null, standard:null, standardUnits:null, double:null, doubleUnits:null, orders:null, units:null, revenue:null },
+  { week:'W4', label:'5/11–5/17', current:false, earlyBird:null, earlyBirdUnits:null, standard:null, standardUnits:null, double:null, doubleUnits:null, orders:null, units:null, revenue:null },
+  { week:'W5', label:'5/18–5/24', current:false, earlyBird:null, earlyBirdUnits:null, standard:null, standardUnits:null, double:null, doubleUnits:null, orders:null, units:null, revenue:null },
 ];
 
 const pnlRows = [
@@ -1409,6 +1413,7 @@ function switchTab(id, el) {
   const tab = document.getElementById('tab-' + id);
   if (tab) tab.classList.add('active');
   if (el) el.classList.add('active');
+  if (id === 'push') renderPushCharts();
   return false;
 }
 
@@ -1457,7 +1462,7 @@ function renderWeekly() {
       <td>${dc(w.cpa)}</td>
       <td>${dc(w.weekCPA)}</td>
       <td>${dc(w.cogs)}</td>
-      <td>${w.totalROI == null ? '<span class="tbd">—</span>' : fmtP(w.totalROI)}</td>
+      <td>${w.totalROI == null ? '<span class="tbd">—</span>' : fmtX(w.totalROI)}</td>
     </tr>`;
   }).join('');
 }
@@ -1756,6 +1761,8 @@ function renderKolTable() {
 function makePushChart(id, data, hasTag) {
   const ctx = document.getElementById(id);
   if (!ctx) return;
+  const existing = Chart.getChart(ctx);
+  if (existing) existing.destroy();
   const tagColor = d => (d.tag === '問卷') ? '#6B8FAB' : '#BB8A6A';
   new Chart(ctx, {
     type: 'bar',
@@ -1819,11 +1826,13 @@ function pushDetailRow(d) {
   </tr>`;
 }
 
-function renderPushTables() {
+function renderPushCharts() {
   makePushChart('chartPushLine', pushData.line.filter(d => d.sends != null), true);
   makePushChart('chartPushEdm',  pushData.edm.filter(d => d.sends != null),  true);
   makePushChart('chartPushSms',  pushData.sms,  false);
+}
 
+function renderPushTables() {
   const lineEl = document.getElementById('tbl-line-detail');
   if (lineEl) lineEl.innerHTML = pushData.line.map(pushDetailRow).join('');
 
