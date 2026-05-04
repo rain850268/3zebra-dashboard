@@ -602,7 +602,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
   </div>
 
   <p style="font-size:11px;color:var(--muted);margin-top:12px">
-    ＊ 商品成本依 0501 戰情報表計算（筋舒適 119台＋小資眼罩 30個＋加購品）｜ 實收金額採 92折（嘖嘖 8% 手續費）計算
+    ＊ 商品成本：筋舒適單位成本 $1,973（119 台）＋小資眼罩 30 個＋加購品｜ 實收金額採 92 折（嘖嘖 8% 手續費）計算
   </p>
 
 </div>
@@ -1040,9 +1040,9 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
         <tbody>
           <tr>
             <td>筋舒適</td>
-            <td style="text-align:right">$2,326</td>
+            <td style="text-align:right">$1,973</td>
             <td style="text-align:right">119 台</td>
-            <td style="text-align:right;font-weight:600">$276,794</td>
+            <td style="text-align:right;font-weight:600">$234,787</td>
           </tr>
           <tr>
             <td>小資款眼罩（超早鳥贈品）</td>
@@ -1072,7 +1072,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
             <td>合計</td>
             <td style="text-align:right">—</td>
             <td style="text-align:right">—</td>
-            <td style="text-align:right;font-size:15px;color:var(--red)">$300,183</td>
+            <td style="text-align:right;font-size:15px;color:var(--red)">$258,176</td>
           </tr>
         </tbody>
       </table>
@@ -1367,9 +1367,9 @@ const pnlRows = [
   { label:'總訂單數',          c3:null,  c4:111,   isCnt:true },
   { t:'spacer' },
   { t:'header', label:'▌ 商品成本' },
-  { label:'商品總成本',        c3:null,  c4:300183 },
-  { label:'毛利',              c3:null,  c4:236564, isCalc:true },
-  { label:'毛利率',            c3:null,  c4:44.1,  isPct:true },
+  { label:'商品總成本',        c3:null,  c4:258176 },
+  { label:'毛利',              c3:null,  c4:278571, isCalc:true },
+  { label:'毛利率',            c3:null,  c4:51.9,  isPct:true },
   { t:'spacer' },
   { t:'header', label:'▌ 行銷費用' },
   { label:'Meta 廣告費',       c3:24418,  c4:99586,  isExp:true },
@@ -1381,7 +1381,7 @@ const pnlRows = [
   { t:'spacer' },
   { t:'header', label:'▌ 其他費用' },
   { label:'運費 / $120',       c3:0,     c4:0,     isExp:true, isAuto:true },
-  { label:'管銷費用 8%',       c3:0,     c4:0,     isExp:true, isAuto:true },
+  { label:'人事管銷費用',       c3:30000, c4:45000, isExp:true },
   { label:'其他費用小計',      c3:0,     c4:0,     isExp:true, isSub:true, isAuto:true },
   { t:'spacer' },
   { t:'header', label:'▌ 損益指標' },
@@ -1670,16 +1670,12 @@ function renderPnL() {
     shipRow.c4 = ordersC4 * 120;
   }
 
-  const mgmtRow = getRow('管銷費用 8%');
-  if (mgmtRow) {
-    mgmtRow.c3 = Math.round(rawC3 * 0.08);
-    mgmtRow.c4 = Math.round(rawC4 * 0.08);
-  }
+  const mgmtRow = getRow('人事管銷費用');
 
   const otherSubRow = getRow('其他費用小計');
   if (otherSubRow) {
-    otherSubRow.c3 = (shipRow ? shipRow.c3 : 0) + (mgmtRow ? mgmtRow.c3 : 0);
-    otherSubRow.c4 = (shipRow ? shipRow.c4 : 0) + (mgmtRow ? mgmtRow.c4 : 0);
+    otherSubRow.c3 = (shipRow ? shipRow.c3 : 0) + (mgmtRow ? (mgmtRow.c3 || 0) : 0);
+    otherSubRow.c4 = (shipRow ? shipRow.c4 : 0) + (mgmtRow ? (mgmtRow.c4 || 0) : 0);
   }
 
   // 淨利潤 = 實收金額 − 總廣告費用 − 商品成本 − 管銷費用 − 運費
