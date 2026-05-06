@@ -115,6 +115,11 @@ tr:hover td{background:#FAFAF8;}
 .pnl-neg{color:var(--red);}
 .pnl-spacer td{height:6px;border-bottom:none;padding:0;}
 
+/* PUSH GROUP HEADERS */
+.push-grp-hdr td{background:#F5F3F0;font-size:11px;font-weight:700;padding:7px 12px;cursor:pointer;user-select:none;}
+.push-grp-hdr td span.grp-arrow{margin-left:6px;display:inline-block;transition:transform .2s;}
+.push-grp-hdr.collapsed td span.grp-arrow{transform:rotate(-90deg);}
+
 /* CONVERSION */
 .conv-bar{height:12px;background:#F0EDE8;border-radius:99px;overflow:hidden;margin:12px 0;}
 .conv-fill{height:12px;border-radius:99px;background:var(--primary);}
@@ -229,8 +234,8 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
     <div class="hero-row">
       <div>
         <div class="hero-label">累積募資金額</div>
-        <div class="hero-amount" id="h-amount">$583,421</div>
-        <div class="hero-goal">目標 $2,000,000 ／ 已達成 <strong id="h-pct">29.2%</strong></div>
+        <div class="hero-amount" id="h-amount">$856,837</div>
+        <div class="hero-goal">目標 $2,000,000 ／ 已達成 <strong id="h-pct">42.8%</strong></div>
       </div>
       <div class="hero-stat" style="text-align:right">
         <div class="lbl">開賣天數</div>
@@ -238,7 +243,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
         <div class="lbl">天</div>
       </div>
     </div>
-    <div class="progress-track"><div class="progress-fill" id="h-bar" style="width:29.2%"></div></div>
+    <div class="progress-track"><div class="progress-fill" id="h-bar" style="width:42.8%"></div></div>
     <div style="display:flex;justify-content:space-between;font-size:12px;opacity:.75">
       <span>$0</span><span>$500K</span><span>$1M</span><span>$1.5M</span><span>$2M</span>
     </div>
@@ -247,19 +252,19 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
   <div class="grid4 mb20">
     <div class="card kpi">
       <div class="icon">🛍️</div>
-      <div class="val">111</div>
+      <div class="val">166</div>
       <div class="lbl">總贊助人數</div>
       <div class="sub">累計</div>
     </div>
     <div class="card kpi">
       <div class="icon">💰</div>
-      <div class="val">$5,253</div>
+      <div class="val">$5,161</div>
       <div class="lbl">客單價</div>
       <div class="sub">目標 $5,500</div>
     </div>
     <div class="card kpi">
       <div class="icon">⚡</div>
-      <div class="val">9.5</div>
+      <div class="val">7.8</div>
       <div class="lbl">開賣廣告 ROAS</div>
       <div class="sub"><span class="tag tag-green">累積</span></div>
     </div>
@@ -274,7 +279,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
   <!-- 週報表 -->
   <div class="card mb20">
     <div class="section-title">📅 週報表
-      <span class="updated" id="weekly-updated">資料截至 4/30</span>
+      <span class="updated" id="weekly-updated">資料截至 5/5</span>
     </div>
     <div class="weekly-wrap">
       <table class="wtbl">
@@ -307,31 +312,31 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
       <div class="section-title">📊 問卷轉換率</div>
       <div id="conv-content">
         <div style="text-align:center;padding:16px 0 8px">
-          <div style="font-size:32px;font-weight:700;color:var(--primary)">2.77%</div>
+          <div style="font-size:32px;font-weight:700;color:var(--primary)">2.90%</div>
           <div style="font-size:12px;color:var(--muted);margin-top:2px">追蹤到的問卷名單→購買轉換率</div>
-          <div style="font-size:12px;color:var(--muted)">44 筆訂單 ／ 1,587 份問卷</div>
+          <div style="font-size:12px;color:var(--muted)">46 筆訂單 ／ 1,587 份問卷</div>
         </div>
         <div style="border-top:1px solid #F0EDE8;margin-top:10px;padding-top:12px">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
             <span style="font-size:13px">SMS 問卷名單（730 人）</span>
-            <span style="font-weight:600;font-size:13px">1.78%</span>
+            <span style="font-weight:600;font-size:13px">1.92%</span>
           </div>
           <div style="background:#F0EDE8;border-radius:99px;height:6px;margin-bottom:12px">
-            <div style="width:1.78%;background:#6B8FAB;height:6px;border-radius:99px;min-width:8px"></div>
+            <div style="width:1.92%;background:#6B8FAB;height:6px;border-radius:99px;min-width:8px"></div>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-            <span style="font-size:13px">LINE 問卷名單（714 人）</span>
-            <span style="font-weight:600;font-size:13px">3.22%</span>
+            <span style="font-size:13px">LINE 問卷名單（1,422 人）</span>
+            <span style="font-weight:600;font-size:13px">1.69%</span>
           </div>
           <div style="background:#F0EDE8;border-radius:99px;height:6px;margin-bottom:12px">
-            <div style="width:3.22%;background:#6B8FAB;height:6px;border-radius:99px;min-width:12px"></div>
+            <div style="width:1.69%;background:#6B8FAB;height:6px;border-radius:99px;min-width:12px"></div>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
             <span style="font-size:13px">EDM 問卷名單（1,066 人）</span>
-            <span style="font-weight:600;font-size:13px">0.75%</span>
+            <span style="font-weight:600;font-size:13px">0.84%</span>
           </div>
           <div style="background:#F0EDE8;border-radius:99px;height:6px;margin-bottom:4px">
-            <div style="width:0.75%;background:#6B8FAB;height:6px;border-radius:99px;min-width:5px"></div>
+            <div style="width:0.84%;background:#6B8FAB;height:6px;border-radius:99px;min-width:5px"></div>
           </div>
         </div>
         <div style="margin-top:10px;font-size:11px;color:var(--muted);line-height:1.5">
@@ -348,7 +353,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
   <!-- 累積業績曲線圖 -->
   <div class="card mb20">
     <div class="section-title">📈 累積業績走勢
-      <span class="updated">截至 4/30｜含目標線與里程碑</span>
+      <span class="updated">截至 5/5｜含目標線與里程碑</span>
     </div>
     <div style="position:relative;height:300px"><canvas id="chartRevenueTrend"></canvas></div>
   </div>
@@ -400,24 +405,24 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
         </div>
         <div class="rec-card ok" data-cat="overall">
           <div class="rec-header"><span class="rec-icon">📬</span>
-            <span class="rec-title">行銷推播超水準：SMS 問卷名單 ROAS 6.51，開賣首日功不可沒</span>
+            <span class="rec-title">行銷推播累積成效：三渠道合計 ROAS 均正向，SMS 問卷名單是最強引擎</span>
             <span class="tag tag-green">整體</span></div>
           <div class="rec-body">
-            三個推播渠道均有正向 ROAS，效益由高到低：
+            三個推播渠道截至 5/4 二推，整體 ROAS 效益：
             <ul>
-              <li><strong>SMS（ROAS 6.51）：</strong>730 位問卷名單傳送，直接帶動 $70,185 首日收益——最精準、最高效的渠道</li>
-              <li><strong>EDM（ROAS 3.9）：</strong>開賣當天 5 封序列觸達不同名單，累積費用 $11,107</li>
-              <li><strong>LINE（ROAS 3.46）：</strong>開賣當天推播帶進 $126,494，但問卷期推播屬名單建立成本，ROAS 基準不同</li>
+              <li><strong>EDM（累積 ROAS 4.4）：</strong>費用 $11,107，問卷名單序列 + 倒數七天二推，累積帶入 $48,510</li>
+              <li><strong>SMS（累積 ROAS 4.8）：</strong>費用 $18,718，問卷名單首批帶動 $70,185，二推合計追加業績逾 $2 萬</li>
+              <li><strong>LINE（累積 ROAS 3.1）：</strong>費用 $42,397，含問卷期建名單成本，實際開賣推播業績 $131,213</li>
             </ul>
-            <div class="rec-insight">💡 行銷推播剩餘預算約 $22K，建議 W2~W3 各安排 1 波 LINE＋EDM，維持中段熱度，避免 U 型曲線中段過深。</div>
+            <div class="rec-insight">💡 二推（5/3–5/4）已帶入 SMS 問卷名單業績 $15,517，EDM 倒數七天問卷名單 $4,719；後續首批截止前建議聚焦 LINE 圖文選單維持長尾流量。</div>
           </div>
         </div>
         <div class="rec-card warn" data-cat="overall">
           <div class="rec-header"><span class="rec-icon">💰</span>
-            <span class="rec-title">客單價 $5,253 略低於目標 $5,500，需追蹤 SKU 分布</span>
+            <span class="rec-title">客單價 $5,161 低於目標 $5,500，需追蹤後段 SKU 組合拉升空間</span>
             <span class="tag tag-amber">整體</span></div>
           <div class="rec-body">
-            目前客單價 $5,253 比目標低 4.5%，若全程維持此水位，達標需要額外多約 17 筆訂單（共 381 筆）。4/30 客單價 $5,259，近期整體在 $5,250 附近，趨於穩定。
+            目前客單價 $5,161（166 筆），比目標低 6.2%。W3（5/4–5/5）日均客單 $5,283，較 W2 略有回升。
             <ul>
               <li>上傳嘖嘖訂單 CSV 後，可在「產品購買」分頁查看各方案選購比例</li>
               <li>超早鳥價格優惠期結束後，觀察是否自然拉高客單價</li>
@@ -582,7 +587,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:8px">
     <div>
       <h2 style="margin-bottom:4px">📉 損益表</h2>
-      <p style="font-size:13px;color:var(--muted)" id="pnl-note">資料截至 2026/4/30 ｜ 每月上傳損益 CSV 可更新數值</p>
+      <p style="font-size:13px;color:var(--muted)" id="pnl-note">資料截至 2026/5/5 ｜ 每月上傳損益 CSV 可更新數值</p>
     </div>
     <button class="uz-btn" onclick="document.getElementById('fi-pnl').click()">⬆ 上傳損益 CSV</button>
   </div>
@@ -591,9 +596,10 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
     <table class="pnl-tbl">
       <thead>
         <tr>
-          <th style="width:40%;text-align:left">項目</th>
+          <th style="width:35%;text-align:left">項目</th>
           <th>3 月</th>
           <th>4 月</th>
+          <th>5 月</th>
           <th>合計</th>
         </tr>
       </thead>
@@ -658,11 +664,11 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
     <div class="section-title">📱 LINE 推播</div>
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0 20px">
       <div style="text-align:center;padding:14px 8px;background:var(--bg);border-radius:10px">
-        <div style="font-size:17px;font-weight:700;color:var(--text)">$36,535</div>
+        <div style="font-size:17px;font-weight:700;color:var(--text)">$42,397</div>
         <div style="font-size:11px;color:var(--muted);margin-top:3px">累積費用</div>
       </div>
       <div style="text-align:center;padding:14px 8px;background:var(--bg);border-radius:10px">
-        <div style="font-size:17px;font-weight:700;color:var(--text)">3.46</div>
+        <div style="font-size:17px;font-weight:700;color:var(--text)">3.1</div>
         <div style="font-size:11px;color:var(--muted);margin-top:3px">整體 ROAS</div>
       </div>
       <div style="text-align:center;padding:14px 8px;background:var(--bg);border-radius:10px">
@@ -699,7 +705,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
         <div style="font-size:11px;color:var(--muted);margin-top:3px">累積費用</div>
       </div>
       <div style="text-align:center;padding:14px 8px;background:var(--bg);border-radius:10px">
-        <div style="font-size:17px;font-weight:700;color:var(--text)">3.9</div>
+        <div style="font-size:17px;font-weight:700;color:var(--text)">4.4</div>
         <div style="font-size:11px;color:var(--muted);margin-top:3px">整體 ROAS</div>
       </div>
       <div style="text-align:center;padding:14px 8px;background:var(--bg);border-radius:10px">
@@ -732,11 +738,11 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
     <div class="section-title">💬 SMS／大量推送</div>
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0 20px">
       <div style="text-align:center;padding:14px 8px;background:var(--bg);border-radius:10px">
-        <div style="font-size:17px;font-weight:700;color:var(--text)">$10,824</div>
+        <div style="font-size:17px;font-weight:700;color:var(--text)">$18,718</div>
         <div style="font-size:11px;color:var(--muted);margin-top:3px">累積費用</div>
       </div>
       <div style="text-align:center;padding:14px 8px;background:var(--bg);border-radius:10px">
-        <div style="font-size:17px;font-weight:700;color:var(--text)">6.51</div>
+        <div style="font-size:17px;font-weight:700;color:var(--text)">4.8</div>
         <div style="font-size:11px;color:var(--muted);margin-top:3px">整體 ROAS</div>
       </div>
       <div style="text-align:center;padding:14px 8px;background:var(--bg);border-radius:10px">
@@ -769,15 +775,15 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
     <div class="section-title">📘 FB 貼文推播</div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0 20px">
       <div style="text-align:center;padding:14px 8px;background:var(--bg);border-radius:10px">
-        <div style="font-size:17px;font-weight:700;color:var(--text)">9</div>
+        <div style="font-size:17px;font-weight:700;color:var(--text)">11</div>
         <div style="font-size:11px;color:var(--muted);margin-top:3px">累積訂單</div>
       </div>
       <div style="text-align:center;padding:14px 8px;background:var(--bg);border-radius:10px">
-        <div style="font-size:17px;font-weight:700;color:var(--text)">$48,310</div>
+        <div style="font-size:17px;font-weight:700;color:var(--text)">$57,828</div>
         <div style="font-size:11px;color:var(--muted);margin-top:3px">累積業績</div>
       </div>
       <div style="text-align:center;padding:14px 8px;background:var(--bg);border-radius:10px">
-        <div style="font-size:17px;font-weight:700;color:var(--text)">$5,368</div>
+        <div style="font-size:17px;font-weight:700;color:var(--text)">$5,257</div>
         <div style="font-size:11px;color:var(--muted);margin-top:3px">平均客單價</div>
       </div>
     </div>
@@ -1107,9 +1113,9 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
 <div class="page">
   <div id="discounts-content">
     <div class="kpi-row mb20" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
-      <div class="card kpi"><div class="icon">🎟️</div><div class="val">83</div><div class="lbl">折扣碼使用次數</div></div>
-      <div class="card kpi"><div class="icon">💸</div><div class="val">$7,740</div><div class="lbl">折扣總讓利</div></div>
-      <div class="card kpi"><div class="icon">📊</div><div class="val">74.8%</div><div class="lbl">折扣碼使用率</div></div>
+      <div class="card kpi"><div class="icon">🎟️</div><div class="val">121</div><div class="lbl">折扣碼使用次數</div></div>
+      <div class="card kpi"><div class="icon">💸</div><div class="val">$10,990</div><div class="lbl">折扣總讓利</div></div>
+      <div class="card kpi"><div class="icon">📊</div><div class="val">72.9%</div><div class="lbl">折扣碼使用率</div></div>
     </div>
     <div class="card">
       <h3>各折扣碼使用狀況</h3>
@@ -1119,56 +1125,70 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
           <tr>
             <td><strong>new80</strong><span style="font-size:11px;color:var(--muted);margin-left:6px">新客首購</span></td>
             <td style="text-align:right">-$80</td>
-            <td style="text-align:right">55 <span style="font-size:11px;color:var(--muted)">(49.5%)</span></td>
-            <td style="text-align:right">$276,143</td>
-            <td style="text-align:right">$4,400</td>
+            <td style="text-align:right">86 <span style="font-size:11px;color:var(--muted)">(51.8%)</span></td>
+            <td style="text-align:right">$443,629</td>
+            <td style="text-align:right">$6,880</td>
           </tr>
           <tr>
             <td><strong>老朋友</strong><span style="font-size:11px;color:var(--muted);margin-left:6px">回頭客</span></td>
             <td style="text-align:right">-$120</td>
-            <td style="text-align:right">16 <span style="font-size:11px;color:var(--muted)">(14.4%)</span></td>
+            <td style="text-align:right">16 <span style="font-size:11px;color:var(--muted)">(9.6%)</span></td>
             <td style="text-align:right">$77,824</td>
             <td style="text-align:right">$1,920</td>
           </tr>
           <tr>
             <td><strong>老好友</strong><span style="font-size:11px;color:var(--muted);margin-left:6px">回頭客</span></td>
             <td style="text-align:right">-$120</td>
-            <td style="text-align:right">10 <span style="font-size:11px;color:var(--muted)">(9.0%)</span></td>
+            <td style="text-align:right">10 <span style="font-size:11px;color:var(--muted)">(6.0%)</span></td>
             <td style="text-align:right">$57,068</td>
             <td style="text-align:right">$1,200</td>
           </tr>
           <tr>
             <td><strong>waca100</strong><span style="font-size:11px;color:var(--muted);margin-left:6px">WACA 會員</span></td>
             <td style="text-align:right">-$100</td>
-            <td style="text-align:right">1 <span style="font-size:11px;color:var(--muted)">(0.9%)</span></td>
-            <td style="text-align:right">$4,699</td>
-            <td style="text-align:right">$100</td>
+            <td style="text-align:right">2 <span style="font-size:11px;color:var(--muted)">(1.2%)</span></td>
+            <td style="text-align:right">$9,398</td>
+            <td style="text-align:right">$200</td>
+          </tr>
+          <tr>
+            <td><strong>zec100</strong><span style="font-size:11px;color:var(--muted);margin-left:6px">ZEC 會員</span></td>
+            <td style="text-align:right">-$100</td>
+            <td style="text-align:right">2 <span style="font-size:11px;color:var(--muted)">(1.2%)</span></td>
+            <td style="text-align:right">$10,878</td>
+            <td style="text-align:right">$200</td>
+          </tr>
+          <tr>
+            <td><strong>vip110</strong><span style="font-size:11px;color:var(--muted);margin-left:6px">VIP 專屬</span></td>
+            <td style="text-align:right">-$110</td>
+            <td style="text-align:right">1 <span style="font-size:11px;color:var(--muted)">(0.6%)</span></td>
+            <td style="text-align:right">$4,689</td>
+            <td style="text-align:right">$110</td>
           </tr>
           <tr>
             <td><strong>3zb120</strong><span style="font-size:11px;color:var(--muted);margin-left:6px">3ZB 專屬</span></td>
             <td style="text-align:right">-$120</td>
-            <td style="text-align:right">1 <span style="font-size:11px;color:var(--muted)">(0.9%)</span></td>
-            <td style="text-align:right">$4,679</td>
-            <td style="text-align:right">$120</td>
+            <td style="text-align:right">4 <span style="font-size:11px;color:var(--muted)">(2.4%)</span></td>
+            <td style="text-align:right">$20,196</td>
+            <td style="text-align:right">$480</td>
           </tr>
           <tr>
             <td>（無折扣碼）</td>
             <td style="text-align:right">—</td>
-            <td style="text-align:right">28 <span style="font-size:11px;color:var(--muted)">(25.2%)</span></td>
-            <td style="text-align:right">$163,008</td>
+            <td style="text-align:right">45 <span style="font-size:11px;color:var(--muted)">(27.1%)</span></td>
+            <td style="text-align:right">$248,872</td>
             <td style="text-align:right">—</td>
           </tr>
           <tr style="font-weight:600;border-top:2px solid #F0EDE8">
             <td>合計</td>
             <td style="text-align:right">—</td>
-            <td style="text-align:right">111</td>
-            <td style="text-align:right">$583,421</td>
-            <td style="text-align:right">$7,740</td>
+            <td style="text-align:right">166</td>
+            <td style="text-align:right">$872,554</td>
+            <td style="text-align:right">$10,990</td>
           </tr>
         </tbody>
       </table>
       <div style="margin-top:16px;padding:12px 16px;background:#FBF9F6;border-radius:8px;font-size:13px;color:var(--muted)">
-        💡 老朋友 + 老好友合計 26 筆（23.4%），代表回購客群佔開賣訂單逾兩成。
+        💡 老朋友 + 老好友合計 26 筆（15.7%），回購客群穩健；new80 新客首購佔比 51.8%，為主力折扣碼。
       </div>
     </div>
   </div>
@@ -1180,9 +1200,9 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
 <div class="page">
   <div id="referrals-content">
     <div class="kpi-row mb20" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
-      <div class="card kpi"><div class="icon">🔗</div><div class="val">78</div><div class="lbl">有追蹤來源訂單</div></div>
-      <div class="card kpi"><div class="icon">💰</div><div class="val">$406,456</div><div class="lbl">有追蹤來源業績</div></div>
-      <div class="card kpi"><div class="icon">📊</div><div class="val">70.3%</div><div class="lbl">來源追蹤率</div></div>
+      <div class="card kpi"><div class="icon">🔗</div><div class="val">118</div><div class="lbl">有追蹤來源訂單</div></div>
+      <div class="card kpi"><div class="icon">💰</div><div class="val">$600,458</div><div class="lbl">有追蹤來源業績</div></div>
+      <div class="card kpi"><div class="icon">📊</div><div class="val">70.2%</div><div class="lbl">來源追蹤率</div></div>
     </div>
     <div class="card">
       <h3>推薦來源業績排行</h3>
@@ -1190,65 +1210,61 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
         <thead><tr><th>來源</th><th style="text-align:right">訂單數</th><th style="text-align:right">業績金額</th><th style="text-align:right">業績佔比</th></tr></thead>
         <tbody>
           <tr>
-            <td><span class="tag tag-blue" style="font-size:11px;margin-right:6px">LINE</span>正式開賣_問卷_0422</td>
-            <td style="text-align:right">23</td><td style="text-align:right">$117,056</td><td style="text-align:right">20.1%</td>
+            <td><span style="font-size:11px;color:var(--muted);margin-right:6px">—</span>（直接 / 未追蹤）</td>
+            <td style="text-align:right">50</td><td style="text-align:right">$272,096</td><td style="text-align:right">31.2%</td>
           </tr>
           <tr>
-            <td><span style="font-size:11px;color:var(--muted);margin-right:6px">—</span>（直接 / 未追蹤）</td>
-            <td style="text-align:right">33</td><td style="text-align:right">$176,965</td><td style="text-align:right">30.3%</td>
+            <td><span class="tag tag-blue" style="font-size:11px;margin-right:6px">LINE</span>正式開賣_問卷_0422</td>
+            <td style="text-align:right">24</td><td style="text-align:right">$121,775</td><td style="text-align:right">14.0%</td>
           </tr>
           <tr>
             <td><span class="tag tag-amber" style="font-size:11px;margin-right:6px">SMS</span>正式開賣_問卷_0422</td>
-            <td style="text-align:right">13</td><td style="text-align:right">$70,185</td><td style="text-align:right">12.0%</td>
-          </tr>
-          <tr>
-            <td><span class="tag tag-green" style="font-size:11px;margin-right:6px">EDM</span>正式開賣_問卷_0422</td>
-            <td style="text-align:right">8</td><td style="text-align:right">$39,072</td><td style="text-align:right">6.7%</td>
-          </tr>
-          <tr>
-            <td><span class="tag tag-blue" style="font-size:11px;margin-right:6px">FB</span>正式開賣_0422</td>
-            <td style="text-align:right">6</td><td style="text-align:right">$34,033</td><td style="text-align:right">5.8%</td>
+            <td style="text-align:right">13</td><td style="text-align:right">$70,185</td><td style="text-align:right">8.0%</td>
           </tr>
           <tr>
             <td><span class="tag tag-blue" style="font-size:11px;margin-right:6px">廣告</span>皮克敏_30S_加框_0422</td>
-            <td style="text-align:right">5</td><td style="text-align:right">$30,834</td><td style="text-align:right">5.3%</td>
+            <td style="text-align:right">10</td><td style="text-align:right">$62,228</td><td style="text-align:right">7.1%</td>
           </tr>
           <tr>
             <td><span class="tag tag-blue" style="font-size:11px;margin-right:6px">廣告</span>小夫妻_五格_ASC</td>
-            <td style="text-align:right">5</td><td style="text-align:right">$25,235</td><td style="text-align:right">4.3%</td>
+            <td style="text-align:right">9</td><td style="text-align:right">$46,911</td><td style="text-align:right">5.4%</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-blue" style="font-size:11px;margin-right:6px">廣告</span>體驗會（各場次合計）</td>
+            <td style="text-align:right">8</td><td style="text-align:right">$41,512</td><td style="text-align:right">4.8%</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-green" style="font-size:11px;margin-right:6px">EDM</span>正式開賣_問卷_0422</td>
+            <td style="text-align:right">8</td><td style="text-align:right">$39,072</td><td style="text-align:right">4.5%</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-blue" style="font-size:11px;margin-right:6px">FB</span>正式開賣_0422</td>
+            <td style="text-align:right">6</td><td style="text-align:right">$34,033</td><td style="text-align:right">3.9%</td>
           </tr>
           <tr>
             <td><span class="tag tag-blue" style="font-size:11px;margin-right:6px">FB</span>上線隔天_0423</td>
-            <td style="text-align:right">3</td><td style="text-align:right">$14,277</td><td style="text-align:right">2.4%</td>
+            <td style="text-align:right">5</td><td style="text-align:right">$23,795</td><td style="text-align:right">2.7%</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-blue" style="font-size:11px;margin-right:6px">廣告</span>自己亂伸篇_9比16_0422</td>
+            <td style="text-align:right">4</td><td style="text-align:right">$20,836</td><td style="text-align:right">2.4%</td>
           </tr>
           <tr>
             <td><span class="tag" style="font-size:11px;margin-right:6px;background:#E8E4DE;color:#7A6F5E">嘖嘖</span>正式開賣_0422</td>
-            <td style="text-align:right">3</td><td style="text-align:right">$14,237</td><td style="text-align:right">2.4%</td>
+            <td style="text-align:right">4</td><td style="text-align:right">$18,956</td><td style="text-align:right">2.2%</td>
           </tr>
           <tr>
-            <td><span class="tag tag-blue" style="font-size:11px;margin-right:6px">LINE</span>圖文選單</td>
-            <td style="text-align:right">2</td><td style="text-align:right">$9,438</td><td style="text-align:right">1.6%</td>
-          </tr>
-          <tr>
-            <td><span class="tag tag-blue" style="font-size:11px;margin-right:6px">廣告</span>自己亂伸篇_9比16_加框_RT</td>
-            <td style="text-align:right">2</td><td style="text-align:right">$9,398</td><td style="text-align:right">1.6%</td>
-          </tr>
-          <tr>
-            <td><span class="tag tag-amber" style="font-size:11px;margin-right:6px">KOL</span>小夫妻的旅攝生活</td>
-            <td style="text-align:right">1</td><td style="text-align:right">$9,398</td><td style="text-align:right">1.6%</td>
-          </tr>
-          <tr>
-            <td><span class="tag tag-blue" style="font-size:11px;margin-right:6px">廣告</span>其他（各 1 筆）</td>
-            <td style="text-align:right">7</td><td style="text-align:right">$33,293</td><td style="text-align:right">5.7%</td>
+            <td><span class="tag tag-blue" style="font-size:11px;margin-right:6px">廣告／推播</span>其他（各渠道合計）</td>
+            <td style="text-align:right">27</td><td style="text-align:right">$121,155</td><td style="text-align:right">13.9%</td>
           </tr>
           <tr style="font-weight:600;border-top:2px solid #F0EDE8">
             <td>合計</td>
-            <td style="text-align:right">111</td><td style="text-align:right">$583,421</td><td style="text-align:right">100%</td>
+            <td style="text-align:right">168</td><td style="text-align:right">$872,554</td><td style="text-align:right">100%</td>
           </tr>
         </tbody>
       </table>
       <div style="margin-top:16px;padding:12px 16px;background:#FBF9F6;border-radius:8px;font-size:13px;color:var(--muted)">
-        💡 LINE + SMS + EDM 問卷名單三渠道合計帶入 44 筆訂單（39.6%），業績 $226,313（38.8%）——問卷名單仍是最強轉換引擎。
+        💡 LINE + SMS + EDM 問卷名單三渠道合計 45 筆（26.8%），業績 $231,032（26.5%）——問卷名單仍是最強精準轉換引擎。
       </div>
     </div>
   </div>
@@ -1289,9 +1305,11 @@ const pushData = {
     { name:'0417 倒數五天－其他',  sends:13815, openRate:'61.56%', ctr:'1.38%',  revenue:0,      roas:null,  cost:5526,  tag:'問卷' },
     { name:'0419 倒數三天－問卷',  sends:706,   openRate:'51.42%', ctr:'9.07%',  revenue:0,      roas:null,  cost:282,   tag:'問卷' },
     { name:'0419 倒數三天－其他',  sends:13794, openRate:'60.56%', ctr:'1.09%',  revenue:0,      roas:null,  cost:5518,  tag:'問卷' },
-    { name:'0422 上線當天－問卷',  sends:714,   openRate:'53.78%', ctr:'13.87%', revenue:117056, roas:409.3, cost:286,   tag:'開賣' },
+    { name:'0422 上線當天－問卷',  sends:714,   openRate:'53.78%', ctr:'13.87%', revenue:121775, roas:425.8, cost:286,   tag:'開賣' },
     { name:'0422 上線當天－其他',  sends:13760, openRate:'64.40%', ctr:'1.74%',  revenue:0,      roas:null,  cost:5504,  tag:'開賣' },
     { name:'圖文選單（常駐）',     sends:null,  openRate:null,     ctr:null,     revenue:9438,   roas:null,  cost:0,     tag:'開賣' },
+    { name:'0503 首批倒數一天－問卷', sends:708, openRate:'44.63%', ctr:'7.91%', revenue:0, roas:null, cost:283, tag:'二推' },
+    { name:'0503 首批倒數一天－其他', sends:13948, openRate:'55.28%', ctr:'1.33%', revenue:0, roas:null, cost:5579, tag:'二推' },
   ],
   edm: [
     { name:'問卷上線－waca vip',       sends:1162,  openRate:'9.90%',  ctr:'4.40%',  revenue:0,     roas:null,  cost:116,  tag:'問卷' },
@@ -1311,7 +1329,7 @@ const pushData = {
     { name:'上線當天－大補帖',         sends:25741, openRate:'9.30%',  ctr:'0.14%',  revenue:0,     roas:null,  cost:2574, tag:'開賣' },
     { name:'首批倒數七天－waca vip',   sends:87,   openRate:'44.9%', ctr:'0%',    revenue:0, roas:null, cost:9,   tag:'二推' },
     { name:'首批倒數七天－waca',       sends:822,  openRate:'48.1%', ctr:'0.14%', revenue:0, roas:null, cost:82,  tag:'二推' },
-    { name:'首批倒數七天－問卷名單',   sends:1026, openRate:'9.0%',  ctr:'1.19%', revenue:0, roas:null, cost:103, tag:'二推' },
+    { name:'首批倒數七天－問卷名單',   sends:1026, openRate:'9.0%',  ctr:'1.19%', revenue:4719, roas:45.8, cost:103, tag:'二推' },
     { name:'首批倒數七天－大補帖',     sends:1743, openRate:'44.8%', ctr:'0.06%', revenue:0, roas:null, cost:174, tag:'二推' },
     { name:'首批倒數七天－其他問卷',   sends:357,  openRate:'49.8%', ctr:'0.31%', revenue:0, roas:null, cost:36,  tag:'二推' },
   ],
@@ -1320,11 +1338,18 @@ const pushData = {
     { name:'開賣－問卷名單',  sends:730,  ctr:'80%',    revenue:65506, roas:89.7, cost:730  },
     { name:'開賣－VIP',       sends:1107, ctr:'44.26%', revenue:0,     roas:null, cost:1107 },
     { name:'開賣－WACA',      sends:8943, ctr:'38.03%', revenue:4699,  roas:0.5,  cost:8943 },
+    { name:'首批倒數一天_wacavip_0503', sends:1109, ctr:'43.7%',  revenue:0,     roas:null, cost:1109, tag:'二推' },
+    { name:'首批倒數一天_waca_0503',    sends:1796, ctr:'176.3%', revenue:0,     roas:null, cost:1796, tag:'二推' },
+    { name:'首批倒數一天_問卷_0503',    sends:697,  ctr:'68.0%',  revenue:4679,  roas:3.4,  cost:1394, tag:'二推' },
+    { name:'首批只到今天_wacavip_0504', sends:1107, ctr:'44.5%',  revenue:0,     roas:null, cost:1107, tag:'二推' },
+    { name:'首批只到今天_waca_0504',    sends:1795, ctr:'176.0%', revenue:4699,  roas:2.6,  cost:1795, tag:'二推' },
+    { name:'首批只到今天_問卷_0504',    sends:693,  ctr:'63.9%',  revenue:10838, roas:15.6, cost:693,  tag:'二推' },
   ],
   fb: [
-    { name:'FB 正式開賣_0422', orders:6, revenue:34033 },
-    { name:'FB 上線隔天_0423', orders:3, revenue:14277 },
+    { name:'FB 正式開賣_0422',     orders:6, revenue:34033 },
+    { name:'FB 上線隔天_0423',     orders:5, revenue:23795 },
     { name:'FB 首批倒數七天_0429', orders:0, revenue:0 },
+    { name:'FB 首批倒數一天_0503', orders:0, revenue:0 },
   ]
 };
 
@@ -1340,10 +1365,12 @@ const weeklyReport = [
   { week:'W1', label:'4/22–4/26', current:false,
     adFB:34105, adSurvey:0, totalRevenue:426932, weekRevenue:426932,
     weekOrders:82, totalOrders:82, cogs:223283 },
-  { week:'W2', label:'4/27–5/3',  current:true,
-    adFB:27012, adSurvey:0, totalRevenue:583421, weekRevenue:156489,
-    weekOrders:29, totalOrders:111, cogs:300183 },
-  { week:'W3', label:'5/4–5/10',  current:false, adFB:null, adSurvey:0, totalRevenue:null, weekRevenue:null, weekOrders:null, totalOrders:null, cogs:null },
+  { week:'W2', label:'4/27–5/3',  current:false,
+    adFB:56562, adSurvey:0, totalRevenue:745819, weekRevenue:318887,
+    weekOrders:63, totalOrders:145, cogs:258176 },
+  { week:'W3', label:'5/4–5/10',  current:true,
+    adFB:18485, adSurvey:0, totalRevenue:856837, weekRevenue:111018,
+    weekOrders:21, totalOrders:166, cogs:375817 },
   { week:'W4', label:'5/11–5/17', current:false, adFB:null, adSurvey:0, totalRevenue:null, weekRevenue:null, weekOrders:null, totalOrders:null, cogs:null },
   { week:'W5', label:'5/18–5/24', current:false, adFB:null, adSurvey:0, totalRevenue:null, weekRevenue:null, weekOrders:null, totalOrders:null, cogs:null },
 ];
@@ -1352,42 +1379,44 @@ const weeklyProducts = [
   { week:'W1', label:'4/22–4/26', current:false,
     earlyBird:30, earlyBirdUnits:30, standard:46, standardUnits:46,
     double:6, doubleUnits:12, orders:82, units:88, revenue:426932 },
-  { week:'W2', label:'4/27–5/3',  current:true,
-    earlyBird:0, earlyBirdUnits:0, standard:27, standardUnits:27,
-    double:2, doubleUnits:4, orders:29, units:31, revenue:156489 },
-  { week:'W3', label:'5/4–5/10',  current:false, earlyBird:null, earlyBirdUnits:null, standard:null, standardUnits:null, double:null, doubleUnits:null, orders:null, units:null, revenue:null },
+  { week:'W2', label:'4/27–5/3',  current:false,
+    earlyBird:0, earlyBirdUnits:0, standard:60, standardUnits:60,
+    double:1, doubleUnits:2, orders:63, units:62, revenue:318887 },
+  { week:'W3', label:'5/4–5/10',  current:true,
+    earlyBird:0, earlyBirdUnits:0, standard:21, standardUnits:21,
+    double:0, doubleUnits:0, orders:21, units:21, revenue:111018 },
   { week:'W4', label:'5/11–5/17', current:false, earlyBird:null, earlyBirdUnits:null, standard:null, standardUnits:null, double:null, doubleUnits:null, orders:null, units:null, revenue:null },
   { week:'W5', label:'5/18–5/24', current:false, earlyBird:null, earlyBirdUnits:null, standard:null, standardUnits:null, double:null, doubleUnits:null, orders:null, units:null, revenue:null },
 ];
 
 const pnlRows = [
   { t:'header', label:'▌ 收入' },
-  { label:'募資金額',          c3:null,  c4:583421 },
-  { label:'實收金額（92折）',  c3:null,  c4:536747 },
-  { label:'總訂單數',          c3:null,  c4:111,   isCnt:true },
+  { label:'募資金額',          c3:null,  c4:583421, c5:273416 },
+  { label:'實收金額（92折）',  c3:null,  c4:536747, c5:251543 },
+  { label:'總訂單數',          c3:null,  c4:111,    c5:55,    isCnt:true },
   { t:'spacer' },
   { t:'header', label:'▌ 商品成本' },
-  { label:'商品總成本',        c3:null,  c4:258176 },
-  { label:'毛利',              c3:null,  c4:278571, isCalc:true },
-  { label:'毛利率',            c3:null,  c4:51.9,  isPct:true },
+  { label:'商品總成本',        c3:null,  c4:258176, c5:117641 },
+  { label:'毛利',              c3:null,  c4:278571, c5:133902, isCalc:true },
+  { label:'毛利率',            c3:null,  c4:51.9,   c5:53.2,  isPct:true },
   { t:'spacer' },
   { t:'header', label:'▌ 行銷費用' },
-  { label:'Meta 廣告費',       c3:24418,  c4:99586,  isExp:true },
-  { label:'SMS 費用',          c3:0,      c4:10780,  isExp:true },
-  { label:'EDM 費用',          c3:0,      c4:6010,   isExp:true },
-  { label:'LINE 費用',         c3:19142,  c4:17393,  isExp:true },
-  { label:'KOL 費用',          c3:35000,  c4:10000,  isExp:true },
-  { label:'行銷費用小計',      c3:78560,  c4:143769, isExp:true, isSub:true },
+  { label:'Meta 廣告費',       c3:24418, c4:99586,  c5:48035, isExp:true },
+  { label:'SMS 費用',          c3:0,     c4:10780,  c5:7894,  isExp:true },
+  { label:'EDM 費用',          c3:0,     c4:6010,   c5:0,     isExp:true },
+  { label:'LINE 費用',         c3:19142, c4:17393,  c5:5862,  isExp:true },
+  { label:'KOL 費用',          c3:35000, c4:10000,  c5:0,     isExp:true },
+  { label:'行銷費用小計',      c3:78560, c4:143769, c5:61791, isExp:true, isSub:true },
   { t:'spacer' },
   { t:'header', label:'▌ 其他費用' },
-  { label:'運費 / $120',       c3:0,     c4:0,     isExp:true, isAuto:true },
-  { label:'人事管銷費用',       c3:30000, c4:45000, isExp:true },
-  { label:'其他費用小計',      c3:0,     c4:0,     isExp:true, isSub:true, isAuto:true },
+  { label:'運費 / $120',       c3:0,     c4:0,      c5:0,     isExp:true, isAuto:true },
+  { label:'人事管銷費用',       c3:30000, c4:45000,  c5:45000, isExp:true },
+  { label:'其他費用小計',      c3:0,     c4:0,      c5:0,     isExp:true, isSub:true, isAuto:true },
   { t:'spacer' },
   { t:'header', label:'▌ 損益指標' },
-  { label:'總 ROAS',           c3:null,  c4:'9.5',  isText:true },
-  { label:'總 ROI',            c3:null,  c4:null,  isText:true },
-  { label:'淨利潤',            c3:null,  c4:null },
+  { label:'總 ROAS',           c3:null,  c4:'9.5',  c5:'4.4', isText:true },
+  { label:'總 ROI',            c3:null,  c4:null,   c5:null,  isText:true },
+  { label:'淨利潤',            c3:null,  c4:null,   c5:null },
 ];
 
 const UPLOAD_SLOTS = [
@@ -1661,13 +1690,16 @@ function renderPnL() {
   // 自動計算「其他費用」：有訂單才會有數值
   const ordersC3 = getC('總訂單數', 'c3');
   const ordersC4 = getC('總訂單數', 'c4');
+  const ordersC5 = getC('總訂單數', 'c5');
   const rawC3    = getC('募資金額', 'c3');
   const rawC4    = getC('募資金額', 'c4');
+  const rawC5    = getC('募資金額', 'c5');
 
   const shipRow = getRow('運費 / $120');
   if (shipRow) {
     shipRow.c3 = ordersC3 * 120;
     shipRow.c4 = ordersC4 * 120;
+    shipRow.c5 = ordersC5 * 120;
   }
 
   const mgmtRow = getRow('人事管銷費用');
@@ -1676,6 +1708,7 @@ function renderPnL() {
   if (otherSubRow) {
     otherSubRow.c3 = (shipRow ? shipRow.c3 : 0) + (mgmtRow ? (mgmtRow.c3 || 0) : 0);
     otherSubRow.c4 = (shipRow ? shipRow.c4 : 0) + (mgmtRow ? (mgmtRow.c4 || 0) : 0);
+    otherSubRow.c5 = (shipRow ? shipRow.c5 : 0) + (mgmtRow ? (mgmtRow.c5 || 0) : 0);
   }
 
   // 淨利潤 = 實收金額 − 總廣告費用 − 商品成本 − 管銷費用 − 運費
@@ -1688,6 +1721,7 @@ function renderPnL() {
       - (shipRow ? (shipRow[col] || 0) : 0);
     netRow.c3 = calcNet('c3');
     netRow.c4 = calcNet('c4');
+    netRow.c5 = calcNet('c5');
     netRow.isAuto = true;
   }
 
@@ -1697,6 +1731,7 @@ function renderPnL() {
     const calcRoi = (raw, mkt) => mkt ? ((raw - mkt) / mkt).toFixed(2) : null;
     roiRow.c3 = calcRoi(rawC3, getC('行銷費用小計', 'c3'));
     roiRow.c4 = calcRoi(rawC4, getC('行銷費用小計', 'c4'));
+    roiRow.c5 = calcRoi(rawC5, getC('行銷費用小計', 'c5'));
     roiRow.isText = true;
     roiRow.noTotal = true;
     roiRow.isAuto = true;
@@ -1714,12 +1749,12 @@ function renderPnL() {
   };
 
   el.innerHTML = rows.map(r => {
-    if (r.t === 'header') return `<tr class="pnl-header"><td colspan="4">${r.label}</td></tr>`;
-    if (r.t === 'spacer') return `<tr class="pnl-spacer"><td colspan="4"></td></tr>`;
+    if (r.t === 'header') return `<tr class="pnl-header"><td colspan="5">${r.label}</td></tr>`;
+    if (r.t === 'spacer') return `<tr class="pnl-spacer"><td colspan="5"></td></tr>`;
 
     const total = r.noTotal ? null
-      : (r.c3 != null || r.c4 != null)
-      ? ((r.c3 || 0) + (r.c4 || 0))
+      : (r.c3 != null || r.c4 != null || r.c5 != null)
+      ? ((r.c3 || 0) + (r.c4 || 0) + (r.c5 || 0))
       : null;
 
     const rowCls = r.isSub ? ' class="pnl-subtotal"' : r.isTotal ? ' class="pnl-total"' : '';
@@ -1730,6 +1765,7 @@ function renderPnL() {
       <td ${indent}>${r.label}${autoTag}</td>
       <td>${fv(r, r.c3, r.isExp)}</td>
       <td>${fv(r, r.c4, r.isExp)}</td>
+      <td>${fv(r, r.c5, r.isExp)}</td>
       <td>${fv(r, total, r.isExp)}</td>
     </tr>`;
   }).join('');
@@ -1837,22 +1873,54 @@ function renderPushCharts() {
   makePushChart('chartPushSms',  pushData.sms,  false);
 }
 
+function renderGroupedRows(data, rowFn, colSpan, defaultCollapsed) {
+  const groups = {};
+  const order = [];
+  data.forEach(d => {
+    const g = d.tag || '上線期間';
+    if (!groups[g]) { groups[g] = []; order.push(g); }
+    groups[g].push(d);
+  });
+  const tagLabel = { '問卷':'問卷期間', '開賣':'上線期間', '二推':'二推加推', '上線期間':'上線期間' };
+  let html = '';
+  order.forEach((g, gi) => {
+    const label = tagLabel[g] || g;
+    const collapsed = defaultCollapsed.includes(g);
+    const id = 'pg-' + Math.random().toString(36).slice(2);
+    html += `<tr class="push-grp-hdr${collapsed?' collapsed':''}" onclick="togglePushGroup(this,'${id}')">
+      <td colspan="${colSpan}">${label} <span class="grp-arrow">▼</span></td></tr>`;
+    const display = collapsed ? ' style="display:none"' : '';
+    groups[g].forEach(d => {
+      const row = rowFn(d);
+      html += row.replace('<tr', `<tr class="pg-row ${id}"${display}`);
+    });
+  });
+  return html;
+}
+
+function togglePushGroup(hdr, id) {
+  hdr.classList.toggle('collapsed');
+  document.querySelectorAll('.pg-row.' + id).forEach(r => {
+    r.style.display = r.style.display === 'none' ? '' : 'none';
+  });
+}
+
 function renderPushTables() {
   const lineEl = document.getElementById('tbl-line-detail');
-  if (lineEl) lineEl.innerHTML = pushData.line.map(pushDetailRow).join('');
+  if (lineEl) lineEl.innerHTML = renderGroupedRows(pushData.line, pushDetailRow, 8, ['問卷']);
 
   const edmEl = document.getElementById('tbl-edm-detail');
-  if (edmEl) edmEl.innerHTML = pushData.edm.map(pushDetailRow).join('');
+  if (edmEl) edmEl.innerHTML = renderGroupedRows(pushData.edm, pushDetailRow, 8, ['問卷']);
 
   const smsEl = document.getElementById('tbl-sms-detail');
-  if (smsEl) smsEl.innerHTML = pushData.sms.map(d => `<tr>
+  if (smsEl) smsEl.innerHTML = renderGroupedRows(pushData.sms, d => `<tr>
     <td>${d.name}</td>
     <td style="text-align:right">${d.sends.toLocaleString()}</td>
     <td style="text-align:right">${d.ctr}</td>
     <td style="text-align:right">$${d.cost.toLocaleString()}</td>
     <td style="text-align:right;${d.revenue>0?'color:var(--green);font-weight:600':'color:var(--muted)'}">${d.revenue ? '$'+d.revenue.toLocaleString() : '—'}</td>
     <td style="text-align:right">${d.roas != null ? d.roas.toFixed(1) : '—'}</td>
-  </tr>`).join('');
+  </tr>`, 6, []);
 
   const fbEl = document.getElementById('tbl-fb-detail');
   if (fbEl) fbEl.innerHTML = pushData.fb.map(d => `<tr>
@@ -2113,16 +2181,16 @@ function onDrop(e) {
 function renderChartDaily() {
   const ctx = document.getElementById('chartDaily');
   if (!ctx) return;
-  const labels = ['4/22','4/23','4/24','4/25','4/26','4/27','4/28','4/29','4/30'];
+  const labels = ['4/22','4/23','4/24','4/25','4/26','4/27','4/28','4/29','4/30','5/1','5/2','5/3','5/4','5/5'];
   const targetPace = labels.map((_, i) => Math.round(GOAL / 60 * (i + 1)));
   new Chart(ctx, {
     type:'bar',
     data: {
       labels,
       datasets: [
-        { label:'每日業績', data:[214716,57348,83163,57468,14237,4679,35513,32154,84143],
+        { label:'每日業績', data:[214716,57348,83163,57468,14237,4679,35513,32154,84143,39792,51670,85063,95741,20996],
           backgroundColor:'#6B8FAB', borderRadius:6 },
-        { label:'廣告費', data:[2109,4903,7526,8473,11094,5263,6770,7628,7351],
+        { label:'廣告費', data:[2109,4903,7526,8473,11094,5263,6770,7628,7351,9293,8594,11663,9982,8503],
           backgroundColor:'#C9AEB0', borderRadius:6 },
         { label:'線性目標', data:targetPace,
           type:'line', borderColor:'#C4C2BE', borderDash:[4,4],
@@ -2144,10 +2212,10 @@ function renderChartRevenueTrend() {
   const ctx = document.getElementById('chartRevenueTrend');
   if (!ctx) return;
 
-  const labels  = ['4/22','4/23','4/24','4/25','4/26','4/27','4/28','4/29','4/30'];
-  const revenue = [214716, 57348, 83163, 57468, 14237, 4679, 35513, 32154, 84143];
-  const orders  = [43, 10, 16, 10, 3, 1, 6, 6, 16];
-  const aov     = [4993, 5735, 5198, 5747, 4746, 4679, 5919, 5359, 5259];
+  const labels  = ['4/22','4/23','4/24','4/25','4/26','4/27','4/28','4/29','4/30','5/1','5/2','5/3','5/4','5/5'];
+  const revenue = [214716,57348,83163,57468,14237,4679,35513,32154,84143,39792,51670,85063,95741,20996];
+  const orders  = [43,10,16,10,3,1,6,6,16,8,9,17,18,3];
+  const aov     = [4993,5735,5198,5747,4746,4679,5919,5359,5259,4974,5741,5004,5319,6999];
 
   new Chart(ctx, {
     data: {
