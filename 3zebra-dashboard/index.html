@@ -487,16 +487,16 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
         </div>
         <div class="rec-card" data-cat="kol">
           <div class="rec-header"><span class="rec-icon">⏰</span>
-            <span class="rec-title">KOL 5 位已上線，預算剩餘 $55K——後段口碑發酵是衝刺關鍵</span>
+            <span class="rec-title">KOL 8 位合作中，Kerstin Chan 待上線——後段口碑發酵是衝刺關鍵</span>
             <span class="tag tag-green">KOL 策略</span></div>
           <div class="rec-body">
             <ul>
               <li><strong>已結案（$14K）：</strong>物理治療師 ZM、小夫妻的旅攝生活——素材已可申請廣告授權二創</li>
-              <li><strong>上線中（$11K）：</strong>林瑄（$1.5K）、徐可妮（$5K，已帶入 5 筆 $24,055）、杜怡萱（$4.5K，新帶入 5 筆 $28,514）——持續追蹤流量與轉換</li>
-              <li>後段建議以 ZM、徐可妮 素材進行廣告二創，搭配 W4~W5 推播衝刺</li>
-              <li>剩餘 KOL 預算 $55K 可保留給最終衝刺期（結案前 1~2 週）高轉換合作</li>
+              <li><strong>上線中（$11K）：</strong>林瑄（$1.5K）、徐可妮（$5K，帶入 5 筆 $24,055）、杜怡萱（$4.5K，帶入 7 筆 $38,032）——持續追蹤流量與轉換</li>
+              <li><strong>撰稿中（$72K）：</strong>Kerstin Chan 詹可旬（$58K）、職能治療師體驗會（$10K）、Lea's Wonderland（$4K）——預期近期陸續上線</li>
+              <li>Kerstin Chan 上線後建議同步申請廣告授權，搭配結案前衝刺</li>
             </ul>
-            <div class="rec-insight">💡 KOL 已用 $45K（使用率 45%），剩餘 $55K 建議分配：後段口碑型 KOL + 廣告素材二創，最大化結尾衝刺效益。</div>
+            <div class="rec-insight">💡 KOL 已承諾 $97K（使用率 97%），剩餘預算僅 $3K；Kerstin Chan（$58K）為最後一波大型合作，上線時機把握是後段衝刺關鍵。</div>
           </div>
         </div>
         <div class="rec-card warn" data-cat="warn">
@@ -555,7 +555,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
       <tbody id="budget-table"></tbody>
       <tfoot>
         <tr style="font-weight:700;background:#FAFAF8">
-          <td>合計</td><td>$596,400</td><td>$490,709</td><td>$105,691</td><td>82.3%</td>
+          <td>合計</td><td>$596,400</td><td>$542,709</td><td>$53,691</td><td>91.0%</td>
           <td><span class="tag tag-green">進度正常</span></td>
         </tr>
       </tfoot>
@@ -622,7 +622,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
       <div class="icon">✍️</div>
       <div class="val">3</div>
       <div class="lbl">撰稿中 KOL</div>
-      <div class="sub">費用 $20,000</div>
+      <div class="sub">費用 $72,000</div>
     </div>
     <div class="card kpi">
       <div class="icon">✅</div>
@@ -632,9 +632,9 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
     </div>
     <div class="card kpi">
       <div class="icon">💵</div>
-      <div class="val">$55,000</div>
+      <div class="val">$3,000</div>
       <div class="lbl">KOL 可用預算</div>
-      <div class="sub">總預算 $100,000，已用 $45,000</div>
+      <div class="sub">總預算 $100,000，已用 $97,000</div>
     </div>
   </div>
 
@@ -1289,19 +1289,19 @@ const LS = 'zb_';
 const budgets = [
   { label:'問卷廣告', budget:90000, used:94896 },
   { label:'上線廣告', budget:326400, used:292796 },
-  { label:'KOL 費用', budget:100000, used:45000 },
+  { label:'KOL 費用', budget:100000, used:97000 },
   { label:'行銷推播', budget:80000, used:58017 },
 ];
 
 const kolData = [
-  { status:'已上線結案', name:'物理治療師 ZM',     fee:6000, style:'',         type:'影片' },
-  { status:'已上線結案', name:'小夫妻的旅攝生活', fee:8000, style:'',          type:'影片' },
-  { status:'已上線',     name:'林瑄',              fee:1500, style:'瑜珈老師',  type:'影片' },
-  { status:'已上線',     name:'徐可妮',            fee:5000, style:'全職媽媽',  type:'影片' },
-  { status:'已上線',     name:'杜怡萱（記者）',   fee:4500, style:'身心療癒',  type:'影片' },
-  { status:'撰稿中',     name:"Lea's Wonderland", fee:4000, style:'網紅生活',  type:'影片' },
-  { status:'撰稿中',     name:'厝邊工作室',        fee:6000,  style:'',          type:'影片' },
-  { status:'撰稿中',     name:'物理治療師',        fee:10000, style:'',          type:'體驗會合作' },
+  { status:'已上線結案', name:'物理治療師 ZM',     fee:6000,  style:'',         type:'影片' },
+  { status:'已上線結案', name:'小夫妻的旅攝生活', fee:8000,  style:'',          type:'影片' },
+  { status:'已上線',     name:'林瑄',              fee:1500,  style:'瑜珈老師',  type:'影片' },
+  { status:'已上線',     name:'徐可妮',            fee:5000,  style:'全職媽媽',  type:'影片' },
+  { status:'已上線',     name:'杜怡萱（記者）',   fee:4500,  style:'身心療癒',  type:'影片' },
+  { status:'撰稿中',     name:"Lea's Wonderland", fee:4000,  style:'網紅生活',  type:'影片' },
+  { status:'撰稿中',     name:'職能治療師',        fee:10000, style:'',          type:'體驗會合作' },
+  { status:'撰稿中',     name:'Kerstin Chan 詹可旬', fee:58000, style:'時尚生活', type:'影片' },
 ];
 
 
