@@ -595,10 +595,11 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
     <table class="pnl-tbl">
       <thead>
         <tr>
-          <th style="width:35%;text-align:left">項目</th>
+          <th style="width:32%;text-align:left">項目</th>
           <th>3 月</th>
           <th>4 月</th>
           <th>5 月</th>
+          <th>6 月</th>
           <th>合計</th>
         </tr>
       </thead>
@@ -1432,32 +1433,32 @@ const weeklyProducts = [
 
 const pnlRows = [
   { t:'header', label:'▌ 收入' },
-  { label:'募資金額',          c3:null,  c4:583421, c5:846342 },
-  { label:'實收金額（92折）',  c3:null,  c4:536747, c5:778635 },
-  { label:'總訂單數',          c3:null,  c4:111,    c5:161,   isCnt:true },
+  { label:'募資金額',          c3:null,  c4:583421, c5:846342, c6:110177 },
+  { label:'實收金額（92折）',  c3:null,  c4:536747, c5:778635, c6:101363 },
+  { label:'總訂單數',          c3:null,  c4:111,    c5:161,    c6:17,    isCnt:true },
   { t:'spacer' },
   { t:'header', label:'▌ 商品成本' },
-  { label:'商品總成本',        c3:null,  c4:270076, c5:270416 },
-  { label:'毛利',              c3:null,  c4:266671, c5:508219, isCalc:true },
-  { label:'毛利率',            c3:null,  c4:49.7,   c5:65.3,  isPct:true },
+  { label:'商品總成本',        c3:null,  c4:270076, c5:270416, c6:40181 },
+  { label:'毛利',              c3:null,  c4:266671, c5:508219, c6:61182, isCalc:true },
+  { label:'毛利率',            c3:null,  c4:49.7,   c5:65.3,   c6:60.4,  isPct:true },
   { t:'spacer' },
   { t:'header', label:'▌ 行銷費用' },
-  { label:'Meta 廣告費',       c3:24418, c4:61117,  c5:228876, isExp:true },
-  { label:'SMS 費用',          c3:0,     c4:10780,  c5:7894,  isExp:true },
-  { label:'EDM 費用',          c3:0,     c4:6010,   c5:0,     isExp:true },
-  { label:'LINE 費用',         c3:19142, c4:17393,  c5:5862,  isExp:true },
-  { label:'KOL 費用',          c3:35000, c4:10000,  c5:0,     isExp:true },
-  { label:'行銷費用小計',      c3:78560, c4:105300, c5:242632, isExp:true, isSub:true },
+  { label:'Meta 廣告費',       c3:24418, c4:61117,  c5:228876, c6:32460, isExp:true },
+  { label:'SMS 費用',          c3:0,     c4:10780,  c5:7894,   c6:0,     isExp:true },
+  { label:'EDM 費用',          c3:0,     c4:6010,   c5:0,      c6:0,     isExp:true },
+  { label:'LINE 費用',         c3:19142, c4:17393,  c5:5862,   c6:0,     isExp:true },
+  { label:'KOL 費用',          c3:35000, c4:10000,  c5:0,      c6:58000, isExp:true },
+  { label:'行銷費用小計',      c3:78560, c4:105300, c5:242632, c6:90460, isExp:true, isSub:true },
   { t:'spacer' },
   { t:'header', label:'▌ 其他費用' },
-  { label:'運費 / $120',       c3:0,     c4:0,      c5:0,     isExp:true, isAuto:true },
-  { label:'人事管銷費用',       c3:30000, c4:45000,  c5:0,     isExp:true },
-  { label:'其他費用小計',      c3:0,     c4:0,      c5:0,     isExp:true, isSub:true, isAuto:true },
+  { label:'運費 / $120',       c3:0,     c4:0,      c5:0,      c6:0,     isExp:true, isAuto:true },
+  { label:'人事管銷費用',       c3:30000, c4:45000,  c5:0,      c6:0,     isExp:true },
+  { label:'其他費用小計',      c3:0,     c4:0,      c5:0,      c6:0,     isExp:true, isSub:true, isAuto:true },
   { t:'spacer' },
   { t:'header', label:'▌ 損益指標' },
-  { label:'總 ROAS',           c3:null,  c4:'9.5',  c5:'3.7', isText:true },
-  { label:'總 ROI',            c3:null,  c4:null,   c5:null,  isText:true },
-  { label:'淨利潤',            c3:null,  c4:null,   c5:null },
+  { label:'總 ROAS',           c3:null,  c4:'9.5',  c5:'3.7',  c6:'3.4', isText:true },
+  { label:'總 ROI',            c3:null,  c4:null,   c5:null,   c6:null,  isText:true },
+  { label:'淨利潤',            c3:null,  c4:null,   c5:null,   c6:null },
 ];
 
 const UPLOAD_SLOTS = [
@@ -1732,15 +1733,18 @@ function renderPnL() {
   const ordersC3 = getC('總訂單數', 'c3');
   const ordersC4 = getC('總訂單數', 'c4');
   const ordersC5 = getC('總訂單數', 'c5');
+  const ordersC6 = getC('總訂單數', 'c6');
   const rawC3    = getC('募資金額', 'c3');
   const rawC4    = getC('募資金額', 'c4');
   const rawC5    = getC('募資金額', 'c5');
+  const rawC6    = getC('募資金額', 'c6');
 
   const shipRow = getRow('運費 / $120');
   if (shipRow) {
     shipRow.c3 = ordersC3 * 120;
     shipRow.c4 = ordersC4 * 120;
     shipRow.c5 = ordersC5 * 120;
+    shipRow.c6 = ordersC6 * 120;
   }
 
   const mgmtRow = getRow('人事管銷費用');
@@ -1750,6 +1754,7 @@ function renderPnL() {
     otherSubRow.c3 = (shipRow ? shipRow.c3 : 0) + (mgmtRow ? (mgmtRow.c3 || 0) : 0);
     otherSubRow.c4 = (shipRow ? shipRow.c4 : 0) + (mgmtRow ? (mgmtRow.c4 || 0) : 0);
     otherSubRow.c5 = (shipRow ? shipRow.c5 : 0) + (mgmtRow ? (mgmtRow.c5 || 0) : 0);
+    otherSubRow.c6 = (shipRow ? shipRow.c6 : 0) + (mgmtRow ? (mgmtRow.c6 || 0) : 0);
   }
 
   // 淨利潤 = 實收金額 − 總廣告費用 − 商品成本 − 管銷費用 − 運費
@@ -1763,6 +1768,7 @@ function renderPnL() {
     netRow.c3 = calcNet('c3');
     netRow.c4 = calcNet('c4');
     netRow.c5 = calcNet('c5');
+    netRow.c6 = calcNet('c6');
     netRow.isAuto = true;
   }
 
@@ -1773,6 +1779,7 @@ function renderPnL() {
     roiRow.c3 = calcRoi(rawC3, getC('行銷費用小計', 'c3'));
     roiRow.c4 = calcRoi(rawC4, getC('行銷費用小計', 'c4'));
     roiRow.c5 = calcRoi(rawC5, getC('行銷費用小計', 'c5'));
+    roiRow.c6 = calcRoi(rawC6, getC('行銷費用小計', 'c6'));
     roiRow.isText = true;
     roiRow.noTotal = true;
     roiRow.isAuto = true;
@@ -1790,12 +1797,12 @@ function renderPnL() {
   };
 
   el.innerHTML = rows.map(r => {
-    if (r.t === 'header') return `<tr class="pnl-header"><td colspan="5">${r.label}</td></tr>`;
-    if (r.t === 'spacer') return `<tr class="pnl-spacer"><td colspan="5"></td></tr>`;
+    if (r.t === 'header') return `<tr class="pnl-header"><td colspan="6">${r.label}</td></tr>`;
+    if (r.t === 'spacer') return `<tr class="pnl-spacer"><td colspan="6"></td></tr>`;
 
     const total = r.noTotal ? null
-      : (r.c3 != null || r.c4 != null || r.c5 != null)
-      ? ((r.c3 || 0) + (r.c4 || 0) + (r.c5 || 0))
+      : (r.c3 != null || r.c4 != null || r.c5 != null || r.c6 != null)
+      ? ((r.c3 || 0) + (r.c4 || 0) + (r.c5 || 0) + (r.c6 || 0))
       : null;
 
     const rowCls = r.isSub ? ' class="pnl-subtotal"' : r.isTotal ? ' class="pnl-total"' : '';
@@ -1807,6 +1814,7 @@ function renderPnL() {
       <td>${fv(r, r.c3, r.isExp)}</td>
       <td>${fv(r, r.c4, r.isExp)}</td>
       <td>${fv(r, r.c5, r.isExp)}</td>
+      <td>${fv(r, r.c6, r.isExp)}</td>
       <td>${fv(r, total, r.isExp)}</td>
     </tr>`;
   }).join('');
