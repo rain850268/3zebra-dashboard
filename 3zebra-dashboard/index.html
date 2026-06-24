@@ -234,8 +234,8 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
     <div class="hero-row">
       <div>
         <div class="hero-label">累積募資金額</div>
-        <div class="hero-amount" id="h-amount">$1,539,940</div>
-        <div class="hero-goal">目標 $2,000,000 ／ 已達成 <strong id="h-pct">77.0%</strong></div>
+        <div class="hero-amount" id="h-amount">$1,954,872</div>
+        <div class="hero-goal">目標 $2,000,000 ／ 已達成 <strong id="h-pct">97.7%</strong></div>
       </div>
       <div class="hero-stat" style="text-align:right">
         <div class="lbl">開賣天數</div>
@@ -243,7 +243,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
         <div class="lbl">天</div>
       </div>
     </div>
-    <div class="progress-track"><div class="progress-fill" id="h-bar" style="width:77.0%"></div></div>
+    <div class="progress-track"><div class="progress-fill" id="h-bar" style="width:97.7%"></div></div>
     <div style="display:flex;justify-content:space-between;font-size:12px;opacity:.75">
       <span>$0</span><span>$500K</span><span>$1M</span><span>$1.5M</span><span>$2M</span>
     </div>
@@ -252,19 +252,19 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
   <div class="grid4 mb20">
     <div class="card kpi">
       <div class="icon">🛍️</div>
-      <div class="val">293</div>
+      <div class="val">347</div>
       <div class="lbl">總贊助人數</div>
       <div class="sub">累計</div>
     </div>
     <div class="card kpi">
       <div class="icon">💰</div>
-      <div class="val">$5,255</div>
+      <div class="val">$5,635</div>
       <div class="lbl">客單價</div>
       <div class="sub">目標 $5,500</div>
     </div>
     <div class="card kpi">
       <div class="icon">⚡</div>
-      <div class="val">4.9</div>
+      <div class="val">4.7</div>
       <div class="lbl">開賣廣告 ROAS</div>
       <div class="sub"><span class="tag tag-green">累積</span></div>
     </div>
@@ -279,7 +279,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
   <!-- 週報表 -->
   <div class="card mb20">
     <div class="section-title">📅 週報表
-      <span class="updated" id="weekly-updated">資料截至 6/8</span>
+      <span class="updated" id="weekly-updated">資料截至 6/23</span>
     </div>
     <div class="weekly-wrap">
       <table class="wtbl">
@@ -353,7 +353,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
   <!-- 累積業績曲線圖 -->
   <div class="card mb20">
     <div class="section-title">📈 累積業績走勢
-      <span class="updated">截至 6/8｜含目標線與里程碑</span>
+      <span class="updated">截至 6/23｜含目標線與里程碑</span>
     </div>
     <div style="position:relative;height:300px"><canvas id="chartRevenueTrend"></canvas></div>
   </div>
@@ -1322,6 +1322,11 @@ const pushData = {
     { name:'0506 網紅口碑－其他', sends:13908, openRate:'67.66%', ctr:'1.32%', revenue:9438, roas:null, cost:0, tag:'三推' },
     { name:'0525 引導留言－問卷', sends:698, openRate:'38.11%', ctr:'2.44%', revenue:4719, roas:null, cost:0, tag:'三推' },
     { name:'0525 引導留言－其他', sends:13741, openRate:'53.66%', ctr:'0.42%', revenue:0, roas:null, cost:0, tag:'三推' },
+    { name:'0610 早鳥倒數五天－其他', sends:13641, openRate:'58.54%', ctr:'0.34%', revenue:0, roas:null, cost:27282, tag:'四推' },
+    { name:'0610 早鳥倒數五天－問卷', sends:696, openRate:'43.39%', ctr:'2.01%', revenue:0, roas:null, cost:1392, tag:'四推' },
+    { name:'0615 早鳥只到今天－其他', sends:13588, openRate:'58.88%', ctr:'0.80%', revenue:0, roas:null, cost:27176, tag:'四推' },
+    { name:'0615 早鳥只到今天－問卷', sends:693, openRate:'39.83%', ctr:'3.03%', revenue:0, roas:null, cost:1386, tag:'四推' },
+    { name:'0622 晚鳥開跑', sends:13950, openRate:'50.84%', ctr:'0.42%', revenue:0, roas:null, cost:27900, tag:'四推' },
   ],
   edm: [
     { name:'問卷上線－waca vip',       sends:1162,  openRate:'9.90%',  ctr:'4.40%',  revenue:0,     roas:null,  cost:116,  tag:'問卷' },
@@ -1345,6 +1350,11 @@ const pushData = {
     { name:'首批倒數七天－大補帖',     sends:1743, openRate:'44.8%', ctr:'0.06%', revenue:0, roas:null, cost:174, tag:'二推' },
     { name:'首批倒數七天－其他問卷',   sends:357,  openRate:'49.8%', ctr:'0.31%', revenue:0, roas:null, cost:36,  tag:'二推' },
     { name:'0515 留評價好禮回饋', sends:154, openRate:'25.3%', ctr:'6.5%', revenue:0, roas:null, cost:0, tag:'三推' },
+    { name:'早鳥倒數七天－其他問卷', sends:356, openRate:'72.2%', ctr:'0.84%', revenue:0, roas:null, cost:36, tag:'四推' },
+    { name:'早鳥倒數七天－大補帖',   sends:1736, openRate:'70.7%', ctr:'0.52%', revenue:0, roas:null, cost:174, tag:'四推' },
+    { name:'早鳥倒數七天－問卷名單', sends:1014, openRate:'26.3%', ctr:'0.49%', revenue:0, roas:null, cost:101, tag:'四推' },
+    { name:'早鳥倒數七天－waca開信', sends:821, openRate:'76.0%', ctr:'0.24%', revenue:0, roas:null, cost:82, tag:'四推' },
+    { name:'早鳥倒數七天－waca vip', sends:1317, openRate:'22.6%', ctr:'0.53%', revenue:0, roas:null, cost:132, tag:'四推' },
   ],
   sms: [
     { name:'0424 體驗會提醒', sends:22,   ctr:'0%',     revenue:0,     roas:null, cost:44   },
@@ -1357,6 +1367,9 @@ const pushData = {
     { name:'首批只到今天_wacavip_0504', sends:1107, ctr:'44.5%',  revenue:0,     roas:null, cost:1107, tag:'二推' },
     { name:'首批只到今天_waca_0504',    sends:1795, ctr:'176.0%', revenue:4699,  roas:2.6,  cost:1795, tag:'二推' },
     { name:'首批只到今天_問卷_0504',    sends:693,  ctr:'63.9%',  revenue:10838, roas:15.6, cost:693,  tag:'二推' },
+    { name:'早鳥最後一天_wacavip_0615', sends:1276, ctr:'2.98%', cost:1276, revenue:0, roas:null, tag:'四推' },
+    { name:'早鳥最後一天_waca_0615',    sends:1776, ctr:'5.97%', cost:1776, revenue:0, roas:null, tag:'四推' },
+    { name:'早鳥最後一天_問卷_0615',    sends:698,  ctr:'9.31%', cost:698,  revenue:0, roas:null, tag:'四推' },
   ],
   fb: [
     { name:'FB 正式開賣_0422',     orders:6, revenue:34033 },
@@ -1399,9 +1412,15 @@ const weeklyReport = [
   { week:'W7', label:'6/1–6/7',   current:false,
     adFB:27919, adSurvey:0, totalRevenue:1525403, weekRevenue:95640,
     weekOrders:14, totalOrders:284, cogs:686240 },
-  { week:'W8', label:'6/8–6/14',  current:true,
-    adFB:4541, adSurvey:0, totalRevenue:1539940, weekRevenue:14537,
-    weekOrders:3, totalOrders:287, cogs:null },
+  { week:'W8', label:'6/8–6/14',  current:false,
+    adFB:35311, adSurvey:0, totalRevenue:1613656, weekRevenue:88253,
+    weekOrders:14, totalOrders:298, cogs:null },
+  { week:'W9', label:'6/15–6/21', current:false,
+    adFB:50032, adSurvey:0, totalRevenue:1877227, weekRevenue:263571,
+    weekOrders:35, totalOrders:333, cogs:null },
+  { week:'W10', label:'6/22–',    current:true,
+    adFB:15795, adSurvey:0, totalRevenue:1954872, weekRevenue:77645,
+    weekOrders:14, totalOrders:347, cogs:null },
 ];
 
 const weeklyProducts = [
@@ -1426,9 +1445,15 @@ const weeklyProducts = [
   { week:'W7', label:'6/1–6/7',   current:false,
     earlyBird:0, earlyBirdUnits:0, standard:12, standardUnits:12,
     double:2, doubleUnits:4, orders:14, units:16, revenue:95640 },
-  { week:'W8', label:'6/8–6/14',  current:true,
-    earlyBird:0, earlyBirdUnits:0, standard:3, standardUnits:3,
-    double:0, doubleUnits:0, orders:3, units:3, revenue:14537 },
+  { week:'W8', label:'6/8–6/14',  current:false,
+    earlyBird:0, earlyBirdUnits:0, standard:null, standardUnits:null,
+    double:null, doubleUnits:null, orders:14, units:null, revenue:88253 },
+  { week:'W9', label:'6/15–6/21', current:false,
+    earlyBird:null, earlyBirdUnits:null, standard:null, standardUnits:null,
+    double:null, doubleUnits:null, orders:35, units:null, revenue:263571 },
+  { week:'W10', label:'6/22–',    current:true,
+    earlyBird:0, earlyBirdUnits:0, standard:null, standardUnits:null,
+    double:null, doubleUnits:null, orders:14, units:null, revenue:77645 },
 ];
 
 const pnlRows = [
@@ -2230,16 +2255,16 @@ function onDrop(e) {
 function renderChartDaily() {
   const ctx = document.getElementById('chartDaily');
   if (!ctx) return;
-  const labels = ['4/22','4/23','4/24','4/25','4/26','4/27','4/28','4/29','4/30','5/1','5/2','5/3','5/4','5/5','5/6','5/7','5/8','5/9','5/10','5/11','5/12','5/13','5/14','5/15','5/16','5/17','5/18','5/19','5/20','5/21','5/22','5/23','5/24','5/25','5/26','5/27','5/28','5/29','5/30','5/31','6/1','6/2','6/3','6/4','6/5','6/6','6/7','6/8'];
+  const labels = ['4/22','4/23','4/24','4/25','4/26','4/27','4/28','4/29','4/30','5/1','5/2','5/3','5/4','5/5','5/6','5/7','5/8','5/9','5/10','5/11','5/12','5/13','5/14','5/15','5/16','5/17','5/18','5/19','5/20','5/21','5/22','5/23','5/24','5/25','5/26','5/27','5/28','5/29','5/30','5/31','6/1','6/2','6/3','6/4','6/5','6/6','6/7','6/8','6/9','6/10','6/11','6/12','6/13','6/14','6/15','6/16','6/17','6/18','6/19','6/20','6/21','6/22','6/23'];
   const targetPace = labels.map(() => Math.round(GOAL / 60));
   new Chart(ctx, {
     type:'bar',
     data: {
       labels,
       datasets: [
-        { label:'每日業績', data:[214716,57348,83163,57468,14237,4679,35513,32154,84143,39792,51670,85063,95741,20996,60108,28854,47471,39132,61748,18996,19036,58369,4799,14371,15137,18916,24715,4799,14397,15398,39452,5799,14317,14327,9398,9438,20436,23755,14317,29874,9518,9438,14237,9438,20236,18836,14237,14237],
+        { label:'每日業績', data:[214716,57348,83163,57468,14237,4679,35513,32154,84143,39792,51670,85063,95741,20996,60108,28854,47471,39132,61748,18996,19036,58369,4799,14371,15137,18916,24715,4799,14397,15398,39452,5799,14317,14327,9398,9438,20436,23755,14317,29874,9518,9438,14237,9438,20236,18836,14237,14237,0,20966,4799,4799,14397,28755,28174,20677,28556,72845,25975,31034,56310,51530,21136],
           backgroundColor:'#6B8FAB', borderRadius:6 },
-        { label:'廣告費', data:[2109,4903,7526,8473,11094,5263,6770,7628,7351,9293,8594,11663,9982,8503,9372,9032,8701,8580,11968,8203,9911,8789,8335,6823,7033,6024,5342,5930,5108,7706,7309,7680,8845,7283,4252,3193,4196,4068,2678,4261,2803,2467,2244,3195,5676,4634,6900,4541],
+        { label:'廣告費', data:[2109,4903,7526,8473,11094,5263,6770,7628,7351,9293,8594,11663,9982,8503,9372,9032,8701,8580,11968,8203,9911,8789,8335,6823,7033,6024,5342,5930,5108,7706,7309,7680,8845,7283,4252,3193,4196,4068,2678,4261,2803,2467,2244,3195,5676,4634,6900,4541,4506,6197,6395,5388,3523,4761,4318,5831,5454,9448,9191,6906,8884,7677,8118],
           backgroundColor:'#C9AEB0', borderRadius:6 },
         { label:'線性目標', data:targetPace,
           type:'line', borderColor:'#C4C2BE', borderDash:[4,4],
@@ -2261,10 +2286,10 @@ function renderChartRevenueTrend() {
   const ctx = document.getElementById('chartRevenueTrend');
   if (!ctx) return;
 
-  const labels  = ['4/22','4/23','4/24','4/25','4/26','4/27','4/28','4/29','4/30','5/1','5/2','5/3','5/4','5/5','5/6','5/7','5/8','5/9','5/10','5/11','5/12','5/13','5/14','5/15','5/16','5/17','5/18','5/19','5/20','5/21','5/22','5/23','5/24','5/25','5/26','5/27','5/28','5/29','5/30','5/31','6/1','6/2','6/3','6/4','6/5','6/6','6/7','6/8'];
-  const revenue = [214716,57348,83163,57468,14237,4679,35513,32154,84143,39792,51670,85063,95741,20996,60108,28854,47471,39132,61748,18996,19036,58369,4799,14371,15137,18916,24715,4799,14397,15398,39452,5799,14317,14327,9398,9438,20436,23755,14317,29874,9518,9438,14237,9438,20236,18836,14237,14237];
-  const orders  = [43,10,16,10,3,1,6,6,16,8,9,17,18,3,12,6,8,6,11,4,4,11,1,3,3,3,5,1,3,3,7,1,3,3,1,2,4,5,3,6,2,2,3,2,3,3,3,3];
-  const aov     = [4993,5735,5198,5747,4746,4679,5919,5359,5259,4974,5741,5004,5319,6999,5009,4809,5934,6522,5613,4749,4759,5306,4799,4790,5046,6305,4943,4799,4799,5133,5636,5799,4772,4776,9398,4719,5109,4751,4772,4979,4759,4719,4746,4719,6745,6279,4746,4746];
+  const labels  = ['4/22','4/23','4/24','4/25','4/26','4/27','4/28','4/29','4/30','5/1','5/2','5/3','5/4','5/5','5/6','5/7','5/8','5/9','5/10','5/11','5/12','5/13','5/14','5/15','5/16','5/17','5/18','5/19','5/20','5/21','5/22','5/23','5/24','5/25','5/26','5/27','5/28','5/29','5/30','5/31','6/1','6/2','6/3','6/4','6/5','6/6','6/7','6/8','6/9','6/10','6/11','6/12','6/13','6/14','6/15','6/16','6/17','6/18','6/19','6/20','6/21','6/22','6/23'];
+  const revenue = [214716,57348,83163,57468,14237,4679,35513,32154,84143,39792,51670,85063,95741,20996,60108,28854,47471,39132,61748,18996,19036,58369,4799,14371,15137,18916,24715,4799,14397,15398,39452,5799,14317,14327,9398,9438,20436,23755,14317,29874,9518,9438,14237,9438,20236,18836,14237,14237,0,20966,4799,4799,14397,28755,28174,20677,28556,72845,25975,31034,56310,51530,21136];
+  const orders  = [43,10,16,10,3,1,6,6,16,8,9,17,18,3,12,6,8,6,11,4,4,11,1,3,3,3,5,1,3,3,7,1,3,3,1,2,4,5,3,6,2,2,3,2,3,3,3,3,0,4,1,1,3,5,4,4,4,10,5,6,10,10,4];
+  const aov     = [4993,5735,5198,5747,4746,4679,5919,5359,5259,4974,5741,5004,5319,6999,5009,4809,5934,6522,5613,4749,4759,5306,4799,4790,5046,6305,4943,4799,4799,5133,5636,5799,4772,4776,9398,4719,5109,4751,4772,4979,4759,4719,4746,4719,6745,6279,4746,4746,null,5242,4799,4799,4799,5751,7044,5169,7139,7285,5195,5172,5631,5153,5284];
 
   new Chart(ctx, {
     data: {
