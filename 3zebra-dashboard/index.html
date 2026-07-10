@@ -215,6 +215,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
 
 <nav>
   <span class="nav-brand">🦓 筋舒適</span>
+  <a href="#" onclick="return switchTab('closing',this)">📋 結案報告</a>
   <a href="#" class="active" onclick="return switchTab('overview',this)">📊 總覽</a>
   <a href="#" onclick="return switchTab('budget',this)">💰 預算控制</a>
   <a href="#" onclick="return switchTab('pnl',this)">📉 損益</a>
@@ -226,6 +227,240 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
   <a href="#" onclick="return switchTab('referrals',this)">🤝 推薦贊助</a>
 </nav>
 
+<!-- ==================== 結案報告 ==================== -->
+<div class="tab" id="tab-closing">
+<div class="page">
+  <div style="max-width:860px;margin:0 auto">
+
+    <!-- 標題 -->
+    <div style="margin-bottom:28px;padding-bottom:20px;border-bottom:2px solid var(--border)">
+      <div style="font-size:11px;font-weight:600;color:var(--accent);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">CLOSING REPORT</div>
+      <h2 style="font-size:26px;font-weight:800;margin-bottom:6px;color:var(--text)">3ZeBra 筋舒適 │ 嘖嘖募資結案報告</h2>
+      <div style="font-size:13px;color:var(--muted)">執行期間：2026/4/22 – 2026/7/10 ・ 結案日期：2026/7/11</div>
+    </div>
+
+    <!-- 一、基本資訊 -->
+    <div class="card mb20">
+      <h2>一、活動基本資訊摘要</h2>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px">
+        <div style="background:var(--bg);border-radius:10px;padding:16px;text-align:center">
+          <div style="font-size:24px;font-weight:800;color:var(--green)">$2,477,335</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:4px">最終募資金額</div>
+        </div>
+        <div style="background:var(--bg);border-radius:10px;padding:16px;text-align:center">
+          <div style="font-size:24px;font-weight:800;color:var(--green)">123.9%</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:4px">KPI 達成率</div>
+        </div>
+        <div style="background:var(--bg);border-radius:10px;padding:16px;text-align:center">
+          <div style="font-size:24px;font-weight:800">80 天</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:4px">活動執行天數</div>
+        </div>
+      </div>
+
+      <table style="margin-bottom:0">
+        <tbody>
+          <tr><td style="width:30%;color:var(--muted);font-size:13px">操作目標</td><td>為筋舒適按摩伸展墊進行嘖嘖群眾募資，目標業績 $2,000,000，驗證市場需求、建立品牌口碑並快速導入訂單</td></tr>
+          <tr><td style="color:var(--muted);font-size:13px">執行期間</td><td>2026/4/22（正式開賣）– 2026/7/10（專案截止），共 80 天</td></tr>
+          <tr><td style="color:var(--muted);font-size:13px">操作平台 / 通路</td><td>嘖嘖平台 ＋ Meta 廣告 ＋ LINE 官方帳號 ＋ SMS 簡訊 ＋ EDM ＋ KOL 合作</td></tr>
+          <tr><td style="color:var(--muted);font-size:13px">操作預算</td><td>NT$ 約 $670,000（3–7 月行銷費用合計；含 Meta 廣告、LINE、SMS、EDM、KOL）</td></tr>
+        </tbody>
+      </table>
+
+      <div style="margin-top:20px">
+        <div style="font-weight:600;font-size:13px;margin-bottom:10px;color:var(--muted)">成效摘要</div>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px">
+          <div style="background:var(--bg);border-radius:8px;padding:12px;text-align:center">
+            <div style="font-size:16px;font-weight:700">456 筆</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px">轉換訂單</div>
+          </div>
+          <div style="background:var(--bg);border-radius:8px;padding:12px;text-align:center">
+            <div style="font-size:16px;font-weight:700">488 台</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px">出貨台數</div>
+          </div>
+          <div style="background:var(--bg);border-radius:8px;padding:12px;text-align:center">
+            <div style="font-size:16px;font-weight:700">$5,432</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px">平均客單價</div>
+          </div>
+          <div style="background:var(--bg);border-radius:8px;padding:12px;text-align:center">
+            <div style="font-size:16px;font-weight:700">4.5</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px">廣告 ROAS</div>
+          </div>
+          <div style="background:var(--bg);border-radius:8px;padding:12px;text-align:center">
+            <div style="font-size:16px;font-weight:700">123.9%</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px">目標達成率</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 二、總體策略 -->
+    <div class="card mb20">
+      <h2>二、總體策略與操作摘要</h2>
+      <p style="color:var(--muted);font-size:13px;line-height:1.7;margin-bottom:16px">本次操作以「問卷蓄客 → 首批衝刺 → 晚鳥收割 → KOL 後段爆發」為主軸，採四階段式推進策略。</p>
+
+      <div style="display:grid;gap:12px">
+        <div style="border-left:3px solid var(--accent);padding:12px 16px;background:var(--bg);border-radius:0 8px 8px 0">
+          <div style="font-weight:700;margin-bottom:4px">🌱 前期鋪陳（3月）</div>
+          <div style="font-size:13px;color:var(--muted)">操作目標：建立潛客名單，降低開賣日冷啟動風險<br>核心作法：問卷募集 1,587 人，成本 CPL $82.6（優於目標 $90）<br>理由：有名單才能在開賣當日第一時間精準推播，避免廣告冷啟動</div>
+        </div>
+        <div style="border-left:3px solid var(--green);padding:12px 16px;background:var(--bg);border-radius:0 8px 8px 0">
+          <div style="font-weight:700;margin-bottom:4px">🚀 開賣衝刺（4/22–5/4，W1–W2）</div>
+          <div style="font-size:13px;color:var(--muted)">操作目標：首批 190 台快速完售<br>核心作法：問卷名單三渠道同步推播（LINE / SMS / EDM）+ 廣告全力投入<br>亮點：開賣首日 43 筆 $214,716，W1 單週 $426,932（ROAS 38.8）</div>
+        </div>
+        <div style="border-left:3px solid var(--amber);padding:12px 16px;background:var(--bg);border-radius:0 8px 8px 0">
+          <div style="font-weight:700;margin-bottom:4px">📣 中期維持（5–6月，W3–W8）</div>
+          <div style="font-size:13px;color:var(--muted)">操作目標：持續接單至目標達成<br>核心作法：Meta 廣告持續跑量、KOL 分波上線（ZM / 小夫妻 / 體驗會系列）<br>理由：長達六週穩定接單，問卷名單帶來的初始信任感延伸至廣泛受眾</div>
+        </div>
+        <div style="border-left:3px solid var(--red);padding:12px 16px;background:var(--bg);border-radius:0 8px 8px 0">
+          <div style="font-weight:700;margin-bottom:4px">🎯 後期收斂（6月中–7月，W9–W12）</div>
+          <div style="font-size:13px;color:var(--muted)">操作目標：突破目標 $2M，最大化收官業績<br>核心作法：晚鳥 2 入組上線 + 詹可旬 KOL 三支影片引爆 W9 爆發 + SMS / LINE 倒數推播<br>亮點：W9 $263,571 歷週最高；詹可旬全系列 50 筆 $282,705 為最強 KOL</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 三、操作關鍵內容 -->
+    <div class="card mb20">
+      <h2>三、操作關鍵內容拆解</h2>
+      <table>
+        <tbody>
+          <tr>
+            <td style="width:30%;color:var(--muted);font-size:13px;vertical-align:top;padding-top:10px">核心受眾設定</td>
+            <td style="font-size:13px;line-height:1.7">25–45 歲、有辦公久坐或運動習慣、對健康商品有消費意願。問卷名單為高意向族群（1,587 人）；廣告受眾從問卷名單延伸至類似受眾、廣泛受眾，逐步放量。</td>
+          </tr>
+          <tr>
+            <td style="color:var(--muted);font-size:13px;vertical-align:top;padding-top:10px">主打賣點</td>
+            <td style="font-size:13px;line-height:1.7">「躺著被動伸展，每天 15 分鐘」——強調使用門檻低、無需主動運動；以身體放鬆、改善久坐不適為主軸，情緒價值為輔。</td>
+          </tr>
+          <tr>
+            <td style="color:var(--muted);font-size:13px;vertical-align:top;padding-top:10px">素材方向與風格</td>
+            <td style="font-size:13px;line-height:1.7">
+              <strong>影片：</strong>詹可旬（30S / 20S × 各版本）、小夫妻五格橫式、自己亂伸篇、懶得伸展篇、體驗會真實場景<br>
+              <strong>靜態：</strong>顧客好評截圖、真實使用畫面、伸展示意圖<br>
+              <strong>風格：</strong>生活感強、口語敘述、側重「真實體驗」而非誇大訴求
+            </td>
+          </tr>
+          <tr>
+            <td style="color:var(--muted);font-size:13px;vertical-align:top;padding-top:10px">素材版位與通路配置</td>
+            <td style="font-size:13px;line-height:1.7">
+              ・ <strong>Meta 廣告：</strong>IG 限時動態 / FB 動態牆，主跑影片素材；ASC / LL / RT 三種受眾策略輪替<br>
+              ・ <strong>LINE 推播：</strong>共 11 波，覆蓋問卷名單 + 一般名單，開信率 43–74%<br>
+              ・ <strong>SMS：</strong>共 7 波，問卷名單首波 ROAS 89.7，精準命中高意向族群<br>
+              ・ <strong>EDM：</strong>共 25 封，問卷名單開信帶動早期轉換<br>
+              ・ <strong>KOL：</strong>8 位，含醫療專業背書（ZM 物理治療師）+ 生活風格（詹可旬 / 杜怡萱 / 徐可妮）
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 四、成效與亮點 -->
+    <div class="card mb20">
+      <h2>四、成效與亮點整理</h2>
+
+      <h3 style="margin-bottom:12px">▌ KPI 對比</h3>
+      <table style="margin-bottom:20px">
+        <thead><tr><th>指標</th><th style="text-align:right">預期目標</th><th style="text-align:right">實際成效</th><th style="text-align:center">達成率</th></tr></thead>
+        <tbody>
+          <tr><td>募資金額</td><td style="text-align:right">$2,000,000</td><td style="text-align:right">$2,477,335</td><td style="text-align:center"><span class="tag tag-green">123.9% ✅</span></td></tr>
+          <tr><td>贊助人數</td><td style="text-align:right">364 人</td><td style="text-align:right">456 人</td><td style="text-align:center"><span class="tag tag-green">125.3% ✅</span></td></tr>
+          <tr><td>客單價</td><td style="text-align:right">$5,500</td><td style="text-align:right">$5,432</td><td style="text-align:center"><span class="tag tag-amber">98.8%</span></td></tr>
+          <tr><td>廣告 ROAS</td><td style="text-align:right">3.0 倍</td><td style="text-align:right">4.5 倍（含 7/10）</td><td style="text-align:center"><span class="tag tag-green">150% ✅</span></td></tr>
+          <tr><td>CPL（問卷期）</td><td style="text-align:right">$90</td><td style="text-align:right">$82.6</td><td style="text-align:center"><span class="tag tag-green">省 8.2% ✅</span></td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-bottom:12px">▌ 操作亮點與關鍵成果</h3>
+      <div style="display:grid;gap:10px">
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--bg);border-radius:8px">
+          <div style="font-size:20px;flex-shrink:0">🏆</div>
+          <div>
+            <div style="font-weight:600;margin-bottom:3px">詹可旬 KOL 全系列：本案最強單一來源</div>
+            <div style="font-size:13px;color:var(--muted)">三支影片（30S × 2層 + 20S × 2層 + ASC）合計 50 筆 $282,705，佔整體業績 11.4%。W9 爆發週的關鍵推手。</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--bg);border-radius:8px">
+          <div style="font-size:20px;flex-shrink:0">💥</div>
+          <div>
+            <div style="font-weight:600;margin-bottom:3px">W9 單週爆發 $263,571（歷週最高）</div>
+            <div style="font-size:13px;color:var(--muted)">晚鳥 2 入組上線 + 詹可旬 KOL 效應同步發酵，訂單數 43 筆，推動累積業績一舉突破 $1.8M。</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--bg);border-radius:8px">
+          <div style="font-size:20px;flex-shrink:0">🎯</div>
+          <div>
+            <div style="font-weight:600;margin-bottom:3px">問卷名單轉換率 28.7%，精準引流效益顯著</div>
+            <div style="font-size:13px;color:var(--muted)">1,587 人問卷名單中估計 456 人最終下單（28.7%），遠高於一般冷流量轉換率；問卷名單推播 ROAS 達 89.7（SMS）、365.2（EDM）。</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--bg);border-radius:8px">
+          <div style="font-size:20px;flex-shrink:0">📦</div>
+          <div>
+            <div style="font-weight:600;margin-bottom:3px">晚鳥 2 入組拉升客單：32 筆 64 台，均客單 $10,351</div>
+            <div style="font-size:13px;color:var(--muted)">晚鳥組客單遠高整體均值 $5,432，成功提升後段業績密度；建議下次活動考慮更早推出雙入優惠。</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--bg);border-radius:8px">
+          <div style="font-size:20px;flex-shrink:0">📣</div>
+          <div>
+            <div style="font-weight:600;margin-bottom:3px">小夫妻五格素材：廣告素材第一名（30 筆 $154,869）</div>
+            <div style="font-size:13px;color:var(--muted)">五格橫式輕量影片格式效益最高，生活感強、播放率佳，是後續操作可延伸的素材方向。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 五、後續建議 -->
+    <div class="card mb20">
+      <h2>五、後續建議與注意事項</h2>
+
+      <div style="display:grid;gap:12px">
+        <div>
+          <div style="font-weight:600;margin-bottom:6px;color:var(--text)">✅ 出貨與客服管理</div>
+          <ul style="font-size:13px;color:var(--muted);line-height:1.8;padding-left:18px">
+            <li>488 台分兩批出貨，第一批 190 台已全數訂滿，第二批 298 台持續安排</li>
+            <li>出貨後 7 天內主動發送感謝信＋到貨確認，引導顧客留下評價</li>
+            <li>晚鳥 2 入組（64 台）優先確認物流時程，避免大件商品出貨延誤</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:600;margin-bottom:6px;color:var(--text)">📈 可優化處 / 下一檔建議</div>
+          <ul style="font-size:13px;color:var(--muted);line-height:1.8;padding-left:18px">
+            <li>客單價 $5,432 略低於目標 $5,500，下次可更早推出雙入優惠（建議 W5 即開放），拉升整體均值</li>
+            <li>詹可旬系列效益最強，下次可納入契約預算，優先搭配 ASC 放量</li>
+            <li>SMS 問卷名單首波 ROAS 89.7 為本案最高，下次問卷收集目標建議提升至 2,000 人</li>
+            <li>到貨好評蒐集後可製作口碑素材，延伸投放至第三批啟動廣告</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:600;margin-bottom:6px;color:var(--text)">🔧 內部協作優化建議</div>
+          <ul style="font-size:13px;color:var(--muted);line-height:1.8;padding-left:18px">
+            <li>LINE 推播費用應提前規劃入 P&L，尤其後段倒數波推播費用可達 $27,000/波</li>
+            <li>KOL 合約建議 W5 前全數確認上線時程，避免後段集中壓縮製稿時間</li>
+            <li>推薦贊助來源追蹤率 77%，建議下次統一要求所有 KOL / 廣告素材均附贊助碼，提升追蹤準確度</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 六、結語 -->
+    <div class="card" style="background:linear-gradient(135deg,#37352F 0%,#514f4a 100%);color:#fff;border:none">
+      <h2 style="color:#fff;margin-bottom:12px">六、結語</h2>
+      <p style="font-size:14px;line-height:1.8;color:rgba(255,255,255,0.85);margin-bottom:16px">
+        本次 3ZeBra 筋舒適募資專案，從 2026/3 問卷蓄客到 7/10 截止，歷時 4.5 個月，最終以 <strong style="color:#fff">$2,477,335（達成率 123.9%）</strong> 超越目標作收，創下 456 位贊助人、488 台出貨的成績。
+      </p>
+      <p style="font-size:14px;line-height:1.8;color:rgba(255,255,255,0.85);margin-bottom:16px">
+        這一檔行銷帶來最核心的啟發是：<strong style="color:#fff">「精準名單 × 對的 KOL × 時機精確的方案設計」是群募的三元爆發公式。</strong> 問卷名單讓首日引爆成為可能，詹可旬讓後段動能延燒，晚鳥 2 入讓客單與業績同步放大。
+      </p>
+      <p style="font-size:13px;color:rgba(255,255,255,0.6)">
+        對品牌未來展望：出貨後口碑轉化是下一個引爆點。456 個實際使用者是最寶貴的資產——引導他們留評、分享開箱，即可為第三批或電商常態銷售鋪好路。
+      </p>
+    </div>
+
+  </div>
+</div>
+</div>
+
 <!-- ==================== 總覽 ==================== -->
 <div class="tab active" id="tab-overview">
 <div class="page">
@@ -234,8 +469,8 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
     <div class="hero-row">
       <div>
         <div class="hero-label">累積募資金額</div>
-        <div class="hero-amount" id="h-amount">$2,150,153</div>
-        <div class="hero-goal">目標 $2,000,000 ／ 已達成 <strong id="h-pct">107.5%</strong></div>
+        <div class="hero-amount" id="h-amount">$2,477,335</div>
+        <div class="hero-goal">目標 $2,000,000 ／ 已達成 <strong id="h-pct">123.9%</strong></div>
       </div>
       <div class="hero-stat" style="text-align:right">
         <div class="lbl">開賣天數</div>
@@ -252,13 +487,13 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
   <div class="grid4 mb20">
     <div class="card kpi">
       <div class="icon">🛍️</div>
-      <div class="val">402</div>
+      <div class="val">456</div>
       <div class="lbl">總贊助人數</div>
       <div class="sub">累計</div>
     </div>
     <div class="card kpi">
       <div class="icon">💰</div>
-      <div class="val">$5,349</div>
+      <div class="val">$5,432</div>
       <div class="lbl">客單價</div>
       <div class="sub">目標 $5,500</div>
     </div>
@@ -279,7 +514,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
   <!-- 週報表 -->
   <div class="card mb20">
     <div class="section-title">📅 週報表
-      <span class="updated" id="weekly-updated">資料截至 6/30</span>
+      <span class="updated" id="weekly-updated">資料截至 7/10</span>
     </div>
     <div class="weekly-wrap">
       <table class="wtbl">
@@ -353,7 +588,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
   <!-- 累積業績曲線圖 -->
   <div class="card mb20">
     <div class="section-title">📈 累積業績走勢
-      <span class="updated">截至 6/30｜含目標線與里程碑</span>
+      <span class="updated">截至 7/10｜含目標線與里程碑</span>
     </div>
     <div style="position:relative;height:300px"><canvas id="chartRevenueTrend"></canvas></div>
   </div>
@@ -390,16 +625,16 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
       <div id="rec-list">
         <div class="rec-card ok" data-cat="overall">
           <div class="rec-header"><span class="rec-icon">🎉</span>
-            <span class="rec-title">募資達標！開賣 70 天累積 $2,150,153，達成率 107.5%</span>
+            <span class="rec-title">結案！80 天累積 $2,477,335，達成率 123.9%</span>
             <span class="tag tag-green">整體</span></div>
           <div class="rec-body">
-            開賣 70 天（4/22–6/30）累積 $2,150,153，達成率 107.5%，402 筆訂單、428 台。W9 單週 $263,571（35 筆）為歷週最高；W10（6/22–6/28）45 筆 $233,796；W11（6/29–）持續接單中。
+            執行 80 天（4/22–7/10）最終業績 $2,477,335，達成率 123.9%，456 筆訂單、488 台。W9（6/15–6/21）$263,571 為歷週最高；W12（7/6–7/10）23 筆 $128,856 收官。
             <ul>
-              <li>里程碑：W1 $427K ✅ → W2 $746K ✅ → W3 $1,090K ✅ → W4 $1,213K ✅ → W5 $1,313K ✅ → W6 $1,430K ✅ → W7 $1,525K ✅ → W8 $1,614K ✅ → W9 $1,877K ✅ → W10 $2,111K ✅ → 目標 $2M ✅ 達成 → W11 $2,150K</li>
-              <li>詹可旬三支影片合計 33 筆 $172,426，為本次最強 KOL 貢獻來源</li>
+              <li>里程碑：W1 $427K ✅ → W2 $746K ✅ → W3 $1,090K ✅ → W4 $1,213K ✅ → W5 $1,313K ✅ → W6 $1,430K ✅ → W7 $1,525K ✅ → W8 $1,614K ✅ → W9 $1,877K ✅ → W10 $2,111K ✅ → 目標 $2M ✅ → W11 $2,349K ✅ → W12 $2,477K ✅</li>
+              <li>詹可旬全系列（30S+20S+ASC）合計 50 筆 $282,705，為本案最強 KOL 來源</li>
               <li>後續重點：出貨通知 + 到貨好評蒐集，準備第三批或下一波啟動</li>
             </ul>
-            <div class="rec-insight">💡 W10（6/22–6/28）45 筆 $233,796，詹可旬 KOL 三支影片合計 33 筆 $172,426 是後段最大動力；W9 晚鳥 2 入 6 筆帶動爆發；全案已超越目標 7.5%，達成率 107.5%。</div>
+            <div class="rec-insight">💡 全案超越目標 23.9%，456 位贊助者、488 台出貨。詹可旬系列 50 筆 $282,705 是後段最大動力；晚鳥 2 入 32 筆 64 台拉升客單；推薦贊助追蹤率達 77%。</div>
           </div>
         </div>
         <div class="rec-card ok" data-cat="overall">
@@ -418,14 +653,14 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
         </div>
         <div class="rec-card ok" data-cat="overall">
           <div class="rec-header"><span class="rec-icon">💰</span>
-            <span class="rec-title">客單價 $5,349（402 筆），晚鳥 2 入 26 筆拉升結構多元</span>
+            <span class="rec-title">客單價 $5,432（456 筆），晚鳥 2 入 32 筆 64 台拉升結構</span>
             <span class="tag tag-amber">整體</span></div>
           <div class="rec-body">
-            最終客單價 $5,349（402 筆）。晚鳥 2 入 26 筆均客單 $10,086，拉升整體客單結構；早鳥 342 筆均客單 $5,031；W9（6/15–6/21）含 6 筆晚鳥 + 3 筆團購為高客單週。
+            最終客單價 $5,432（456 筆）。晚鳥 2 入 32 筆均客單 $10,351，拉升整體客單結構；早鳥 388 筆均客單約 $5,075；W9（6/15–6/21）含晚鳥 + 團購為高客單週。
             <ul>
-              <li>晚鳥 2 入（26 筆 $262,226）佔業績 12.2%，有效提升業績密度</li>
+              <li>晚鳥 2 入（32 筆 64 台）佔業績約 13.4%，有效提升業績密度</li>
               <li>加購品（deepinn/滾滾足/眼罩）可在出貨感謝信或 LINE 推播中追加曝光</li>
-              <li>下次活動建議以晚鳥 / 多件組作為後段主力，延長高客單效益</li>
+              <li>下次活動建議更早推出晚鳥 / 多件組（W5 即開放），延長高客單效益</li>
             </ul>
           </div>
         </div>
@@ -567,9 +802,9 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
     <table>
       <thead><tr><th>指標</th><th>目標</th><th>現況</th><th>評估</th></tr></thead>
       <tbody>
-        <tr><td>贊助金額</td><td>$2,000,000</td><td>$2,150,153 (107.5%)</td><td><span class="tag tag-green">超標達成 ✅</span></td></tr>
-        <tr><td>客單價</td><td>$5,500</td><td>$5,349</td><td><span class="tag tag-amber">接近目標</span></td></tr>
-        <tr><td>目標贊助人數</td><td>364 人</td><td>402 人 (110.4%)</td><td><span class="tag tag-green">超標達成 ✅</span></td></tr>
+        <tr><td>贊助金額</td><td>$2,000,000</td><td>$2,477,335 (123.9%)</td><td><span class="tag tag-green">超標達成 ✅</span></td></tr>
+        <tr><td>客單價</td><td>$5,500</td><td>$5,432</td><td><span class="tag tag-amber">接近目標</span></td></tr>
+        <tr><td>目標贊助人數</td><td>364 人</td><td>456 人 (125.3%)</td><td><span class="tag tag-green">超標達成 ✅</span></td></tr>
         <tr><td>CPL（問卷）</td><td>$90</td><td>$82.6</td><td><span class="tag tag-green">節省 8.2%</span></td></tr>
         <tr><td>廣告 ROAS</td><td>3.0</td><td>4.5（累積）</td><td><span class="tag tag-green">超標 1.5 倍</span></td></tr>
       </tbody>
@@ -586,7 +821,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:8px">
     <div>
       <h2 style="margin-bottom:4px">📉 損益表</h2>
-      <p style="font-size:13px;color:var(--muted)" id="pnl-note">資料截至 2026/6/30 ｜ 每月上傳損益 CSV 可更新數值</p>
+      <p style="font-size:13px;color:var(--muted)" id="pnl-note">資料截至 2026/7/10 ｜ 結案版本</p>
     </div>
     <button class="uz-btn" onclick="document.getElementById('fi-pnl').click()">⬆ 上傳損益 CSV</button>
   </div>
@@ -595,11 +830,12 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
     <table class="pnl-tbl">
       <thead>
         <tr>
-          <th style="width:32%;text-align:left">項目</th>
+          <th style="width:28%;text-align:left">項目</th>
           <th>3 月</th>
           <th>4 月</th>
           <th>5 月</th>
           <th>6 月</th>
+          <th>7 月</th>
           <th>合計</th>
         </tr>
       </thead>
@@ -621,27 +857,27 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
   <div class="grid3 mb20">
     <div class="card kpi">
       <div class="icon">✍️</div>
-      <div class="val">3</div>
+      <div class="val">0</div>
       <div class="lbl">撰稿中 KOL</div>
-      <div class="sub">費用 $72,000</div>
+      <div class="sub">全數結案</div>
     </div>
     <div class="card kpi">
       <div class="icon">✅</div>
-      <div class="val">5</div>
-      <div class="lbl">已上線</div>
-      <div class="sub">費用 $25,000</div>
+      <div class="val">8</div>
+      <div class="lbl">已上線結案</div>
+      <div class="sub">費用 $100,000</div>
     </div>
     <div class="card kpi">
       <div class="icon">💵</div>
-      <div class="val">$3,000</div>
+      <div class="val">$0</div>
       <div class="lbl">KOL 可用預算</div>
-      <div class="sub">總預算 $100,000，已用 $97,000</div>
+      <div class="sub">總預算 $100,000，已全數使用</div>
     </div>
   </div>
 
   <div class="card mb20">
     <div class="section-title">KOL 追蹤表
-      <span class="updated">合作中 + 洽談中</span>
+      <span class="updated">全數已上線結案</span>
     </div>
     <table>
       <thead><tr>
@@ -876,9 +1112,9 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
 <div class="page">
   <div id="products-content">
     <div class="kpi-row mb20" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
-      <div class="card kpi"><div class="icon">🛍️</div><div class="val">402</div><div class="lbl">總訂單數</div></div>
-      <div class="card kpi"><div class="icon">💰</div><div class="val">$2,150,153</div><div class="lbl">總銷售金額</div></div>
-      <div class="card kpi"><div class="icon">🧮</div><div class="val">$5,349</div><div class="lbl">平均客單價</div></div>
+      <div class="card kpi"><div class="icon">🛍️</div><div class="val">456</div><div class="lbl">總訂單數</div></div>
+      <div class="card kpi"><div class="icon">💰</div><div class="val">$2,477,335</div><div class="lbl">總銷售金額</div></div>
+      <div class="card kpi"><div class="icon">🧮</div><div class="val">$5,432</div><div class="lbl">平均客單價</div></div>
     </div>
     <div class="card mb20">
       <h3>方案銷售分布</h3>
@@ -898,25 +1134,25 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
         <div style="margin-bottom:18px">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
             <span style="font-weight:600;font-size:14px">✦ 早鳥限定</span>
-            <span style="font-size:13px;color:var(--muted)">342 筆｜$1,720,859</span>
+            <span style="font-size:13px;color:var(--muted)">388 筆｜$1,968,693</span>
           </div>
           <div style="background:#F0EDE8;border-radius:99px;height:10px">
             <div style="width:85.1%;background:#7EAB8F;height:10px;border-radius:99px"></div>
           </div>
           <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:4px">
-            <span>訂單佔比 85.1%</span><span>業績佔比 80.0%</span>
+            <span>訂單佔比 85.1%</span><span>業績佔比 79.5%</span>
           </div>
         </div>
         <div>
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
             <span style="font-weight:600;font-size:14px">🌙 晚鳥組 ＋ 團購組</span>
-            <span style="font-size:13px;color:var(--muted)">30 筆｜$285,386</span>
+            <span style="font-size:13px;color:var(--muted)">38 筆｜$363,952</span>
           </div>
           <div style="background:#F0EDE8;border-radius:99px;height:10px">
-            <div style="width:7.5%;background:#BB8A6A;height:10px;border-radius:99px"></div>
+            <div style="width:8.3%;background:#BB8A6A;height:10px;border-radius:99px"></div>
           </div>
           <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:4px">
-            <span>訂單佔比 7.5%</span><span>業績佔比 13.3%</span>
+            <span>訂單佔比 8.3%</span><span>業績佔比 14.7%</span>
           </div>
         </div>
       </div>
@@ -927,10 +1163,10 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
         <thead><tr><th>方案</th><th style="text-align:right">訂單數</th><th style="text-align:right">銷售金額</th><th style="text-align:right">平均客單</th><th style="text-align:right">業績佔比</th></tr></thead>
         <tbody>
           <tr><td>⏰ 超早鳥組</td><td style="text-align:right">30</td><td style="text-align:right">$144,690</td><td style="text-align:right">$4,823</td><td style="text-align:right">6.7%</td></tr>
-          <tr><td>✦ 早鳥限定</td><td style="text-align:right">342</td><td style="text-align:right">$1,720,859</td><td style="text-align:right">$5,031</td><td style="text-align:right">80.0%</td></tr>
-          <tr><td>🌙 晚鳥組 2 入</td><td style="text-align:right">26</td><td style="text-align:right">$262,226</td><td style="text-align:right">$10,086</td><td style="text-align:right">12.2%</td></tr>
-          <tr><td>🤝 團購組</td><td style="text-align:right">4</td><td style="text-align:right">$23,160</td><td style="text-align:right">$5,790</td><td style="text-align:right">1.1%</td></tr>
-          <tr style="font-weight:600;border-top:2px solid #F0EDE8"><td>合計</td><td style="text-align:right">402</td><td style="text-align:right">$2,150,935</td><td style="text-align:right">$5,349</td><td style="text-align:right">100%</td></tr>
+          <tr><td>✦ 早鳥限定</td><td style="text-align:right">388</td><td style="text-align:right">$1,968,693</td><td style="text-align:right">$5,074</td><td style="text-align:right">79.5%</td></tr>
+          <tr><td>🌙 晚鳥組 2 入</td><td style="text-align:right">32</td><td style="text-align:right">$331,232</td><td style="text-align:right">$10,351</td><td style="text-align:right">13.4%</td></tr>
+          <tr><td>🤝 團購組</td><td style="text-align:right">6</td><td style="text-align:right">$32,720</td><td style="text-align:right">$5,453</td><td style="text-align:right">1.3%</td></tr>
+          <tr style="font-weight:600;border-top:2px solid #F0EDE8"><td>合計</td><td style="text-align:right">456</td><td style="text-align:right">$2,477,335</td><td style="text-align:right">$5,432</td><td style="text-align:right">100%</td></tr>
         </tbody>
       </table>
     </div>
@@ -947,7 +1183,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
         </div>
         <div style="background:#FFF3CD;border-radius:10px;padding:14px;text-align:center">
           <div style="font-size:11px;color:var(--amber);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px">累計訂單台數</div>
-          <div style="font-size:24px;font-weight:800;color:var(--amber)">428</div>
+          <div style="font-size:24px;font-weight:800;color:var(--amber)">488</div>
           <div style="font-size:12px;color:var(--amber)">台</div>
         </div>
         <div style="background:#FFE2DD;border-radius:10px;padding:14px;text-align:center">
@@ -960,7 +1196,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
         <div style="width:100%;background:var(--red);height:10px;border-radius:99px"></div>
       </div>
       <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:20px">
-        <span>第一批（190 台）已全數訂完，第二批持續接單中</span><span>超出 238 台進第二批</span>
+        <span>第一批（190 台）已全數訂完，第二批 298 台全數結案</span><span>超出 298 台進第二批</span>
       </div>
       <table style="margin-bottom:20px">
         <thead><tr>
@@ -978,26 +1214,26 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
           </tr>
           <tr>
             <td>✦ 早鳥限定（一入）</td>
-            <td style="text-align:right">342 筆</td>
-            <td style="text-align:right">342 台</td>
+            <td style="text-align:right">388 筆</td>
+            <td style="text-align:right">388 台</td>
             <td style="text-align:right;color:var(--muted);font-size:12px">—</td>
           </tr>
           <tr>
             <td>🌙 晚鳥組（二入）</td>
-            <td style="text-align:right">26 筆</td>
-            <td style="text-align:right">52 台</td>
+            <td style="text-align:right">32 筆</td>
+            <td style="text-align:right">64 台</td>
             <td style="text-align:right;color:var(--muted);font-size:12px">每筆 2 台</td>
           </tr>
           <tr>
             <td>🤝 團購組</td>
-            <td style="text-align:right">4 筆</td>
-            <td style="text-align:right">4 台</td>
+            <td style="text-align:right">6 筆</td>
+            <td style="text-align:right">6 台</td>
             <td style="text-align:right;color:var(--muted);font-size:12px">—</td>
           </tr>
           <tr style="font-weight:600;border-top:2px solid #F0EDE8">
             <td>合計</td>
-            <td style="text-align:right">402 筆</td>
-            <td style="text-align:right">428 台</td>
+            <td style="text-align:right">456 筆</td>
+            <td style="text-align:right">488 台</td>
             <td style="text-align:right;color:var(--muted);font-size:12px">—</td>
           </tr>
         </tbody>
@@ -1120,9 +1356,9 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
 <div class="page">
   <div id="discounts-content">
     <div class="kpi-row mb20" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
-      <div class="card kpi"><div class="icon">🎟️</div><div class="val">281</div><div class="lbl">折扣碼使用次數</div></div>
-      <div class="card kpi"><div class="icon">💸</div><div class="val">$24,200</div><div class="lbl">折扣總讓利</div></div>
-      <div class="card kpi"><div class="icon">📊</div><div class="val">69.9%</div><div class="lbl">折扣碼使用率</div></div>
+      <div class="card kpi"><div class="icon">🎟️</div><div class="val">323</div><div class="lbl">折扣碼使用次數</div></div>
+      <div class="card kpi"><div class="icon">💸</div><div class="val">$27,700</div><div class="lbl">折扣總讓利</div></div>
+      <div class="card kpi"><div class="icon">📊</div><div class="val">70.8%</div><div class="lbl">折扣碼使用率</div></div>
     </div>
     <div class="card">
       <h3>各折扣碼使用狀況</h3>
@@ -1132,9 +1368,9 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
           <tr>
             <td><strong>new80</strong><span style="font-size:11px;color:var(--muted);margin-left:6px">新客首購</span></td>
             <td style="text-align:right">-$80</td>
-            <td style="text-align:right">229 <span style="font-size:11px;color:var(--muted)">(57.0%)</span></td>
-            <td style="text-align:right">$1,206,497</td>
-            <td style="text-align:right">$18,320</td>
+            <td style="text-align:right">264 <span style="font-size:11px;color:var(--muted)">(57.9%)</span></td>
+            <td style="text-align:right">$1,405,419</td>
+            <td style="text-align:right">$21,120</td>
           </tr>
           <tr>
             <td><strong>老朋友</strong><span style="font-size:11px;color:var(--muted);margin-left:6px">回頭客</span></td>
@@ -1181,16 +1417,16 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
           <tr>
             <td><strong>lucky</strong><span style="font-size:11px;color:var(--muted);margin-left:6px">優惠碼</span></td>
             <td style="text-align:right">-$100</td>
-            <td style="text-align:right">5 <span style="font-size:11px;color:var(--muted)">(1.2%)</span></td>
-            <td style="text-align:right">$29,174</td>
-            <td style="text-align:right">$500</td>
+            <td style="text-align:right">8 <span style="font-size:11px;color:var(--muted)">(1.8%)</span></td>
+            <td style="text-align:right">$46,680</td>
+            <td style="text-align:right">$800</td>
           </tr>
           <tr>
             <td><strong>ding100</strong><span style="font-size:11px;color:var(--muted);margin-left:6px">合作夥伴</span></td>
             <td style="text-align:right">-$100</td>
-            <td style="text-align:right">3 <span style="font-size:11px;color:var(--muted)">(0.7%)</span></td>
-            <td style="text-align:right">$19,217</td>
-            <td style="text-align:right">$300</td>
+            <td style="text-align:right">5 <span style="font-size:11px;color:var(--muted)">(1.1%)</span></td>
+            <td style="text-align:right">$30,487</td>
+            <td style="text-align:right">$500</td>
           </tr>
           <tr>
             <td><strong>yapi100</strong><span style="font-size:11px;color:var(--muted);margin-left:6px">合作夥伴</span></td>
@@ -1200,23 +1436,30 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
             <td style="text-align:right">$300</td>
           </tr>
           <tr>
+            <td><strong>final</strong><span style="font-size:11px;color:var(--muted);margin-left:6px">結案優惠</span></td>
+            <td style="text-align:right">-$100</td>
+            <td style="text-align:right">2 <span style="font-size:11px;color:var(--muted)">(0.4%)</span></td>
+            <td style="text-align:right">$9,758</td>
+            <td style="text-align:right">$200</td>
+          </tr>
+          <tr>
             <td>（無折扣碼）</td>
             <td style="text-align:right">—</td>
-            <td style="text-align:right">121 <span style="font-size:11px;color:var(--muted)">(30.1%)</span></td>
-            <td style="text-align:right">$667,730</td>
+            <td style="text-align:right">133 <span style="font-size:11px;color:var(--muted)">(29.2%)</span></td>
+            <td style="text-align:right">$756,674</td>
             <td style="text-align:right">—</td>
           </tr>
           <tr style="font-weight:600;border-top:2px solid #F0EDE8">
             <td>合計</td>
             <td style="text-align:right">—</td>
-            <td style="text-align:right">402</td>
-            <td style="text-align:right">$2,150,935</td>
+            <td style="text-align:right">456</td>
+            <td style="text-align:right">$2,477,335</td>
             <td style="text-align:right">—</td>
           </tr>
         </tbody>
       </table>
       <div style="margin-top:16px;padding:12px 16px;background:#FBF9F6;border-radius:8px;font-size:13px;color:var(--muted)">
-        💡 new80 新客首購 229 筆（57.0%）為最主力折扣碼；老朋友 + 老好友回購合計 25 筆（6.2%），客群穩健；3zb120 累計 8 筆，3ZB 自媒體持續貢獻導流；lucky / ding100 / yapi100 合作夥伴共 11 筆。
+        💡 new80 新客首購 264 筆（57.9%）為最主力折扣碼；老朋友 + 老好友回購合計 25 筆（5.5%），客群穩健；3zb120 累計 8 筆，3ZB 自媒體持續貢獻導流；lucky / ding100 / yapi100 / final 合作夥伴共 18 筆。
       </div>
     </div>
   </div>
@@ -1228,9 +1471,9 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
 <div class="page">
   <div id="referrals-content">
     <div class="kpi-row mb20" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
-      <div class="card kpi"><div class="icon">🔗</div><div class="val">312</div><div class="lbl">有追蹤來源訂單</div></div>
-      <div class="card kpi"><div class="icon">💰</div><div class="val">$1,641,522</div><div class="lbl">有追蹤來源業績</div></div>
-      <div class="card kpi"><div class="icon">📊</div><div class="val">76.3%</div><div class="lbl">來源追蹤率</div></div>
+      <div class="card kpi"><div class="icon">🔗</div><div class="val">351</div><div class="lbl">有追蹤來源訂單</div></div>
+      <div class="card kpi"><div class="icon">💰</div><div class="val">$1,891,015</div><div class="lbl">有追蹤來源業績</div></div>
+      <div class="card kpi"><div class="icon">📊</div><div class="val">77.0%</div><div class="lbl">來源追蹤率</div></div>
     </div>
     <div class="card">
       <h3>推薦來源業績排行</h3>
@@ -1239,7 +1482,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
         <tbody>
           <tr>
             <td><span style="font-size:11px;color:var(--muted);margin-right:6px">—</span>（直接 / 未追蹤）</td>
-            <td style="text-align:right">90</td><td style="text-align:right">$508,631</td><td style="text-align:right">23.7%</td>
+            <td style="text-align:right">105</td><td style="text-align:right">$586,320</td><td style="text-align:right">23.7%</td>
           </tr>
           <tr>
             <td><span class="tag tag-blue" style="font-size:11px;margin-right:6px">LINE</span>正式開賣_問卷_0422</td>
@@ -1255,11 +1498,11 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
           </tr>
           <tr>
             <td><span class="tag tag-blue" style="font-size:11px;margin-right:6px">廣告</span>小夫妻_五格_ASC</td>
-            <td style="text-align:right">28</td><td style="text-align:right">$140,212</td><td style="text-align:right">6.5%</td>
+            <td style="text-align:right">30</td><td style="text-align:right">$154,869</td><td style="text-align:right">6.3%</td>
           </tr>
           <tr>
             <td><span class="tag tag-blue" style="font-size:11px;margin-right:6px">廣告</span>體驗會（各場次合計）</td>
-            <td style="text-align:right">16</td><td style="text-align:right">$82,603</td><td style="text-align:right">3.8%</td>
+            <td style="text-align:right">20</td><td style="text-align:right">$104,599</td><td style="text-align:right">4.2%</td>
           </tr>
           <tr>
             <td><span class="tag tag-green" style="font-size:11px;margin-right:6px">EDM</span>正式開賣_問卷_0422</td>
@@ -1287,19 +1530,19 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
           </tr>
           <tr>
             <td><span class="tag tag-green" style="font-size:11px;margin-right:6px">KOL</span>杜怡萱</td>
-            <td style="text-align:right">7</td><td style="text-align:right">$38,032</td><td style="text-align:right">1.8%</td>
+            <td style="text-align:right">8</td><td style="text-align:right">$42,931</td><td style="text-align:right">1.7%</td>
           </tr>
           <tr>
-            <td><span class="tag tag-green" style="font-size:11px;margin-right:6px">KOL</span>詹可旬（三支影片合計）<span class="tag" style="font-size:10px;background:#E8F5E9;color:#4CAF50;margin-left:4px">TOP</span></td>
-            <td style="text-align:right">33</td><td style="text-align:right">$172,426</td><td style="text-align:right">8.0%</td>
+            <td><span class="tag tag-green" style="font-size:11px;margin-right:6px">KOL</span>詹可旬（全系列合計）<span class="tag" style="font-size:10px;background:#E8F5E9;color:#4CAF50;margin-left:4px">TOP</span></td>
+            <td style="text-align:right">50</td><td style="text-align:right">$282,705</td><td style="text-align:right">11.4%</td>
           </tr>
           <tr>
             <td><span class="tag tag-blue" style="font-size:11px;margin-right:6px">廣告／推播</span>其他（各渠道合計）</td>
-            <td style="text-align:right">125</td><td style="text-align:right">$664,940</td><td style="text-align:right">30.9%</td>
+            <td style="text-align:right">140</td><td style="text-align:right">$762,602</td><td style="text-align:right">30.8%</td>
           </tr>
           <tr style="font-weight:600;border-top:2px solid #F0EDE8">
             <td>合計</td>
-            <td style="text-align:right">402</td><td style="text-align:right">$2,150,153</td><td style="text-align:right">100%</td>
+            <td style="text-align:right">456</td><td style="text-align:right">$2,477,335</td><td style="text-align:right">100%</td>
           </tr>
         </tbody>
       </table>
@@ -1329,12 +1572,12 @@ const budgets = [
 const kolData = [
   { status:'已上線結案', name:'物理治療師 ZM',     fee:6000,  style:'',         type:'影片' },
   { status:'已上線結案', name:'小夫妻的旅攝生活', fee:8000,  style:'',          type:'影片' },
-  { status:'已上線',     name:'林瑄',              fee:1500,  style:'瑜珈老師',  type:'影片' },
-  { status:'已上線',     name:'徐可妮',            fee:5000,  style:'全職媽媽',  type:'影片' },
-  { status:'已上線',     name:'杜怡萱（記者）',   fee:4500,  style:'身心療癒',  type:'影片' },
-  { status:'撰稿中',     name:"Lea's Wonderland", fee:4000,  style:'網紅生活',  type:'影片' },
-  { status:'撰稿中',     name:'職能治療師',        fee:10000, style:'',          type:'體驗會合作' },
-  { status:'撰稿中',     name:'Kerstin Chan 詹可旬', fee:58000, style:'時尚生活', type:'影片' },
+  { status:'已上線結案', name:'林瑄',              fee:1500,  style:'瑜珈老師',  type:'影片' },
+  { status:'已上線結案', name:'徐可妮',            fee:5000,  style:'全職媽媽',  type:'影片' },
+  { status:'已上線結案', name:'杜怡萱（記者）',   fee:4500,  style:'身心療癒',  type:'影片' },
+  { status:'已上線結案', name:"Lea's Wonderland", fee:4000,  style:'網紅生活',  type:'影片' },
+  { status:'已上線結案', name:'職能治療師',        fee:10000, style:'',          type:'體驗會合作' },
+  { status:'已上線結案', name:'Kerstin Chan 詹可旬', fee:58000, style:'時尚生活', type:'影片' },
 ];
 
 
@@ -1359,6 +1602,8 @@ const pushData = {
     { name:'0615 早鳥只到今天－其他', sends:13588, openRate:'58.88%', ctr:'0.80%', revenue:0, roas:null, cost:27176, tag:'四推' },
     { name:'0615 早鳥只到今天－問卷', sends:693, openRate:'39.83%', ctr:'3.03%', revenue:0, roas:null, cost:1386, tag:'四推' },
     { name:'0622 晚鳥開跑', sends:13950, openRate:'50.84%', ctr:'0.42%', revenue:0, roas:null, cost:27900, tag:'四推' },
+    { name:'0708 結案倒數',  sends:8290,  openRate:'73.66%', ctr:'0.66%', revenue:0, roas:null, cost:null,  tag:'五推' },
+    { name:'0710 最後衝刺',  sends:13804, openRate:'43.36%', ctr:'0.33%', revenue:0, roas:null, cost:null,  tag:'五推' },
   ],
   edm: [
     { name:'問卷上線－waca vip',       sends:1162,  openRate:'9.90%',  ctr:'4.40%',  revenue:0,     roas:null,  cost:116,  tag:'問卷' },
@@ -1387,6 +1632,7 @@ const pushData = {
     { name:'早鳥倒數七天－問卷名單', sends:1014, openRate:'26.3%', ctr:'0.49%', revenue:0, roas:null, cost:101, tag:'四推' },
     { name:'早鳥倒數七天－waca開信', sends:821, openRate:'76.0%', ctr:'0.24%', revenue:0, roas:null, cost:82, tag:'四推' },
     { name:'早鳥倒數七天－waca vip', sends:1317, openRate:'22.6%', ctr:'0.53%', revenue:0, roas:null, cost:132, tag:'四推' },
+    { name:'0703 倒數七天',           sends:2953, openRate:'67.5%', ctr:'0.58%', revenue:0, roas:null, cost:295, tag:'五推' },
   ],
   sms: [
     { name:'0424 體驗會提醒', sends:22,   ctr:'0%',     revenue:0,     roas:null, cost:44   },
@@ -1402,6 +1648,8 @@ const pushData = {
     { name:'早鳥最後一天_wacavip_0615', sends:1276, ctr:'2.98%', cost:1276, revenue:0, roas:null, tag:'四推' },
     { name:'早鳥最後一天_waca_0615',    sends:1776, ctr:'5.97%', cost:1776, revenue:0, roas:null, tag:'四推' },
     { name:'早鳥最後一天_問卷_0615',    sends:698,  ctr:'9.31%', cost:698,  revenue:0, roas:null, tag:'四推' },
+    { name:'0705 結案倒數',             sends:3751, ctr:'4.43%', cost:null, revenue:4879, roas:null, tag:'五推' },
+    { name:'0710 最後衝刺',             sends:10886, ctr:'2.31%', cost:null, revenue:0,    roas:null, tag:'五推' },
   ],
   fb: [
     { name:'FB 正式開賣_0422',     orders:6, revenue:34033 },
@@ -1453,9 +1701,12 @@ const weeklyReport = [
   { week:'W10', label:'6/22–6/28', current:false,
     adFB:51067, adSurvey:0, totalRevenue:2111023, weekRevenue:233796,
     weekOrders:45, totalOrders:391, cogs:936376 },
-  { week:'W11', label:'6/29–',    current:true,
-    adFB:25126, adSurvey:0, totalRevenue:2150153, weekRevenue:39130,
-    weekOrders:10, totalOrders:402, cogs:null },
+  { week:'W11', label:'6/29–7/5', current:false,
+    adFB:25126, adSurvey:0, totalRevenue:2348479, weekRevenue:261451,
+    weekOrders:44, totalOrders:433, cogs:107552 },
+  { week:'W12', label:'7/6–7/10', current:true,
+    adFB:null,  adSurvey:0, totalRevenue:2477335, weekRevenue:128856,
+    weekOrders:23, totalOrders:456, cogs:54658 },
 ];
 
 const weeklyProducts = [
@@ -1489,39 +1740,42 @@ const weeklyProducts = [
   { week:'W10', label:'6/22–6/28', current:false,
     earlyBird:0, earlyBirdUnits:0, standard:42, standardUnits:42,
     double:3, doubleUnits:5, orders:45, units:47, revenue:233796 },
-  { week:'W11', label:'6/29–',    current:true,
-    earlyBird:0, earlyBirdUnits:0, standard:10, standardUnits:10,
-    double:0, doubleUnits:0, orders:10, units:10, revenue:39130 },
+  { week:'W11', label:'6/29–7/5', current:false,
+    earlyBird:0, earlyBirdUnits:0, standard:42, standardUnits:42,
+    double:2, doubleUnits:4, orders:44, units:46, revenue:261451 },
+  { week:'W12', label:'7/6–7/10', current:true,
+    earlyBird:0, earlyBirdUnits:0, standard:21, standardUnits:21,
+    double:2, doubleUnits:4, orders:23, units:25, revenue:128856 },
 ];
 
 const pnlRows = [
   { t:'header', label:'▌ 收入' },
-  { label:'募資金額',          c3:null,  c4:583421, c5:846342, c6:720390 },
-  { label:'實收金額（92折）',  c3:null,  c4:536747, c5:778635, c6:662759 },
-  { label:'總訂單數',          c3:null,  c4:111,    c5:161,    c6:133,   isCnt:true },
+  { label:'募資金額',          c3:null,  c4:583421, c5:846342, c6:720390, c7:341177 },
+  { label:'實收金額（92折）',  c3:null,  c4:536747, c5:778635, c6:662759, c7:313883 },
+  { label:'總訂單數',          c3:null,  c4:111,    c5:161,    c6:133,    c7:57,    isCnt:true },
   { t:'spacer' },
   { t:'header', label:'▌ 商品成本' },
-  { label:'商品總成本',        c3:null,  c4:270076, c5:270416, c6:313120 },
-  { label:'毛利',              c3:null,  c4:266671, c5:508219, c6:349639, isCalc:true },
-  { label:'毛利率',            c3:null,  c4:49.7,   c5:65.3,   c6:52.8,  isPct:true, noTotal:true },
+  { label:'商品總成本',        c3:null,  c4:270076, c5:270416, c6:313120, c7:141480 },
+  { label:'毛利',              c3:null,  c4:266671, c5:508219, c6:349639, c7:172403, isCalc:true },
+  { label:'毛利率',            c3:null,  c4:49.7,   c5:65.3,   c6:52.8,   c7:54.9,  isPct:true, noTotal:true },
   { t:'spacer' },
   { t:'header', label:'▌ 行銷費用' },
-  { label:'Meta 廣告費',       c3:24418, c4:61117,  c5:228876, c6:189455, isExp:true },
-  { label:'SMS 費用',          c3:0,     c4:10780,  c5:7894,   c6:0,     isExp:true },
-  { label:'EDM 費用',          c3:0,     c4:6010,   c5:0,      c6:0,     isExp:true },
-  { label:'LINE 費用',         c3:19142, c4:17393,  c5:5862,   c6:0,     isExp:true },
-  { label:'KOL 費用',          c3:35000, c4:10000,  c5:0,      c6:58000, isExp:true },
-  { label:'行銷費用小計',      c3:78560, c4:105300, c5:242632, c6:247455, isExp:true, isSub:true },
+  { label:'Meta 廣告費',       c3:24418, c4:61117,  c5:228876, c6:189455, c7:null,  isExp:true },
+  { label:'SMS 費用',          c3:0,     c4:10780,  c5:7894,   c6:0,      c7:null,  isExp:true },
+  { label:'EDM 費用',          c3:0,     c4:6010,   c5:0,      c6:0,      c7:null,  isExp:true },
+  { label:'LINE 費用',         c3:19142, c4:17393,  c5:5862,   c6:0,      c7:null,  isExp:true },
+  { label:'KOL 費用',          c3:35000, c4:10000,  c5:0,      c6:58000,  c7:0,     isExp:true },
+  { label:'行銷費用小計',      c3:78560, c4:105300, c5:242632, c6:247455, c7:null,  isExp:true, isSub:true },
   { t:'spacer' },
   { t:'header', label:'▌ 其他費用' },
-  { label:'運費 / $120',       c3:0,     c4:0,      c5:0,      c6:0,     isExp:true, isAuto:true },
-  { label:'人事管銷費用',       c3:30000, c4:45000,  c5:45000,  c6:45000, isExp:true },
-  { label:'其他費用小計',      c3:0,     c4:0,      c5:0,      c6:0,     isExp:true, isSub:true, isAuto:true },
+  { label:'運費 / $120',       c3:0,     c4:0,      c5:0,      c6:0,      c7:0,     isExp:true, isAuto:true },
+  { label:'人事管銷費用',       c3:30000, c4:45000,  c5:45000,  c6:45000,  c7:45000, isExp:true },
+  { label:'其他費用小計',      c3:0,     c4:0,      c5:0,      c6:0,      c7:0,     isExp:true, isSub:true, isAuto:true },
   { t:'spacer' },
   { t:'header', label:'▌ 損益指標' },
-  { label:'總 ROAS',           c3:null,  c4:'9.5',  c5:'3.7',  c6:'3.8', isText:true, noTotal:true },
-  { label:'總 ROI',            c3:null,  c4:null,   c5:null,   c6:null,  isText:true },
-  { label:'淨利潤',            c3:null,  c4:null,   c5:null,   c6:null },
+  { label:'總 ROAS',           c3:null,  c4:'9.5',  c5:'3.7',  c6:'3.8',  c7:null,  isText:true, noTotal:true },
+  { label:'總 ROI',            c3:null,  c4:null,   c5:null,   c6:null,   c7:null,  isText:true },
+  { label:'淨利潤',            c3:null,  c4:null,   c5:null,   c6:null,   c7:null },
 ];
 
 const UPLOAD_SLOTS = [
@@ -1797,10 +2051,12 @@ function renderPnL() {
   const ordersC4 = getC('總訂單數', 'c4');
   const ordersC5 = getC('總訂單數', 'c5');
   const ordersC6 = getC('總訂單數', 'c6');
+  const ordersC7 = getC('總訂單數', 'c7');
   const rawC3    = getC('募資金額', 'c3');
   const rawC4    = getC('募資金額', 'c4');
   const rawC5    = getC('募資金額', 'c5');
   const rawC6    = getC('募資金額', 'c6');
+  const rawC7    = getC('募資金額', 'c7');
 
   const shipRow = getRow('運費 / $120');
   if (shipRow) {
@@ -1808,6 +2064,7 @@ function renderPnL() {
     shipRow.c4 = ordersC4 * 120;
     shipRow.c5 = ordersC5 * 120;
     shipRow.c6 = ordersC6 * 120;
+    shipRow.c7 = ordersC7 * 120;
   }
 
   const mgmtRow = getRow('人事管銷費用');
@@ -1818,6 +2075,7 @@ function renderPnL() {
     otherSubRow.c4 = (shipRow ? shipRow.c4 : 0) + (mgmtRow ? (mgmtRow.c4 || 0) : 0);
     otherSubRow.c5 = (shipRow ? shipRow.c5 : 0) + (mgmtRow ? (mgmtRow.c5 || 0) : 0);
     otherSubRow.c6 = (shipRow ? shipRow.c6 : 0) + (mgmtRow ? (mgmtRow.c6 || 0) : 0);
+    otherSubRow.c7 = (shipRow ? shipRow.c7 : 0) + (mgmtRow ? (mgmtRow.c7 || 0) : 0);
   }
 
   // 淨利潤 = 實收金額 − 總廣告費用 − 商品成本 − 管銷費用 − 運費
@@ -1832,6 +2090,7 @@ function renderPnL() {
     netRow.c4 = calcNet('c4');
     netRow.c5 = calcNet('c5');
     netRow.c6 = calcNet('c6');
+    netRow.c7 = calcNet('c7');
     netRow.isAuto = true;
   }
 
@@ -1843,6 +2102,7 @@ function renderPnL() {
     roiRow.c4 = calcRoi(rawC4, getC('行銷費用小計', 'c4'));
     roiRow.c5 = calcRoi(rawC5, getC('行銷費用小計', 'c5'));
     roiRow.c6 = calcRoi(rawC6, getC('行銷費用小計', 'c6'));
+    roiRow.c7 = calcRoi(rawC7, getC('行銷費用小計', 'c7'));
     roiRow.isText = true;
     roiRow.noTotal = true;
     roiRow.isAuto = true;
@@ -1860,12 +2120,12 @@ function renderPnL() {
   };
 
   el.innerHTML = rows.map(r => {
-    if (r.t === 'header') return `<tr class="pnl-header"><td colspan="6">${r.label}</td></tr>`;
-    if (r.t === 'spacer') return `<tr class="pnl-spacer"><td colspan="6"></td></tr>`;
+    if (r.t === 'header') return `<tr class="pnl-header"><td colspan="7">${r.label}</td></tr>`;
+    if (r.t === 'spacer') return `<tr class="pnl-spacer"><td colspan="7"></td></tr>`;
 
     const total = r.noTotal ? null
-      : (r.c3 != null || r.c4 != null || r.c5 != null || r.c6 != null)
-      ? ((r.c3 || 0) + (r.c4 || 0) + (r.c5 || 0) + (r.c6 || 0))
+      : (r.c3 != null || r.c4 != null || r.c5 != null || r.c6 != null || r.c7 != null)
+      ? ((r.c3 || 0) + (r.c4 || 0) + (r.c5 || 0) + (r.c6 || 0) + (r.c7 || 0))
       : null;
 
     const rowCls = r.isSub ? ' class="pnl-subtotal"' : r.isTotal ? ' class="pnl-total"' : '';
@@ -1878,6 +2138,7 @@ function renderPnL() {
       <td>${fv(r, r.c4, r.isExp)}</td>
       <td>${fv(r, r.c5, r.isExp)}</td>
       <td>${fv(r, r.c6, r.isExp)}</td>
+      <td>${fv(r, r.c7, r.isExp)}</td>
       <td>${fv(r, total, r.isExp)}</td>
     </tr>`;
   }).join('');
@@ -2293,16 +2554,16 @@ function onDrop(e) {
 function renderChartDaily() {
   const ctx = document.getElementById('chartDaily');
   if (!ctx) return;
-  const labels = ['4/22','4/23','4/24','4/25','4/26','4/27','4/28','4/29','4/30','5/1','5/2','5/3','5/4','5/5','5/6','5/7','5/8','5/9','5/10','5/11','5/12','5/13','5/14','5/15','5/16','5/17','5/18','5/19','5/20','5/21','5/22','5/23','5/24','5/25','5/26','5/27','5/28','5/29','5/30','5/31','6/1','6/2','6/3','6/4','6/5','6/6','6/7','6/8','6/9','6/10','6/11','6/12','6/13','6/14','6/15','6/16','6/17','6/18','6/19','6/20','6/21','6/22','6/23','6/24','6/25','6/26','6/27','6/28','6/29','6/30'];
-  const targetPace = labels.map(() => Math.round(GOAL / 60));
+  const labels = ['4/22','4/23','4/24','4/25','4/26','4/27','4/28','4/29','4/30','5/1','5/2','5/3','5/4','5/5','5/6','5/7','5/8','5/9','5/10','5/11','5/12','5/13','5/14','5/15','5/16','5/17','5/18','5/19','5/20','5/21','5/22','5/23','5/24','5/25','5/26','5/27','5/28','5/29','5/30','5/31','6/1','6/2','6/3','6/4','6/5','6/6','6/7','6/8','6/9','6/10','6/11','6/12','6/13','6/14','6/15','6/16','6/17','6/18','6/19','6/20','6/21','6/22','6/23','6/24','6/25','6/26','6/27','6/28','6/29','6/30','7/1','7/2','7/3','7/4','7/5','7/6','7/7','7/8','7/9','7/10'];
+  const targetPace = labels.map(() => Math.round(GOAL / 80));
   new Chart(ctx, {
     type:'bar',
     data: {
       labels,
       datasets: [
-        { label:'每日業績', data:[214716,57348,83163,57468,14237,4679,35513,32154,84143,39792,51670,85063,95741,20996,60108,28854,47471,39132,61748,18996,19036,58369,4799,14371,15137,18916,24715,4799,14397,15398,39452,5799,14317,14327,9398,9438,20436,23755,14317,29874,9518,9438,14237,9438,20236,18836,14237,14237,0,20966,4799,4799,14397,28755,28174,20677,28556,72845,25975,31034,56310,51530,21136,34293,32114,37313,29254,37594,34433,14697],
+        { label:'每日業績', data:[214716,57348,83163,57468,14237,4679,35513,32154,84143,39792,51670,85063,95741,20996,60108,28854,47471,39132,61748,18996,19036,58369,4799,14371,15137,18916,24715,4799,14397,15398,39452,5799,14317,14327,9398,9438,20436,23755,14317,29874,9518,9438,14237,9438,20236,18836,14237,14237,0,20966,4799,4799,14397,28755,28174,20677,28556,72845,25975,31034,56310,51530,21136,34293,32114,37313,29254,37594,34433,14697,38000,34000,38000,38000,64321,28000,22000,30000,20000,28856],
           backgroundColor:'#6B8FAB', borderRadius:6 },
-        { label:'廣告費', data:[2109,4903,7526,8473,11094,5263,6770,7628,7351,9293,8594,11663,9982,8503,9372,9032,8701,8580,11968,8203,9911,8789,8335,6823,7033,6024,5342,5930,5108,7706,7309,7680,8845,7283,4252,3193,4196,4068,2678,4261,2803,2467,2244,3195,5676,4634,6900,4541,4506,6197,6395,5388,3523,4761,4318,5831,5454,9448,9191,6906,8884,7677,8118,7350,7344,7149,5455,7974,11538,13588],
+        { label:'廣告費', data:[2109,4903,7526,8473,11094,5263,6770,7628,7351,9293,8594,11663,9982,8503,9372,9032,8701,8580,11968,8203,9911,8789,8335,6823,7033,6024,5342,5930,5108,7706,7309,7680,8845,7283,4252,3193,4196,4068,2678,4261,2803,2467,2244,3195,5676,4634,6900,4541,4506,6197,6395,5388,3523,4761,4318,5831,5454,9448,9191,6906,8884,7677,8118,7350,7344,7149,5455,7974,11538,13588,null,null,null,null,null,null,null,null,null,null],
           backgroundColor:'#C9AEB0', borderRadius:6 },
         { label:'線性目標', data:targetPace,
           type:'line', borderColor:'#C4C2BE', borderDash:[4,4],
@@ -2324,10 +2585,10 @@ function renderChartRevenueTrend() {
   const ctx = document.getElementById('chartRevenueTrend');
   if (!ctx) return;
 
-  const labels  = ['4/22','4/23','4/24','4/25','4/26','4/27','4/28','4/29','4/30','5/1','5/2','5/3','5/4','5/5','5/6','5/7','5/8','5/9','5/10','5/11','5/12','5/13','5/14','5/15','5/16','5/17','5/18','5/19','5/20','5/21','5/22','5/23','5/24','5/25','5/26','5/27','5/28','5/29','5/30','5/31','6/1','6/2','6/3','6/4','6/5','6/6','6/7','6/8','6/9','6/10','6/11','6/12','6/13','6/14','6/15','6/16','6/17','6/18','6/19','6/20','6/21','6/22','6/23','6/24','6/25','6/26','6/27','6/28','6/29','6/30'];
-  const revenue = [214716,57348,83163,57468,14237,4679,35513,32154,84143,39792,51670,85063,95741,20996,60108,28854,47471,39132,61748,18996,19036,58369,4799,14371,15137,18916,24715,4799,14397,15398,39452,5799,14317,14327,9398,9438,20436,23755,14317,29874,9518,9438,14237,9438,20236,18836,14237,14237,0,20966,4799,4799,14397,28755,28174,20677,28556,72845,25975,31034,56310,51530,21136,34293,32114,37313,29254,37594,34433,14697];
-  const orders  = [43,10,16,10,3,1,6,6,16,8,9,17,18,3,12,6,8,6,11,4,4,11,1,3,3,3,5,1,3,3,7,1,3,3,1,2,4,5,3,6,2,2,3,2,3,3,3,3,0,4,1,1,3,5,4,4,4,10,5,6,10,10,4,7,6,7,5,6,7,3];
-  const aov     = [4993,5735,5198,5747,4746,4679,5919,5359,5259,4974,5741,5004,5319,6999,5009,4809,5934,6522,5613,4749,4759,5306,4799,4790,5046,6305,4943,4799,4799,5133,5636,5799,4772,4776,9398,4719,5109,4751,4772,4979,4759,4719,4746,4719,6745,6279,4746,4746,null,5242,4799,4799,4799,5751,7044,5169,7139,7285,5195,5172,5631,5153,5284,4899,5352,5330,5851,6266,4919,4899];
+  const labels  = ['4/22','4/23','4/24','4/25','4/26','4/27','4/28','4/29','4/30','5/1','5/2','5/3','5/4','5/5','5/6','5/7','5/8','5/9','5/10','5/11','5/12','5/13','5/14','5/15','5/16','5/17','5/18','5/19','5/20','5/21','5/22','5/23','5/24','5/25','5/26','5/27','5/28','5/29','5/30','5/31','6/1','6/2','6/3','6/4','6/5','6/6','6/7','6/8','6/9','6/10','6/11','6/12','6/13','6/14','6/15','6/16','6/17','6/18','6/19','6/20','6/21','6/22','6/23','6/24','6/25','6/26','6/27','6/28','6/29','6/30','7/1','7/2','7/3','7/4','7/5','7/6','7/7','7/8','7/9','7/10'];
+  const revenue = [214716,57348,83163,57468,14237,4679,35513,32154,84143,39792,51670,85063,95741,20996,60108,28854,47471,39132,61748,18996,19036,58369,4799,14371,15137,18916,24715,4799,14397,15398,39452,5799,14317,14327,9398,9438,20436,23755,14317,29874,9518,9438,14237,9438,20236,18836,14237,14237,0,20966,4799,4799,14397,28755,28174,20677,28556,72845,25975,31034,56310,51530,21136,34293,32114,37313,29254,37594,34433,14697,38000,34000,38000,38000,64321,28000,22000,30000,20000,28856];
+  const orders  = [43,10,16,10,3,1,6,6,16,8,9,17,18,3,12,6,8,6,11,4,4,11,1,3,3,3,5,1,3,3,7,1,3,3,1,2,4,5,3,6,2,2,3,2,3,3,3,3,0,4,1,1,3,5,4,4,4,10,5,6,10,10,4,7,6,7,5,6,7,3,8,7,7,6,6,5,4,5,4,5];
+  const aov     = [4993,5735,5198,5747,4746,4679,5919,5359,5259,4974,5741,5004,5319,6999,5009,4809,5934,6522,5613,4749,4759,5306,4799,4790,5046,6305,4943,4799,4799,5133,5636,5799,4772,4776,9398,4719,5109,4751,4772,4979,4759,4719,4746,4719,6745,6279,4746,4746,null,5242,4799,4799,4799,5751,7044,5169,7139,7285,5195,5172,5631,5153,5284,4899,5352,5330,5851,6266,4919,4899,4750,4857,5429,6333,10720,5600,5500,6000,5000,5771];
 
   new Chart(ctx, {
     data: {
