@@ -1766,16 +1766,18 @@ const pnlRows = [
   { label:'EDM 費用',          c3:0,     c4:6010,   c5:0,      c6:525,    c7:328,   isExp:true },
   { label:'LINE 費用',         c3:19142, c4:17393,  c5:5862,   c6:85136,  c7:44188, isExp:true },
   { label:'KOL 費用',          c3:35000, c4:10000,  c5:0,      c6:58000,  c7:0,     isExp:true },
-  { label:'行銷費用小計',      c3:78560, c4:105300, c5:242632, c6:336866, c7:143153, isExp:true, isSub:true },
+  { label:'團主分潤',          c3:0,     c4:0,      c5:0,      c6:0,      c7:3765,  isExp:true },
+  { label:'行銷費用小計',      c3:78560, c4:105300, c5:242632, c6:336866, c7:146918, isExp:true, isSub:true },
   { t:'spacer' },
   { t:'header', label:'▌ 其他費用' },
   { label:'運費 / $120',       c3:0,     c4:0,      c5:0,      c6:0,      c7:0,     isExp:true, isAuto:true },
   { label:'人事管銷費用',       c3:30000, c4:45000,  c5:45000,  c6:45000,  c7:45000, isExp:true },
+  { label:'營業稅 5%',         c3:0,     c4:29171,  c5:42317,  c6:36020,  c7:16359, isExp:true },
   { label:'其他費用小計',      c3:0,     c4:0,      c5:0,      c6:0,      c7:0,     isExp:true, isSub:true, isAuto:true },
   { t:'spacer' },
   { t:'header', label:'▌ 損益指標' },
   { label:'總 ROAS',           c3:null,  c4:'9.5',  c5:'3.7',  c6:'3.8',  c7:'3.9', isText:true, noTotal:true, total:'4.2' },
-  { label:'總 ROI',            c3:null,  c4:null,   c5:null,   c6:null,   c7:null,  isText:true, noTotal:true, total:'1.73' },
+  { label:'總 ROI',            c3:null,  c4:null,   c5:null,   c6:null,   c7:null,  isText:true, noTotal:true, total:'1.72' },
   { label:'淨利潤',            c3:null,  c4:null,   c5:null,   c6:null,   c7:null },
 ];
 
@@ -2069,14 +2071,16 @@ function renderPnL() {
   }
 
   const mgmtRow = getRow('人事管銷費用');
+  const taxRow  = getRow('營業稅 5%');
 
   const otherSubRow = getRow('其他費用小計');
   if (otherSubRow) {
-    otherSubRow.c3 = (shipRow ? shipRow.c3 : 0) + (mgmtRow ? (mgmtRow.c3 || 0) : 0);
-    otherSubRow.c4 = (shipRow ? shipRow.c4 : 0) + (mgmtRow ? (mgmtRow.c4 || 0) : 0);
-    otherSubRow.c5 = (shipRow ? shipRow.c5 : 0) + (mgmtRow ? (mgmtRow.c5 || 0) : 0);
-    otherSubRow.c6 = (shipRow ? shipRow.c6 : 0) + (mgmtRow ? (mgmtRow.c6 || 0) : 0);
-    otherSubRow.c7 = (shipRow ? shipRow.c7 : 0) + (mgmtRow ? (mgmtRow.c7 || 0) : 0);
+    const s = (r, col) => r ? (r[col] || 0) : 0;
+    otherSubRow.c3 = s(shipRow,'c3') + s(mgmtRow,'c3') + s(taxRow,'c3');
+    otherSubRow.c4 = s(shipRow,'c4') + s(mgmtRow,'c4') + s(taxRow,'c4');
+    otherSubRow.c5 = s(shipRow,'c5') + s(mgmtRow,'c5') + s(taxRow,'c5');
+    otherSubRow.c6 = s(shipRow,'c6') + s(mgmtRow,'c6') + s(taxRow,'c6');
+    otherSubRow.c7 = s(shipRow,'c7') + s(mgmtRow,'c7') + s(taxRow,'c7');
   }
 
   // 淨利潤 = 實收金額 − 總廣告費用 − 商品成本 − 管銷費用 − 運費
@@ -2086,7 +2090,8 @@ function renderPnL() {
       getC('實收金額（92折）', col) - getC('行銷費用小計', col)
       - getC('商品總成本', col)
       - (mgmtRow ? (mgmtRow[col] || 0) : 0)
-      - (shipRow ? (shipRow[col] || 0) : 0);
+      - (shipRow ? (shipRow[col] || 0) : 0)
+      - (taxRow  ? (taxRow[col]  || 0) : 0);
     netRow.c3 = calcNet('c3');
     netRow.c4 = calcNet('c4');
     netRow.c5 = calcNet('c5');
