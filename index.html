@@ -2593,6 +2593,7 @@ function renderChartRevenueTrend() {
   const aov     = [4993,5735,5198,5747,4746,4679,5919,5359,5259,4974,5741,5004,5319,6999,5009,4809,5934,6522,5613,4749,4759,5306,4799,4790,5046,6305,4943,4799,4799,5133,5636,5799,4772,4776,9398,4719,5109,4751,4772,4979,4759,4719,4746,4719,6745,6279,4746,4746,null,5242,4799,4799,4799,5751,7044,5169,7139,7285,5195,5172,5631,5153,5284,4899,5352,5330,5851,6266,4919,4899,4750,4857,5429,6333,10720,5600,5500,6000,5000,5771];
 
   new Chart(ctx, {
+    type: 'bar',
     data: {
       labels,
       datasets: [
@@ -2885,12 +2886,9 @@ window.addEventListener('DOMContentLoaded', () => {
   renderWeeklyProducts();
   renderDiscounts();
   renderReferrals();
-  renderChartRevenueTrend();
-  renderChartDaily();
-  renderChartSurveyOverview();
-  renderChartSurvey();
-  renderChartSurveySpend();
-  renderChartCost();
+  [renderChartRevenueTrend, renderChartDaily, renderChartSurveyOverview,
+   renderChartSurvey, renderChartSurveySpend, renderChartCost
+  ].forEach(fn => { try { fn(); } catch(e) { console.error(fn.name, e); } });
 });
 </script>
 </body>
